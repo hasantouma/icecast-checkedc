@@ -1,0 +1,227 @@
+[
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/avl -I/home/hasantouma/converted-examples/convert_icecast -I/home/hasantouma/converted-examples/convert_icecast/src -pthread -g -O2 -fPIC -DPIC -o .libs/libiceavl_la-avl.o /home/hasantouma/converted-examples/convert_icecast/src/avl/avl.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/avl",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/avl/avl.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/avl -I/home/hasantouma/converted-examples/convert_icecast -I/home/hasantouma/converted-examples/convert_icecast/src -pthread -g -O2 -o libiceavl_la-avl.o /home/hasantouma/converted-examples/convert_icecast/src/avl/avl.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/avl",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/avl/avl.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/thread -I/home/hasantouma/converted-examples/convert_icecast -I/home/hasantouma/converted-examples/convert_icecast/src -pthread -g -O2 -fPIC -DPIC -o .libs/libicethread_la-thread.o /home/hasantouma/converted-examples/convert_icecast/src/thread/thread.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/thread",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/thread/thread.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/thread -I/home/hasantouma/converted-examples/convert_icecast -I/home/hasantouma/converted-examples/convert_icecast/src -pthread -g -O2 -o libicethread_la-thread.o /home/hasantouma/converted-examples/convert_icecast/src/thread/thread.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/thread",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/thread/thread.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/httpp -I/home/hasantouma/converted-examples/convert_icecast -I/home/hasantouma/converted-examples/convert_icecast/src -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -fPIC -DPIC -o .libs/libicehttpp_la-httpp.o /home/hasantouma/converted-examples/convert_icecast/src/httpp/httpp.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/httpp",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/httpp/httpp.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/httpp -I/home/hasantouma/converted-examples/convert_icecast -I/home/hasantouma/converted-examples/convert_icecast/src -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o libicehttpp_la-httpp.o /home/hasantouma/converted-examples/convert_icecast/src/httpp/httpp.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/httpp",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/httpp/httpp.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/net -I/home/hasantouma/converted-examples/convert_icecast -I/home/hasantouma/converted-examples/convert_icecast/src -pthread -g -O2 -fPIC -DPIC -o .libs/libicenet_la-sock.o /home/hasantouma/converted-examples/convert_icecast/src/net/sock.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/net",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/net/sock.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/net -I/home/hasantouma/converted-examples/convert_icecast -I/home/hasantouma/converted-examples/convert_icecast/src -pthread -g -O2 -o libicenet_la-sock.o /home/hasantouma/converted-examples/convert_icecast/src/net/sock.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/net",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/net/sock.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/net -I/home/hasantouma/converted-examples/convert_icecast -I/home/hasantouma/converted-examples/convert_icecast/src -pthread -g -O2 -fPIC -DPIC -o .libs/libicenet_la-resolver.o /home/hasantouma/converted-examples/convert_icecast/src/net/resolver.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/net",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/net/resolver.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/net -I/home/hasantouma/converted-examples/convert_icecast -I/home/hasantouma/converted-examples/convert_icecast/src -pthread -g -O2 -o libicenet_la-resolver.o /home/hasantouma/converted-examples/convert_icecast/src/net/resolver.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/net",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/net/resolver.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/log -I/home/hasantouma/converted-examples/convert_icecast -pthread -g -O2 -fPIC -DPIC -o .libs/log.o /home/hasantouma/converted-examples/convert_icecast/src/log/log.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/log",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/log/log.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/log -I/home/hasantouma/converted-examples/convert_icecast -pthread -g -O2 -o log.o /home/hasantouma/converted-examples/convert_icecast/src/log/log.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/log",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/log/log.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/timing -I/home/hasantouma/converted-examples/convert_icecast -pthread -g -O2 -fPIC -DPIC -o .libs/libicetiming_la-timing.o /home/hasantouma/converted-examples/convert_icecast/src/timing/timing.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/timing",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/timing/timing.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src/timing -I/home/hasantouma/converted-examples/convert_icecast -pthread -g -O2 -o libicetiming_la-timing.o /home/hasantouma/converted-examples/convert_icecast/src/timing/timing.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src/timing",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/timing/timing.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o cfgfile.o /home/hasantouma/converted-examples/convert_icecast/src/cfgfile.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/cfgfile.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o main.o /home/hasantouma/converted-examples/convert_icecast/src/main.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/main.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o logging.o /home/hasantouma/converted-examples/convert_icecast/src/logging.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/logging.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o sighandler.o /home/hasantouma/converted-examples/convert_icecast/src/sighandler.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/sighandler.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o connection.o /home/hasantouma/converted-examples/convert_icecast/src/connection.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/connection.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o global.o /home/hasantouma/converted-examples/convert_icecast/src/global.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/global.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o util.o /home/hasantouma/converted-examples/convert_icecast/src/util.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/util.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o slave.o /home/hasantouma/converted-examples/convert_icecast/src/slave.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/slave.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o source.o /home/hasantouma/converted-examples/convert_icecast/src/source.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/source.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o stats.o /home/hasantouma/converted-examples/convert_icecast/src/stats.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/stats.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o refbuf.o /home/hasantouma/converted-examples/convert_icecast/src/refbuf.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/refbuf.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o client.o /home/hasantouma/converted-examples/convert_icecast/src/client.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/client.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o xslt.o /home/hasantouma/converted-examples/convert_icecast/src/xslt.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/xslt.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o fserve.o /home/hasantouma/converted-examples/convert_icecast/src/fserve.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/fserve.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o event.o /home/hasantouma/converted-examples/convert_icecast/src/event.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/event.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o admin.o /home/hasantouma/converted-examples/convert_icecast/src/admin.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/admin.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o md5.o /home/hasantouma/converted-examples/convert_icecast/src/md5.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/md5.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o format.o /home/hasantouma/converted-examples/convert_icecast/src/format.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/format.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o format_ogg.o /home/hasantouma/converted-examples/convert_icecast/src/format_ogg.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/format_ogg.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o format_mp3.o /home/hasantouma/converted-examples/convert_icecast/src/format_mp3.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/format_mp3.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o format_midi.o /home/hasantouma/converted-examples/convert_icecast/src/format_midi.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/format_midi.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o format_flac.o /home/hasantouma/converted-examples/convert_icecast/src/format_flac.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/format_flac.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o format_ebml.o /home/hasantouma/converted-examples/convert_icecast/src/format_ebml.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/format_ebml.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o auth.o /home/hasantouma/converted-examples/convert_icecast/src/auth.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/auth.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o auth_htpasswd.o /home/hasantouma/converted-examples/convert_icecast/src/auth_htpasswd.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/auth_htpasswd.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o format_kate.o /home/hasantouma/converted-examples/convert_icecast/src/format_kate.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/format_kate.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o format_skeleton.o /home/hasantouma/converted-examples/convert_icecast/src/format_skeleton.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/format_skeleton.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o format_opus.o /home/hasantouma/converted-examples/convert_icecast/src/format_opus.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/format_opus.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o format_vorbis.o /home/hasantouma/converted-examples/convert_icecast/src/format_vorbis.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/format_vorbis.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o auth_url.o /home/hasantouma/converted-examples/convert_icecast/src/auth_url.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/auth_url.c"
+    },
+    {
+        "command": "cc -c -DHAVE_CONFIG_H -I/home/hasantouma/converted-examples/convert_icecast/src -I/home/hasantouma/converted-examples/convert_icecast -Wall -ffast-math -fsigned-char -I/usr/include/libxml2 -I/usr/local/include -pthread -g -O2 -o yp.o /home/hasantouma/converted-examples/convert_icecast/src/yp.c",
+        "directory": "/home/hasantouma/converted-examples/convert_icecast/src",
+        "file": "/home/hasantouma/converted-examples/convert_icecast/src/yp.c"
+    }
+]
