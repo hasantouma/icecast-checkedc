@@ -15,7 +15,7 @@
 #include <config.h>
 #endif
 
-#include <string.h>
+#include <string_checked.h>
 
 #include "thread/thread.h"
 #include "avl/avl.h"

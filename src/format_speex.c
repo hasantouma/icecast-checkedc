@@ -17,7 +17,7 @@
 #include <config.h>
 #endif
 
-#include <stdlib.h>
+#include <stdlib_checked.h>
 #include <ogg/ogg.h>
 #include <speex/speex_header.h>
 

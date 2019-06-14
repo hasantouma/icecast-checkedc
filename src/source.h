@@ -19,7 +19,7 @@
 #include "format.h"
 #include "thread/thread.h"
 
-#include <stdio.h>
+#include <stdio_checked.h>
 
 typedef struct source_tag
 {

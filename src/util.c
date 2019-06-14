@@ -16,21 +16,21 @@
 #endif
 
 #include <sys/types.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include <stdio_checked.h>
+#include <string_checked.h>
+#include <stdlib_checked.h>
 
 #ifndef _WIN32
 #include <sys/time.h>
 #include <sys/socket.h>
-#include <unistd.h>
+#include <unistd_checked.h>
 #ifdef HAVE_POLL
 #include <sys/poll.h>
 #endif
 #else
 #include <winsock2.h>
 #include <windows.h>
-#include <stdio.h>
+#include <stdio_checked.h>
 #define snprintf _snprintf
 #define strcasecmp stricmp
 #define strncasecmp strnicmp

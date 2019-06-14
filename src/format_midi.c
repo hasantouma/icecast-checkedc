@@ -17,9 +17,9 @@
 #include <config.h>
 #endif
 
-#include <stdlib.h>
+#include <stdlib_checked.h>
 #include <ogg/ogg.h>
-#include <string.h>
+#include <string_checked.h>
 
 typedef struct source_tag source_t;
 

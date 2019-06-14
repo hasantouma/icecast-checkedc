@@ -14,7 +14,7 @@
 #define __CONNECTION_H__
 
 #include <sys/types.h>
-#include <time.h>
+#include <time_checked.h>
 #ifdef HAVE_OPENSSL
 #include <openssl/ssl.h>
 #include <openssl/err.h>

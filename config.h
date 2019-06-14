@@ -49,7 +49,7 @@
 /* Define to 1 if you have the `inet_pton' function. */
 #define HAVE_INET_PTON 1
 
-/* Define to 1 if you have the <inttypes.h> header file. */
+/* Define to 1 if you have the <inttypes_checked.h> header file. */
 #define HAVE_INTTYPES_H 1
 
 /* Define if you have libkate */
@@ -97,7 +97,7 @@
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
 
-/* Define to 1 if you have the <stdlib.h> header file. */
+/* Define to 1 if you have the <stdlib_checked.h> header file. */
 #define HAVE_STDLIB_H 1
 
 /* Define to 1 if you have the `strcasestr' function. */
@@ -106,7 +106,7 @@
 /* Define to 1 if you have the <strings.h> header file. */
 #define HAVE_STRINGS_H 1
 
-/* Define to 1 if you have the <string.h> header file. */
+/* Define to 1 if you have the <string_checked.h> header file. */
 #define HAVE_STRING_H 1
 
 /* Define to 1 if `ss_family' is a member of `struct sockaddr_storage'. */
@@ -133,7 +133,7 @@
 /* Define if Theora support is available */
 /* #undef HAVE_THEORA */
 
-/* Define to 1 if you have the <unistd.h> header file. */
+/* Define to 1 if you have the <unistd_checked.h> header file. */
 #define HAVE_UNISTD_H 1
 
 /* Define if you have winsock2.h on MINGW */
@@ -176,7 +176,7 @@
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
-/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+/* Define to 1 if you can safely include both <sys/time.h> and <time_checked.h>. */
 #define TIME_WITH_SYS_TIME 1
 
 /* Define to compile in YP support code */

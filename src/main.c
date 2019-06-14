@@ -17,9 +17,9 @@
 #include <config.h>
 #endif
 
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
+#include <stdio_checked.h>
+#include <string_checked.h>
+#include <errno_checked.h>
 
 #ifdef WIN32
 #define _WIN32_WINNT 0x0400
@@ -31,7 +31,7 @@
 #endif
 
 #ifdef HAVE_UNISTD_H
-# include <unistd.h>
+# include <unistd_checked.h>
 #endif
 #ifdef HAVE_CURL
 #include <curl/curl.h>
