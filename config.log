@@ -721,7 +721,7 @@ configure:13228: $? = 0
 configure:13258: result: ok
 configure:13345: checking for libvorbis
 configure:13365: gcc -o conftest -g -O2  -I/usr/local/include  -L/usr/local/lib conftest.c  -lvorbis >&5
-/tmp/cclLErmz.o: In function `main':
+/tmp/ccZbbFZy.o: In function `main':
 /home/hasantouma/converted-examples/convert_icecast/conftest.c:66: undefined reference to `ogg_stream_init'
 collect2: error: ld returned 1 exit status
 configure:13365: $? = 1
@@ -1192,7 +1192,7 @@ conftest.c:61:22: warning: null argument where non-null required (argument 1) [-
                       pthread_create(0,0,0,0); pthread_cleanup_pop(0);
                       ^
 conftest.c:61:22: warning: null argument where non-null required (argument 3) [-Wnonnull]
-/tmp/ccejQtSX.o: In function `main':
+/tmp/cceJVqQW.o: In function `main':
 /home/hasantouma/converted-examples/convert_icecast/conftest.c:59: undefined reference to `pthread_join'
 /home/hasantouma/converted-examples/convert_icecast/conftest.c:60: undefined reference to `__pthread_register_cancel'
 /home/hasantouma/converted-examples/convert_icecast/conftest.c:61: undefined reference to `pthread_create'
