@@ -1,0 +1,55 @@
+nohup: ignoring input
+/home/hasantouma/converted-examples/convert_icecast/src/md5.c:177:27: warning: 'memset' call operates on objects of type 'struct MD5Context' while the size is based on a different type 'struct MD5Context *' [-Wsizeof-pointer-memaccess]
+    memset(ctx, 0, sizeof(ctx));
+           ~~~            ^~~
+/home/hasantouma/converted-examples/convert_icecast/src/md5.c:177:27: note: did you mean to dereference the argument to 'sizeof' (and multiply it by the number of elements)?
+    memset(ctx, 0, sizeof(ctx));
+                          ^~~
+1 warning generated.
+/home/hasantouma/converted-examples/convert_icecast/src/md5.c:177:27: warning: 'memset' call operates on objects of type 'struct MD5Context' while the size is based on a different type 'struct MD5Context *' [-Wsizeof-pointer-memaccess]
+    memset(ctx, 0, sizeof(ctx));
+           ~~~            ^~~
+/home/hasantouma/converted-examples/convert_icecast/src/md5.c:177:27: note: did you mean to dereference the argument to 'sizeof' (and multiply it by the number of elements)?
+    memset(ctx, 0, sizeof(ctx));
+                          ^~~
+1 warning generated.
+file|#constraints|#ptr|#arr|#wild
+/home/hasantouma/converted-examples/convert_icecast/src/admin.c|192|62|0|130
+/home/hasantouma/converted-examples/convert_icecast/src/auth.c|127|29|0|98
+/home/hasantouma/converted-examples/convert_icecast/src/auth_htpasswd.c|86|18|0|68
+/home/hasantouma/converted-examples/convert_icecast/src/auth_url.c|119|0|0|119
+/home/hasantouma/converted-examples/convert_icecast/src/avl/avl.c|297|211|1|85
+/home/hasantouma/converted-examples/convert_icecast/src/cfgfile.c|260|110|0|150
+/home/hasantouma/converted-examples/convert_icecast/src/client.c|60|50|0|10
+/home/hasantouma/converted-examples/convert_icecast/src/connection.c|175|28|0|147
+/home/hasantouma/converted-examples/convert_icecast/src/event.c|3|2|0|1
+/home/hasantouma/converted-examples/convert_icecast/src/format.c|48|18|0|30
+/home/hasantouma/converted-examples/convert_icecast/src/format_ebml.c|91|33|0|58
+/home/hasantouma/converted-examples/convert_icecast/src/format_flac.c|20|2|0|18
+/home/hasantouma/converted-examples/convert_icecast/src/format_kate.c|22|4|0|18
+/home/hasantouma/converted-examples/convert_icecast/src/format_midi.c|19|2|0|17
+/home/hasantouma/converted-examples/convert_icecast/src/format_mp3.c|124|34|0|90
+/home/hasantouma/converted-examples/convert_icecast/src/format_ogg.c|110|26|0|84
+/home/hasantouma/converted-examples/convert_icecast/src/format_opus.c|19|4|0|15
+/home/hasantouma/converted-examples/convert_icecast/src/format_skeleton.c|18|4|0|14
+/home/hasantouma/converted-examples/convert_icecast/src/format_vorbis.c|128|24|0|104
+/home/hasantouma/converted-examples/convert_icecast/src/fserve.c|92|30|0|62
+/home/hasantouma/converted-examples/convert_icecast/src/global.c|0|0|0|0
+/home/hasantouma/converted-examples/convert_icecast/src/httpp/httpp.c|157|83|8|66
+/home/hasantouma/converted-examples/convert_icecast/src/log/log.c|75|33|2|40
+/home/hasantouma/converted-examples/convert_icecast/src/logging.c|23|12|0|11
+/home/hasantouma/converted-examples/convert_icecast/src/main.c|25|0|4|21
+/home/hasantouma/converted-examples/convert_icecast/src/md5.c|22|12|4|6
+/home/hasantouma/converted-examples/convert_icecast/src/net/resolver.c|24|9|6|9
+/home/hasantouma/converted-examples/convert_icecast/src/net/sock.c|61|39|3|19
+/home/hasantouma/converted-examples/convert_icecast/src/refbuf.c|9|4|0|5
+/home/hasantouma/converted-examples/convert_icecast/src/sighandler.c|0|0|0|0
+/home/hasantouma/converted-examples/convert_icecast/src/slave.c|89|7|0|82
+/home/hasantouma/converted-examples/convert_icecast/src/source.c|161|56|2|103
+/home/hasantouma/converted-examples/convert_icecast/src/stats.c|277|111|0|166
+/home/hasantouma/converted-examples/convert_icecast/src/thread/thread.c|195|162|0|33
+/home/hasantouma/converted-examples/convert_icecast/src/timing/timing.c|0|0|0|0
+/home/hasantouma/converted-examples/convert_icecast/src/util.c|133|50|15|68
+/home/hasantouma/converted-examples/convert_icecast/src/xslt.c|19|0|0|19
+/home/hasantouma/converted-examples/convert_icecast/src/yp.c|161|23|0|138
+set([u'/home/hasantouma/converted-examples/convert_icecast/src/logging.c', u'/home/hasantouma/converted-examples/convert_icecast/src/connection.c', u'/home/hasantouma/converted-examples/convert_icecast/src/format_vorbis.c', u'/home/hasantouma/converted-examples/convert_icecast/src/auth_htpasswd.c', u'/home/hasantouma/converted-examples/convert_icecast/src/md5.c', u'/home/hasantouma/converted-examples/convert_icecast/src/format_skeleton.c', u'/home/hasantouma/converted-examples/convert_icecast/src/yp.c', u'/home/hasantouma/converted-examples/convert_icecast/src/thread/thread.c', u'/home/hasantouma/converted-examples/convert_icecast/src/main.c', u'/home/hasantouma/converted-examples/convert_icecast/src/format_midi.c', u'/home/hasantouma/converted-examples/convert_icecast/src/format.c', u'/home/hasantouma/converted-examples/convert_icecast/src/auth.c', u'/home/hasantouma/converted-examples/convert_icecast/src/format_ogg.c', u'/home/hasantouma/converted-examples/convert_icecast/src/fserve.c', u'/home/hasantouma/converted-examples/convert_icecast/src/auth_url.c', u'/home/hasantouma/converted-examples/convert_icecast/src/timing/timing.c', u'/home/hasantouma/converted-examples/convert_icecast/src/format_flac.c', u'/home/hasantouma/converted-examples/convert_icecast/src/sighandler.c', u'/home/hasantouma/converted-examples/convert_icecast/src/log/log.c', u'/home/hasantouma/converted-examples/convert_icecast/src/format_kate.c', u'/home/hasantouma/converted-examples/convert_icecast/src/source.c', u'/home/hasantouma/converted-examples/convert_icecast/src/global.c', u'/home/hasantouma/converted-examples/convert_icecast/src/net/resolver.c', u'/home/hasantouma/converted-examples/convert_icecast/src/stats.c', u'/home/hasantouma/converted-examples/convert_icecast/src/format_ebml.c', u'/home/hasantouma/converted-examples/convert_icecast/src/net/sock.c', u'/home/hasantouma/converted-examples/convert_icecast/src/slave.c', u'/home/hasantouma/converted-examples/convert_icecast/src/cfgfile.c', u'/home/hasantouma/converted-examples/convert_icecast/src/util.c', u'/home/hasantouma/converted-examples/convert_icecast/src/format_opus.c', u'/home/hasantouma/converted-examples/convert_icecast/src/admin.c', u'/home/hasantouma/converted-examples/convert_icecast/src/httpp/httpp.c', u'/home/hasantouma/converted-examples/convert_icecast/src/refbuf.c', u'/home/hasantouma/converted-examples/convert_icecast/src/client.c', u'/home/hasantouma/converted-examples/convert_icecast/src/format_mp3.c', u'/home/hasantouma/converted-examples/convert_icecast/src/avl/avl.c', u'/home/hasantouma/converted-examples/convert_icecast/src/event.c', u'/home/hasantouma/converted-examples/convert_icecast/src/xslt.c'])
