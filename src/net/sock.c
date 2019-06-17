@@ -377,7 +377,7 @@ int sock_write_string(int sock, const char *buff : itype(_Ptr<const char> ) )
 ** this function must only be called with a blocking socket.
 ** will truncate the string if it's greater than 1024 chars.
 */
-int sock_write(int sock, const char *fmt : itype(_Ptr<const char> ) )
+int sock_write(int sock, const char *fmt : itype(_Ptr<const char> ), ... )
 {
     int rc;
     va_list ap;

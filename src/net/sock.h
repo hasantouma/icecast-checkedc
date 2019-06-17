@@ -124,7 +124,7 @@ int sock_connected(int sock, int timeout);
 
 /* Socket write functions */
 int sock_write_bytes(int sock, const void *buff : itype(_Ptr<const void> ) , size_t len);
-int sock_write(int sock, const char *fmt : itype(_Ptr<const char> ) );
+int sock_write(int sock, const char *fmt : itype(_Ptr<const char> ), ... );
 int sock_write_fmt(int sock, const char *fmt : itype(_Ptr<const char> ) , va_list ap);
 int sock_write_string(int sock, const char *buff : itype(_Ptr<const char> ) );
 ssize_t sock_writev(int sock, const struct iovec *iov : itype(_Ptr<const struct iovec> ) , size_t count);
