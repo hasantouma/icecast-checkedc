@@ -379,13 +379,13 @@ void config_release_config(void)
     thread_rwlock_unlock(&(_locks.config_lock));
 }
 
-ice_config_t config_get_config(void) : itype(_Ptr<ice_config_t> ) 
+ice_config_t *config_get_config(void) : itype(_Ptr<ice_config_t> ) 
 {
     thread_rwlock_rlock(&(_locks.config_lock));
     return &_current_configuration;
 }
 
-ice_config_t config_grab_config(void) : itype(_Ptr<ice_config_t> ) 
+ice_config_t *config_grab_config(void) : itype(_Ptr<ice_config_t> ) 
 {
     thread_rwlock_wlock(&(_locks.config_lock));
     return &_current_configuration;
@@ -396,7 +396,7 @@ void config_set_config(ice_config_t *config : itype(_Ptr<ice_config_t> ) ) {
     memcpy(&_current_configuration, config, sizeof(ice_config_t));
 }
 
-ice_config_t config_get_config_unlocked(void) : itype(_Ptr<ice_config_t> ) 
+ice_config_t *config_get_config_unlocked(void) : itype(_Ptr<ice_config_t> ) 
 {
     return &_current_configuration;
 }
