@@ -16,6 +16,6 @@
 #define EVENT_NO_EVENT 0
 #define EVENT_CONFIG_READ 1
 
-void event_config_read(void *arg : itype(void* ) );
+void event_config_read(void *arg : itype(_Ptr<void> ) );
 
 #endif  /* __EVENT_H__ */
