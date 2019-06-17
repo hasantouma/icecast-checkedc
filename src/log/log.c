@@ -389,7 +389,7 @@ int create_log_entry(int log_id, const char *pre, const char *line)
 }
 
 
-void log_contents(int log_id, _Ptr<_Ptr<char>> _contents, _Ptr<unsigned int> _len)
+void log_contents(int log_id, _Ptr<char*> _contents, _Ptr<unsigned int> _len)
 {
     int remain;
     log_entry_t *entry;
