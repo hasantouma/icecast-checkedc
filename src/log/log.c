@@ -547,7 +547,7 @@ void __vsnprintf(char *str, size_t size, const char *format, va_list ap) {
     *str = 0;
 }
 
-void log_write(int log_id, unsigned int priority, const char *cat : itype(_Ptr<const char> ) , const char *func : itype(_Ptr<const char> ) , const char *fmt : itype(_Ptr<const char> ) )
+void log_write(int log_id, unsigned int priority, const char *cat : itype(_Ptr<const char> ) , const char *func : itype(_Ptr<const char> ) , const char *fmt : itype(_Ptr<const char> ), ... )
 {
     static const char *prior[] = { "EROR", "WARN", "INFO", "DBUG" };
     int datelen;
@@ -579,7 +579,7 @@ void log_write(int log_id, unsigned int priority, const char *cat : itype(_Ptr<c
     _unlock_logger();
 }
 
-void log_write_direct(int log_id, const char *fmt : itype(_Ptr<const char> ) )
+void log_write_direct(int log_id, const char *fmt : itype(_Ptr<const char> ), ... )
 {
     va_list ap;
     time_t now;
