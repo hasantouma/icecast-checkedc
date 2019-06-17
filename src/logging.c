@@ -199,7 +199,7 @@ void logging_playlist(const char *mount : itype(_Ptr<const char> ) , const char 
 }
 
 
-void log_parse_failure(void *ctx : itype(_Ptr<void> ) , const char *fmt : itype(_Ptr<const char> ) )
+void log_parse_failure(void *ctx : itype(_Ptr<void> ) , const char *fmt : itype(_Ptr<const char> ), ... )
 {
     char line [200];
     va_list ap;

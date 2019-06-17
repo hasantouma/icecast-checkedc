@@ -73,7 +73,7 @@ extern int playlistlog;
 void logging_access(client_t *client : itype(_Ptr<client_t> ) );
 void logging_playlist(const char *mount : itype(_Ptr<const char> ) , const char *metadata : itype(_Ptr<const char> ) , long listeners);
 void restart_logging(ice_config_t *config : itype(_Ptr<ice_config_t> ) );
-void log_parse_failure(void *ctx : itype(_Ptr<void> ) , const char *fmt : itype(_Ptr<const char> ) );
+void log_parse_failure(void *ctx : itype(_Ptr<void> ) , const char *fmt : itype(_Ptr<const char> ), ... );
 
 #endif  /* __LOGGING_H__ */
 
