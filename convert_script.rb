@@ -2,23 +2,40 @@
 
 output = `find . -type f`
 
+verbose = false
+flag = false
+
+if verbose then
+  puts "verbose is true"
+else
+  puts "verbose is false"
+end
+
+if flag then
+  puts "flag is true"
+else
+  puts "flag is false"
+end
+
 puts "printing source files"
 
 c_count = 0
 output.each_line do |line|
   if line =~ /\.\/(.*)\.checked\.c/ then
-  	c_count += 1
+    c_count += 1
     source_file_name = $1 + ".c"
     checked_file_name = $1 + ".checked.c"
-    print "source file name: " + source_file_name + "\n"
-    print "checked file name: " + checked_file_name + "\n"
-    print "line: " + line
+    if verbose then print "source file name: " + source_file_name + "\n" end
+    if verbose then print "checked file name: " + checked_file_name + "\n" end
+    if verbose then print "line: " + line end
 
     command = "mv " + checked_file_name + " " + source_file_name
-    print "call command: " + command + "\n"
-    # system command
+    if verbose then print "call command: " + command + "\n" end
+    if flag then
+      system command
+    end
 
-    print "\n"
+    if verbose then print "\n" end
 
   end
 end
@@ -31,18 +48,20 @@ puts "printing header files"
 h_count = 0
 output.each_line do |line|
   if line =~ /\.\/(.*)\.checked\.h/ then
-  	h_count += 1
+    h_count += 1
     source_file_name = $1 + ".h"
     checked_file_name = $1 + ".checked.h"
-    print "source file name: " + source_file_name + "\n"
-    print "checked file name: " + checked_file_name + "\n"
-    print "line: " + line
+    if verbose then print "source file name: " + source_file_name + "\n" end
+    if verbose then print "checked file name: " + checked_file_name + "\n" end
+    if verbose then print "line: " + line end
 
     command = "mv " + checked_file_name + " " + source_file_name
-    print "call command: " + command + "\n"
-    # system command
+    if verbose then print "call command: " + command + "\n" end
+    if flag then
+      system command
+    end
 
-    print "\n"
+    if verbose then print "\n" end
 
   end
 end
