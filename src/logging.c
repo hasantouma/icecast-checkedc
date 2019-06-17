@@ -117,7 +117,7 @@ int get_clf_time (char *buffer, unsigned len, struct tm *t)
 ** AGENT = get from client->parser
 ** TIME = timing_get_time() - client->con->con_time
 */
-void logging_access(client_t *client)
+void logging_access(client_t *client : itype(_Ptr<client_t> ) )
 {
     char datebuf[128];
     struct tm thetime;
@@ -169,7 +169,7 @@ void logging_access(client_t *client)
 /* This function will provide a log of metadata for each
    mountpoint.  The metadata *must* be in UTF-8, and thus
    you can assume that the log itself is UTF-8 encoded */
-void logging_playlist(const char *mount, const char *metadata, long listeners)
+void logging_playlist(const char *mount : itype(_Ptr<const char> ) , const char *metadata : itype(_Ptr<const char> ) , long listeners)
 {
     char datebuf[128];
     struct tm thetime;
@@ -199,7 +199,7 @@ void logging_playlist(const char *mount, const char *metadata, long listeners)
 }
 
 
-void log_parse_failure (void *ctx, const char *fmt, ...)
+void log_parse_failure(void *ctx : itype(void* ) , const char *fmt : itype(_Ptr<const char> ) )
 {
     char line [200];
     va_list ap;
@@ -214,7 +214,7 @@ void log_parse_failure (void *ctx, const char *fmt, ...)
 }
 
 
-void restart_logging (ice_config_t *config)
+void restart_logging(ice_config_t *config : itype(_Ptr<ice_config_t> ) )
 {
     if (strcmp (config->error_log, "-"))
     {

@@ -39,10 +39,10 @@
 #define snprintf _snprintf
 #endif
 
-static auth_result htpasswd_adduser (auth_t *auth, const char *username, const char *password);
-static auth_result htpasswd_deleteuser(auth_t *auth, const char *username);
-static auth_result htpasswd_userlist(auth_t *auth, xmlNodePtr srcnode);
-static int _free_user (void *key);
+auth_result htpasswd_adduser(auth_t *auth : itype(_Ptr<auth_t> ) , const char *username : itype(_Ptr<const char> ) , const char *password : itype(_Ptr<const char> ) );
+auth_result htpasswd_deleteuser(auth_t *auth : itype(_Ptr<auth_t> ) , const char *username : itype(_Ptr<const char> ) );
+auth_result htpasswd_userlist(auth_t *auth : itype(_Ptr<auth_t> ) , xmlNodePtr srcnode : itype(_Ptr<xmlNode> ) );
+int _free_user(void *key);
 
 typedef struct
 {
@@ -57,7 +57,7 @@ typedef struct {
     time_t mtime;
 } htpasswd_auth_state;
 
-static void htpasswd_clear(auth_t *self) {
+void htpasswd_clear(auth_t *self) {
     htpasswd_auth_state *state = self->state;
     free(state->filename);
     if (state->users)
@@ -68,7 +68,7 @@ static void htpasswd_clear(auth_t *self) {
 
 
 /* md5 hash */
-static char *get_hash(const char *data, int len)
+char* get_hash(const char *data, int len)
 {
     struct MD5Context context;
     unsigned char digest[16];
@@ -83,7 +83,7 @@ static char *get_hash(const char *data, int len)
 }
 
 
-static int compare_users (void *arg, void *a, void *b)
+int compare_users(void* arg, void *a, void *b)
 {
     htpasswd_user *user1 = (htpasswd_user *)a;
     htpasswd_user *user2 = (htpasswd_user *)b;
@@ -92,7 +92,7 @@ static int compare_users (void *arg, void *a, void *b)
 }
 
 
-static int _free_user (void *key)
+int _free_user(void *key)
 {
     htpasswd_user *user = (htpasswd_user *)key;
 
@@ -102,7 +102,7 @@ static int _free_user (void *key)
 }
 
 
-static void htpasswd_recheckfile (htpasswd_auth_state *htpasswd)
+void htpasswd_recheckfile(htpasswd_auth_state *htpasswd)
 {
     FILE *passwdfile;
     avl_tree *new_users;
@@ -176,7 +176,7 @@ static void htpasswd_recheckfile (htpasswd_auth_state *htpasswd)
 }
 
 
-static auth_result htpasswd_auth (auth_client *auth_user)
+auth_result htpasswd_auth(auth_client *auth_user)
 {
     auth_t *auth = auth_user->client->auth;
     htpasswd_auth_state *htpasswd = auth->state;
@@ -223,7 +223,7 @@ static auth_result htpasswd_auth (auth_client *auth_user)
 }
 
 
-int  auth_get_htpasswd_auth (auth_t *authenticator, config_options_t *options)
+int auth_get_htpasswd_auth(_Ptr<auth_t> authenticator, config_options_t *options)
 {
     htpasswd_auth_state *state;
 
@@ -259,7 +259,7 @@ int  auth_get_htpasswd_auth (auth_t *authenticator, config_options_t *options)
 }
 
 
-static auth_result htpasswd_adduser (auth_t *auth, const char *username, const char *password)
+auth_result htpasswd_adduser(auth_t *auth : itype(_Ptr<auth_t> ) , const char *username : itype(_Ptr<const char> ) , const char *password : itype(_Ptr<const char> ) )
 {
     FILE *passwdfile;
     char *hashed_password = NULL;
@@ -311,7 +311,7 @@ static auth_result htpasswd_adduser (auth_t *auth, const char *username, const c
 }
 
 
-static auth_result htpasswd_deleteuser(auth_t *auth, const char *username)
+auth_result htpasswd_deleteuser(auth_t *auth : itype(_Ptr<auth_t> ) , const char *username : itype(_Ptr<const char> ) )
 {
     FILE *passwdfile;
     FILE *tmp_passwdfile;
@@ -410,7 +410,7 @@ static auth_result htpasswd_deleteuser(auth_t *auth, const char *username)
 }
 
 
-static auth_result htpasswd_userlist(auth_t *auth, xmlNodePtr srcnode)
+auth_result htpasswd_userlist(auth_t *auth : itype(_Ptr<auth_t> ) , xmlNodePtr srcnode : itype(_Ptr<xmlNode> ) )
 {
     htpasswd_auth_state *state;
     xmlNodePtr newnode;

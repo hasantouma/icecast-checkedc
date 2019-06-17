@@ -38,20 +38,20 @@ typedef struct _format_plugin_tag
     format_type_t type;
 
     /* we need to know the mount to report statistics */
-    char *mount;
+    _Ptr<char> mount;
 
     const char *contenttype;
     char *charset;
     uint64_t read_bytes;
     uint64_t sent_bytes;
 
-    refbuf_t *(*get_buffer)(struct source_tag *);
-    int (*write_buf_to_client)(client_t *client);
-    void (*write_buf_to_file)(struct source_tag *source, refbuf_t *refbuf);
-    int (*create_client_data)(struct source_tag *source, client_t *client);
-    void (*set_tag)(struct _format_plugin_tag *plugin, const char *tag, const char *value, const char *charset);
-    void (*free_plugin)(struct _format_plugin_tag *self);
-    void (*apply_settings)(client_t *client, struct _format_plugin_tag *format, struct _mount_proxy *mount);
+    _Ptr<refbuf_t* (struct source_tag* )> get_buffer;
+    _Ptr<int (client_t* )> write_buf_to_client;
+    _Ptr<void (struct source_tag* , refbuf_t* )> write_buf_to_file;
+    _Ptr<int (struct source_tag* , client_t* )> create_client_data;
+    _Ptr<void (struct _format_plugin_tag* , const char* , const char* , const char* )> set_tag;
+    _Ptr<void (struct _format_plugin_tag* )> free_plugin;
+    _Ptr<void (client_t* , struct _format_plugin_tag* , struct _mount_proxy* )> apply_settings;
 
     /* for internal state management */
     void *_state;

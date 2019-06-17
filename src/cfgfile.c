@@ -78,25 +78,22 @@
 static ice_config_t _current_configuration;
 static ice_config_locks _locks;
 
-static void _set_defaults(ice_config_t *c);
-static void _parse_root(xmlDocPtr doc, xmlNodePtr node, ice_config_t *c);
-static void _parse_limits(xmlDocPtr doc, xmlNodePtr node, ice_config_t *c);
-static void _parse_directory(xmlDocPtr doc, xmlNodePtr node, ice_config_t *c);
-static void _parse_paths(xmlDocPtr doc, xmlNodePtr node, ice_config_t *c);
-static void _parse_logging(xmlDocPtr doc, xmlNodePtr node, ice_config_t *c);
-static void _parse_security(xmlDocPtr doc, xmlNodePtr node, ice_config_t *c);
-static void _parse_authentication(xmlDocPtr doc, xmlNodePtr node, 
-        ice_config_t *c);
-static void _parse_http_headers(xmlDocPtr doc, xmlNodePtr node,
-        ice_config_http_header_t **http_headers);
-static void _parse_relay(xmlDocPtr doc, xmlNodePtr node, ice_config_t *c);
-static void _parse_mount(xmlDocPtr doc, xmlNodePtr node, ice_config_t *c);
-static void _parse_listen_socket(xmlDocPtr doc, xmlNodePtr node, 
-        ice_config_t *c);
-static void _add_server(xmlDocPtr doc, xmlNodePtr node, ice_config_t *c);
+void _set_defaults(ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
+void _parse_root(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
+void _parse_limits(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
+void _parse_directory(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
+void _parse_paths(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
+void _parse_logging(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
+void _parse_security(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
+void _parse_authentication(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
+void _parse_http_headers(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_http_header_t **http_headers : itype(_Ptr<_Ptr<ice_config_http_header_t>> ) );
+void _parse_relay(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
+void _parse_mount(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
+void _parse_listen_socket(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
+void _add_server(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) );
 
-static void merge_mounts(mount_proxy * dst, mount_proxy * src);
-static inline void _merge_mounts_all(ice_config_t *c);
+void merge_mounts(mount_proxy *dst : itype(_Ptr<mount_proxy> ) , mount_proxy *src : itype(_Ptr<mount_proxy> ) );
+void _merge_mounts_all(ice_config_t *c : itype(_Ptr<ice_config_t> ) );
 
 static void create_locks(void) {
     thread_mutex_create(&_locks.relay_lock);
@@ -125,7 +122,7 @@ void config_init_configuration(ice_config_t *configuration)
     _set_defaults(configuration);
 }
 
-static void config_clear_http_header(ice_config_http_header_t *header) {
+void config_clear_http_header(ice_config_http_header_t *header) {
  ice_config_http_header_t *old;
 
  while (header) {
@@ -137,7 +134,7 @@ static void config_clear_http_header(ice_config_http_header_t *header) {
  }
 }
 
-static inline ice_config_http_header_t * config_copy_http_header(ice_config_http_header_t *header) {
+ice_config_http_header_t* config_copy_http_header(ice_config_http_header_t *header) {
     ice_config_http_header_t *ret = NULL;
     ice_config_http_header_t *cur = NULL;
     ice_config_http_header_t *old = NULL;
@@ -177,7 +174,7 @@ static inline ice_config_http_header_t * config_copy_http_header(ice_config_http
     return ret;
 }
 
-static void config_clear_mount (mount_proxy *mount)
+void config_clear_mount(mount_proxy *mount)
 {
     config_options_t *option;
 
@@ -213,7 +210,7 @@ static void config_clear_mount (mount_proxy *mount)
     free (mount);
 }
 
-listener_t *config_clear_listener (listener_t *listener)
+listener_t* config_clear_listener(listener_t *listener : itype(_Ptr<listener_t> ) )
 {
     listener_t *next = NULL;
     if (listener)
@@ -226,7 +223,7 @@ listener_t *config_clear_listener (listener_t *listener)
     return next;
 }
 
-void config_clear(ice_config_t *c)
+void config_clear(ice_config_t *c : itype(_Ptr<ice_config_t> ) )
 {
     ice_config_dir_t *dirnode, *nextdirnode;
     relay_server *relay, *nextrelay;
@@ -325,13 +322,13 @@ void config_clear(ice_config_t *c)
     memset(c, 0, sizeof(ice_config_t));
 }
 
-int config_initial_parse_file(const char *filename)
+int config_initial_parse_file(const char *filename : itype(_Ptr<const char> ) )
 {
     /* Since we're already pointing at it, we don't need to copy it in place */
     return config_parse_file(filename, &_current_configuration);
 }
 
-int config_parse_file(const char *filename, ice_config_t *configuration)
+int config_parse_file(const char *filename : itype(_Ptr<const char> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     xmlDocPtr doc;
     xmlNodePtr node;
@@ -367,12 +364,12 @@ int config_parse_file(const char *filename, ice_config_t *configuration)
     return 0;
 }
 
-int config_parse_cmdline(int arg, char **argv)
+int config_parse_cmdline(int arg, char **argv : itype(_Ptr<_Ptr<char>> ) )
 {
     return 0;
 }
 
-ice_config_locks *config_locks(void)
+_Ptr<ice_config_locks> config_locks(void)
 {
     return &_locks;
 }
@@ -382,29 +379,29 @@ void config_release_config(void)
     thread_rwlock_unlock(&(_locks.config_lock));
 }
 
-ice_config_t *config_get_config(void)
+ice_config_t config_get_config(void) : itype(_Ptr<ice_config_t> ) 
 {
     thread_rwlock_rlock(&(_locks.config_lock));
     return &_current_configuration;
 }
 
-ice_config_t *config_grab_config(void)
+ice_config_t config_grab_config(void) : itype(_Ptr<ice_config_t> ) 
 {
     thread_rwlock_wlock(&(_locks.config_lock));
     return &_current_configuration;
 }
 
 /* MUST be called with the lock held! */
-void config_set_config(ice_config_t *config) {
+void config_set_config(ice_config_t *config : itype(_Ptr<ice_config_t> ) ) {
     memcpy(&_current_configuration, config, sizeof(ice_config_t));
 }
 
-ice_config_t *config_get_config_unlocked(void)
+ice_config_t config_get_config_unlocked(void) : itype(_Ptr<ice_config_t> ) 
 {
     return &_current_configuration;
 }
 
-static void _set_defaults(ice_config_t *configuration)
+void _set_defaults(ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     configuration->location = (char *)xmlCharStrdup (CONFIG_DEFAULT_LOCATION);
     configuration->server_id = (char *)xmlCharStrdup (ICECAST_VERSION_STRING);
@@ -450,8 +447,7 @@ static void _set_defaults(ice_config_t *configuration)
     configuration->burst_size = CONFIG_DEFAULT_BURST_SIZE;
 }
 
-static void _parse_root(xmlDocPtr doc, xmlNodePtr node, 
-        ice_config_t *configuration)
+void _parse_root(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     char *tmp;
 
@@ -585,8 +581,7 @@ static void _parse_root(xmlDocPtr doc, xmlNodePtr node,
   }
 }
 
-static void _parse_limits(xmlDocPtr doc, xmlNodePtr node, 
-        ice_config_t *configuration)
+void _parse_limits(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     char *tmp;
 
@@ -635,8 +630,7 @@ static void _parse_limits(xmlDocPtr doc, xmlNodePtr node,
     } while ((node = node->next));
 }
 
-static void _parse_mount(xmlDocPtr doc, xmlNodePtr node, 
-        ice_config_t *configuration)
+void _parse_mount(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     char *tmp;
     mount_proxy *mount = calloc(1, sizeof(mount_proxy));
@@ -831,7 +825,7 @@ static void _parse_mount(xmlDocPtr doc, xmlNodePtr node,
         configuration->mounts = mount;
 }
 
-static void _parse_http_headers(xmlDocPtr doc, xmlNodePtr node, ice_config_http_header_t **http_headers) {
+void _parse_http_headers(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_http_header_t **http_headers : itype(_Ptr<_Ptr<ice_config_http_header_t>> ) ) {
     ice_config_http_header_t *header;
     ice_config_http_header_t *next;
     char *name = NULL;
@@ -889,8 +883,7 @@ static void _parse_http_headers(xmlDocPtr doc, xmlNodePtr node, ice_config_http_
 	xmlFree(value);
 }
 
-static void _parse_relay(xmlDocPtr doc, xmlNodePtr node,
-        ice_config_t *configuration)
+void _parse_relay(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     char *tmp;
     relay_server *relay = calloc(1, sizeof(relay_server));
@@ -970,8 +963,7 @@ static void _parse_relay(xmlDocPtr doc, xmlNodePtr node,
         relay->localmount = (char *)xmlStrdup (XMLSTR(relay->mount));
 }
 
-static void _parse_listen_socket(xmlDocPtr doc, xmlNodePtr node,
-        ice_config_t *configuration)
+void _parse_listen_socket(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     char *tmp;
     listener_t *listener = calloc (1, sizeof(listener_t));
@@ -1042,8 +1034,7 @@ static void _parse_listen_socket(xmlDocPtr doc, xmlNodePtr node,
     }
 }
 
-static void _parse_authentication(xmlDocPtr doc, xmlNodePtr node,
-        ice_config_t *configuration)
+void _parse_authentication(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     do {
         if (node == NULL) break;
@@ -1083,8 +1074,7 @@ static void _parse_authentication(xmlDocPtr doc, xmlNodePtr node,
     } while ((node = node->next));
 }
 
-static void _parse_directory(xmlDocPtr doc, xmlNodePtr node,
-        ice_config_t *configuration)
+void _parse_directory(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     char *tmp;
 
@@ -1120,8 +1110,7 @@ static void _parse_directory(xmlDocPtr doc, xmlNodePtr node,
     configuration->num_yp_directories++;
 }
 
-static void _parse_paths(xmlDocPtr doc, xmlNodePtr node,
-        ice_config_t *configuration)
+void _parse_paths(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     char *temp;
     aliases *alias, *current, *last;
@@ -1213,8 +1202,7 @@ static void _parse_paths(xmlDocPtr doc, xmlNodePtr node,
     } while ((node = node->next));
 }
 
-static void _parse_logging(xmlDocPtr doc, xmlNodePtr node,
-        ice_config_t *configuration)
+void _parse_logging(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     char *tmp;
     do {
@@ -1254,8 +1242,7 @@ static void _parse_logging(xmlDocPtr doc, xmlNodePtr node,
     } while ((node = node->next));
 }
 
-static void _parse_security(xmlDocPtr doc, xmlNodePtr node,
-        ice_config_t *configuration)
+void _parse_security(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
    char *tmp;
    xmlNodePtr oldnode;
@@ -1288,8 +1275,7 @@ static void _parse_security(xmlDocPtr doc, xmlNodePtr node,
    } while ((node = node->next));
 }
 
-static void _add_server(xmlDocPtr doc, xmlNodePtr node, 
-        ice_config_t *configuration)
+void _add_server(xmlDocPtr doc : itype(_Ptr<xmlDoc> ) , xmlNodePtr node : itype(_Ptr<xmlNode> ) , ice_config_t *configuration : itype(_Ptr<ice_config_t> ) )
 {
     ice_config_dir_t *dirnode, *server;
     int addnode;
@@ -1334,7 +1320,7 @@ static void _add_server(xmlDocPtr doc, xmlNodePtr node,
     }
 }
 
-static void merge_mounts(mount_proxy * dst, mount_proxy * src) {
+void merge_mounts(mount_proxy *dst : itype(_Ptr<mount_proxy> ) , mount_proxy *src : itype(_Ptr<mount_proxy> ) ) {
     ice_config_http_header_t *http_header_next;
     ice_config_http_header_t **http_header_tail;
 
@@ -1410,7 +1396,7 @@ static void merge_mounts(mount_proxy * dst, mount_proxy * src) {
     *http_header_tail = config_copy_http_header(src->http_headers);
 }
 
-static inline void _merge_mounts_all(ice_config_t *c) {
+void _merge_mounts_all(ice_config_t *c : itype(_Ptr<ice_config_t> ) ) {
     mount_proxy *mountinfo = c->mounts;
     mount_proxy *default_mount;
 
@@ -1426,7 +1412,7 @@ static inline void _merge_mounts_all(ice_config_t *c) {
 }
 
 /* return the mount details that match the supplied mountpoint */
-mount_proxy *config_find_mount (ice_config_t *config, const char *mount, mount_type type)
+mount_proxy* config_find_mount(ice_config_t *config : itype(_Ptr<ice_config_t> ) , const char *mount : itype(_Ptr<const char> ) , mount_type type)
 {
     mount_proxy *mountinfo = config->mounts;
 
@@ -1460,7 +1446,7 @@ mount_proxy *config_find_mount (ice_config_t *config, const char *mount, mount_t
 /* Helper function to locate the configuration details of the listening 
  * socket
  */
-listener_t *config_get_listen_sock (ice_config_t *config, connection_t *con)
+listener_t* config_get_listen_sock(ice_config_t *config : itype(_Ptr<ice_config_t> ) , connection_t *con : itype(_Ptr<connection_t> ) )
 {
     listener_t *listener;
     int i = 0;

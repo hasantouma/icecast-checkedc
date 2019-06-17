@@ -38,10 +38,10 @@
 #define CATMODULE "auth"
 
 
-static void auth_postprocess_source (auth_client *auth_user);
+void auth_postprocess_source(auth_client *auth_user : itype(_Ptr<auth_client> ) );
 
 
-static auth_client *auth_client_setup (const char *mount, client_t *client)
+auth_client* auth_client_setup(const char *mount, client_t *client)
 {
     /* This will look something like "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" */
     const char *header = httpp_getvar(client->parser, "authorization");
@@ -90,7 +90,7 @@ static auth_client *auth_client_setup (const char *mount, client_t *client)
 }
 
 
-static void queue_auth_client (auth_client *auth_user, mount_proxy *mountinfo)
+void queue_auth_client(auth_client *auth_user, mount_proxy *mountinfo)
 {
     auth_t *auth;
 
@@ -127,7 +127,7 @@ static void queue_auth_client (auth_client *auth_user, mount_proxy *mountinfo)
 /* release the auth. It is referred to by multiple structures so this is
  * refcounted and only actual freed after the last use
  */
-void auth_release (auth_t *authenticator)
+void auth_release(auth_t *authenticator : itype(_Ptr<auth_t> ) )
 {
     if (authenticator == NULL)
         return;
@@ -156,7 +156,7 @@ void auth_release (auth_t *authenticator)
 }
 
 
-static void auth_client_free (auth_client *auth_user)
+void auth_client_free(auth_client *auth_user)
 {
     if (auth_user == NULL)
         return;
@@ -176,7 +176,7 @@ static void auth_client_free (auth_client *auth_user)
 
 
 /* verify that the listener is still connected. */
-static int is_listener_connected (client_t *client)
+int is_listener_connected(client_t *client)
 {
     int ret = 1;
     if (client)
@@ -191,7 +191,7 @@ static int is_listener_connected (client_t *client)
 /* wrapper function for auth thread to authenticate new listener
  * connection details
  */
-static void auth_new_listener (auth_t *auth, auth_client *auth_user)
+void auth_new_listener(auth_t *auth, auth_client *auth_user)
 {
     client_t *client = auth_user->client;
 
@@ -225,7 +225,7 @@ static void auth_new_listener (auth_t *auth, auth_client *auth_user)
 
 /* wrapper function for auth thread to drop listener connections
  */
-static void auth_remove_listener (auth_t *auth, auth_client *auth_user)
+void auth_remove_listener(auth_t *auth, auth_client *auth_user)
 {
     client_t *client = auth_user->client;
 
@@ -241,7 +241,7 @@ static void auth_remove_listener (auth_t *auth, auth_client *auth_user)
 /* Called from auth thread to process any request for source client
  * authentication. Only applies to source clients, not relays.
  */
-static void stream_auth_callback (auth_t *auth, auth_client *auth_user)
+void stream_auth_callback(auth_t *auth, auth_client *auth_user)
 {
     client_t *client = auth_user->client;
 
@@ -260,7 +260,7 @@ static void stream_auth_callback (auth_t *auth, auth_client *auth_user)
 /* Callback from auth thread to handle a stream start event, this applies
  * to both source clients and relays.
  */
-static void stream_start_callback (auth_t *auth, auth_client *auth_user)
+void stream_start_callback(auth_t *auth, auth_client *auth_user)
 {
     if (auth->stream_start)
         auth->stream_start (auth_user);
@@ -271,7 +271,7 @@ static void stream_start_callback (auth_t *auth, auth_client *auth_user)
 /* Callback from auth thread to handle a stream start event, this applies
  * to both source clients and relays.
  */
-static void stream_end_callback (auth_t *auth, auth_client *auth_user)
+void stream_end_callback(auth_t *auth, auth_client *auth_user)
 {
     if (auth->stream_end)
         auth->stream_end (auth_user);
@@ -280,7 +280,7 @@ static void stream_end_callback (auth_t *auth, auth_client *auth_user)
 
 
 /* The auth thread main loop. */
-static void *auth_run_thread (void *arg)
+void* auth_run_thread(void *arg)
 {
     auth_t *auth = arg;
 
@@ -328,7 +328,7 @@ static void *auth_run_thread (void *arg)
  * on either the active or pending lists.
  * return 1 if ok to add or 0 to prevent
  */
-static int check_duplicate_logins (source_t *source, client_t *client, auth_t *auth)
+int check_duplicate_logins(source_t *source, client_t *client, auth_t *auth)
 {
     /* allow multiple authenticated relays */
     if (client->username == NULL)
@@ -375,7 +375,7 @@ static int check_duplicate_logins (source_t *source, client_t *client, auth_t *a
 /* if 0 is returned then the client should not be touched, however if -1
  * is returned then the caller is responsible for handling the client
  */
-static int add_listener_to_source (source_t *source, client_t *client)
+int add_listener_to_source(source_t *source, client_t *client)
 {
     int loop = 10;
     do
@@ -430,7 +430,7 @@ static int add_listener_to_source (source_t *source, client_t *client)
 /* Add listener to the pending lists of either the  source or fserve thread.
  * This can be run from the connection or auth thread context
  */
-static int add_authenticated_listener (const char *mount, mount_proxy *mountinfo, client_t *client)
+int add_authenticated_listener(const char *mount, mount_proxy *mountinfo, client_t *client)
 {
     int ret = 0;
     source_t *source = NULL;
@@ -480,7 +480,7 @@ static int add_authenticated_listener (const char *mount, mount_proxy *mountinfo
 }
 
 
-int auth_postprocess_listener (auth_client *auth_user)
+int auth_postprocess_listener(auth_client *auth_user : itype(_Ptr<auth_client> ) )
 {
     int ret;
     client_t *client = auth_user->client;
@@ -502,7 +502,7 @@ int auth_postprocess_listener (auth_client *auth_user)
 /* Decide whether we need to start a source or just process a source
  * admin request.
  */
-void auth_postprocess_source (auth_client *auth_user)
+void auth_postprocess_source(auth_client *auth_user : itype(_Ptr<auth_client> ) )
 {
     client_t *client = auth_user->client;
     const char *mount = auth_user->mount;
@@ -526,7 +526,7 @@ void auth_postprocess_source (auth_client *auth_user)
 /* Add a listener. Check for any mount information that states any
  * authentication to be used.
  */
-void auth_add_listener (const char *mount, client_t *client)
+void auth_add_listener(const char *mount : itype(_Ptr<const char> ) , client_t *client : itype(_Ptr<client_t> ) )
 {
     mount_proxy *mountinfo; 
     ice_config_t *config = config_get_config();
@@ -568,7 +568,7 @@ void auth_add_listener (const char *mount, client_t *client)
 /* determine whether we need to process this client further. This
  * involves any auth exit, typically for external auth servers.
  */
-int auth_release_listener (client_t *client)
+int auth_release_listener(client_t *client : itype(_Ptr<client_t> ) )
 {
     if (client->authenticated)
     {
@@ -591,7 +591,7 @@ int auth_release_listener (client_t *client)
 }
 
 
-static int get_authenticator (auth_t *auth, config_options_t *options)
+int get_authenticator(auth_t *auth, config_options_t *options)
 {
     if (auth->type == NULL)
     {
@@ -634,7 +634,7 @@ static int get_authenticator (auth_t *auth, config_options_t *options)
 }
 
 
-auth_t *auth_get_authenticator (xmlNodePtr node)
+auth_t* auth_get_authenticator(xmlNodePtr node : itype(_Ptr<xmlNode> ) )
 {
     auth_t *auth = calloc (1, sizeof (auth_t));
     config_options_t *options = NULL, **next_option = &options;
@@ -703,7 +703,7 @@ auth_t *auth_get_authenticator (xmlNodePtr node)
  * authenticator. This is called for both source clients and admin requests
  * that work on a specified mountpoint.
  */
-int auth_stream_authenticate (client_t *client, const char *mount, mount_proxy *mountinfo)
+int auth_stream_authenticate(client_t *client : itype(_Ptr<client_t> ) , const char *mount : itype(_Ptr<const char> ) , mount_proxy *mountinfo : itype(_Ptr<struct _mount_proxy> ) )
 {
     if (mountinfo && mountinfo->auth && mountinfo->auth->stream_auth)
     {
@@ -721,7 +721,7 @@ int auth_stream_authenticate (client_t *client, const char *mount, mount_proxy *
 /* called when the stream starts, so that authentication engine can do any
  * cleanup/initialisation.
  */
-void auth_stream_start (mount_proxy *mountinfo, const char *mount)
+void auth_stream_start(mount_proxy *mountinfo : itype(_Ptr<struct _mount_proxy> ) , const char *mount : itype(_Ptr<const char> ) )
 {
     if (mountinfo && mountinfo->auth && mountinfo->auth->stream_start)
     {
@@ -740,7 +740,7 @@ void auth_stream_start (mount_proxy *mountinfo, const char *mount)
 /* Called when the stream ends so that the authentication engine can do
  * any authentication cleanup
  */
-void auth_stream_end (mount_proxy *mountinfo, const char *mount)
+void auth_stream_end(mount_proxy *mountinfo : itype(_Ptr<struct _mount_proxy> ) , const char *mount : itype(_Ptr<const char> ) )
 {
     if (mountinfo && mountinfo->auth && mountinfo->auth->stream_end)
     {

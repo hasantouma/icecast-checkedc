@@ -30,8 +30,8 @@
 void resolver_initialize(void);
 void resolver_shutdown(void);
 
-char *resolver_getname(const char *ip, char *buff, int len);
-char *resolver_getip(const char *name, char *buff, int len);
+char* resolver_getname(const char *ip : itype(_Ptr<const char> ) , char *buff, int len);
+char* resolver_getip(const char *name : itype(_Ptr<const char> ) , char *buff, int len);
 
 #endif
 

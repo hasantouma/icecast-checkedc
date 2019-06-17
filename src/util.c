@@ -60,7 +60,7 @@
  *           0 if no activity occurs
  *         < 0 for error.
  */
-int util_timed_wait_for_fd(sock_t fd, int timeout)
+int util_timed_wait_for_fd(int fd, int timeout)
 {
 #ifdef HAVE_POLL
     struct pollfd ufds;
@@ -86,7 +86,7 @@ int util_timed_wait_for_fd(sock_t fd, int timeout)
 #endif
 }
 
-int util_read_header(sock_t sock, char *buff, unsigned long len, int entire)
+int util_read_header(int sock, char *buff, unsigned long len, int entire)
 {
     int read_bytes, ret;
     unsigned long pos;
@@ -133,7 +133,7 @@ int util_read_header(sock_t sock, char *buff, unsigned long len, int entire)
     return ret;
 }
 
-char *util_get_extension(const char *path) {
+char* util_get_extension(const char *path : itype(_Ptr<const char> ) ) {
     char *ext = strrchr(path, '.');
 
     if(ext == NULL)
@@ -142,7 +142,7 @@ char *util_get_extension(const char *path) {
         return ext+1;
 }
 
-int util_check_valid_extension(const char *uri) {
+int util_check_valid_extension(const char *uri : itype(_Ptr<const char> ) ) {
     int    ret = 0;
     char    *p2;
 
@@ -174,7 +174,7 @@ int util_check_valid_extension(const char *uri) {
     return ret;
 }
 
-static int hex(char c)
+int hex(char c)
 {
     if(c >= '0' && c <= '9')
         return c - '0';
@@ -186,7 +186,7 @@ static int hex(char c)
         return -1;
 }
 
-static int verify_path(char *path) {
+int verify_path(char *path) {
     int dir = 0, indotseq = 0;
 
     while(*path) {
@@ -214,7 +214,7 @@ static int verify_path(char *path) {
     return 1;
 }
 
-char *util_get_path_from_uri(char *uri) {
+char* util_get_path_from_uri(char *uri : itype(_Ptr<char> ) ) {
     char *path = util_normalise_uri(uri);
     char *fullpath;
 
@@ -227,7 +227,7 @@ char *util_get_path_from_uri(char *uri) {
     }
 }
 
-char *util_get_path_from_normalised_uri(const char *uri) {
+char* util_get_path_from_normalised_uri(const char *uri : itype(_Ptr<const char> ) ) {
     char *fullpath;
     char *webroot;
     ice_config_t *config = config_get_config();
@@ -265,7 +265,7 @@ static char safechars[256] = {
       0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
 };
 
-char *util_url_escape (const char *src)
+char* util_url_escape(const char *src : itype(_Ptr<const char> ) )
 {
     size_t len;
     char *dst; 
@@ -293,7 +293,7 @@ char *util_url_escape (const char *src)
     return dst;
 }
 
-char *util_url_unescape (const char *src)
+char* util_url_unescape(const char *src)
 {
     int len = strlen(src);
     char *decoded;
@@ -346,7 +346,7 @@ char *util_url_unescape (const char *src)
  * escape from the webroot) or if it cannot be URI-decoded.
  * Caller should free the path.
  */
-char *util_normalise_uri(const char *uri) {
+char* util_normalise_uri(const char *uri) {
     char *path;
 #ifdef _WIN32
     size_t len;
@@ -404,7 +404,7 @@ static signed char base64decode[256] = {
      -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2
 };
 
-char *util_bin_to_hex(unsigned char *data, int len)
+char* util_bin_to_hex(unsigned char *data, int len)
 {
     char *hex = malloc(len*2 + 1);
     int i;
@@ -420,7 +420,7 @@ char *util_bin_to_hex(unsigned char *data, int len)
 }
 
 /* This isn't efficient, but it doesn't need to be */
-char *util_base64_encode(const char *data)
+char* util_base64_encode(const char *data : itype(_Ptr<const char> ) )
 {
     int len = strlen(data);
     char *out = malloc(len*4/3 + 4);
@@ -453,7 +453,7 @@ char *util_base64_encode(const char *data)
     return result;
 }
 
-char *util_base64_decode(const char *data)
+char* util_base64_decode(const char *data : itype(_Ptr<const char> ) )
 {
     const unsigned char *input = (const unsigned char *)data;
     int len = strlen (data);
@@ -501,7 +501,7 @@ char *util_base64_decode(const char *data)
 }
 
 /* TODO, FIXME: handle memory allocation errors better. */
-static inline void   _build_headers_loop(char **ret, size_t *len, ice_config_http_header_t *header, int status) {
+void _build_headers_loop(char **ret, _Ptr<size_t> len, ice_config_http_header_t *header, int status) {
     size_t headerlen;
     const char *name;
     const char *value;
@@ -540,7 +540,7 @@ static inline void   _build_headers_loop(char **ret, size_t *len, ice_config_htt
     } while ((header = header->next));
     *ret = r;
 }
-static inline char * _build_headers(int status, ice_config_t *config, source_t *source) {
+char* _build_headers(int status, ice_config_t *config, source_t *source) {
     mount_proxy *mountproxy = NULL;
     char *ret = NULL;
     size_t len = 1;
@@ -558,12 +558,7 @@ static inline char * _build_headers(int status, ice_config_t *config, source_t *
     return ret;
 }
 
-ssize_t util_http_build_header(char * out, size_t len, ssize_t offset,
-        int cache,
-        int status, const char * statusmsg,
-        const char * contenttype, const char * charset,
-        const char * datablock,
-        struct source_tag * source) {
+ssize_t util_http_build_header(char *out : itype(_Ptr<char> ) , size_t len, ssize_t offset, int cache, int status, const char *statusmsg : itype(_Ptr<const char> ) , const char *contenttype : itype(_Ptr<const char> ) , const char *charset : itype(_Ptr<const char> ) , const char *datablock : itype(_Ptr<const char> ) , struct source_tag *source : itype(_Ptr<struct source_tag> ) ) {
     const char * http_version = "1.0";
     ice_config_t *config;
     time_t now;
@@ -662,7 +657,7 @@ util_dict *util_dict_new(void)
     return (util_dict *)calloc(1, sizeof(util_dict));
 }
 
-void util_dict_free(util_dict *dict)
+void util_dict_free(util_dict *dict : itype(_Ptr<util_dict> ) )
 {
     util_dict *next;
 
@@ -679,7 +674,7 @@ void util_dict_free(util_dict *dict)
     }
 }
 
-const char *util_dict_get(util_dict *dict, const char *key)
+const char* util_dict_get(util_dict *dict : itype(_Ptr<util_dict> ) , const char *key : itype(_Ptr<const char> ) )
 {
     while (dict) {
         if (!strcmp(key, dict->key))
@@ -689,7 +684,7 @@ const char *util_dict_get(util_dict *dict, const char *key)
     return NULL;
 }
 
-int util_dict_set(util_dict *dict, const char *key, const char *val)
+int util_dict_set(util_dict *dict : itype(_Ptr<util_dict> ) , const char *key : itype(_Ptr<const char> ) , const char *val : itype(_Ptr<const char> ) )
 {
     util_dict *prev;
 
@@ -740,7 +735,7 @@ int util_dict_set(util_dict *dict, const char *key, const char *val)
    stringify it in order as key=val&key=val... if val 
    is set, or just key&key if val is NULL.
   TODO: Memory management needs overhaul. */
-char *util_dict_urlencode(util_dict *dict, char delim)
+char* util_dict_urlencode(util_dict *dict : itype(_Ptr<util_dict> ) , char delim)
 {
     char *res, *tmp;
     char *enc;
@@ -810,7 +805,7 @@ struct tm *localtime_r (const time_t *timep, struct tm *result)
 /* helper function for converting a passed string in one character set to another
  * we use libxml2 for this
  */
-char *util_conv_string (const char *string, const char *in_charset, const char *out_charset)
+char* util_conv_string(const char *string : itype(_Ptr<const char> ) , const char *in_charset : itype(_Ptr<const char> ) , const char *out_charset : itype(_Ptr<const char> ) )
 {
     xmlCharEncodingHandlerPtr in, out;
     char *ret = NULL;
@@ -846,7 +841,7 @@ char *util_conv_string (const char *string, const char *in_charset, const char *
 }
 
 
-int get_line(FILE *file, char *buf, size_t siz)
+int get_line(FILE *file : itype(_Ptr<FILE> ) , char *buf, size_t siz)
 {
     if(fgets(buf, (int)siz, file)) {
         size_t len = strlen(buf);

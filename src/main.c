@@ -77,7 +77,7 @@
 static int background;
 static char *pidfile = NULL;
 
-static void _fatal_error(const char *perr)
+void _fatal_error(const char *perr)
 {
 #ifdef WIN32_SERVICE
     MessageBox(NULL, perr, "Error", MB_SERVICE_NOTIFICATION);
@@ -150,7 +150,7 @@ void shutdown_subsystems(void)
     xslt_shutdown();
 }
 
-static int _parse_config_opts(int argc, char **argv, char *filename, int size)
+int _parse_config_opts(int argc, char **argv, char *filename, int size)
 {
     int i = 1;
     int config_ok = 0;

@@ -58,19 +58,18 @@ typedef struct vorbis_codec_tag
     ogg_packet *header [3];
     ogg_int64_t prev_page_samples;
 
-    int (*process_packet)(ogg_state_t *ogg_info, ogg_codec_t *codec);
-    refbuf_t *(*get_buffer_page)(ogg_state_t *ogg_info, ogg_codec_t *codec);
+    _Ptr<int (ogg_state_t* , ogg_codec_t* )> process_packet;
+    _Ptr<refbuf_t* (ogg_state_t* , ogg_codec_t* )> get_buffer_page;
 
 } vorbis_codec_t;
 
-static int process_vorbis_headers (ogg_state_t *ogg_info, ogg_codec_t *codec);
-static refbuf_t *process_vorbis_page (ogg_state_t *ogg_info,
-                ogg_codec_t *codec, ogg_page *page);
-static refbuf_t *process_vorbis (ogg_state_t *ogg_info, ogg_codec_t *codec);
-static void vorbis_set_tag (format_plugin_t *plugin, const char *tag, const char *value, const char *charset);
+int process_vorbis_headers(ogg_state_t *ogg_info, ogg_codec_t *codec);
+refbuf_t process_vorbis_page(ogg_state_t *ogg_info : itype(_Ptr<ogg_state_t> ) , ogg_codec_t *codec : itype(_Ptr<ogg_codec_t> ) , ogg_page *page : itype(_Ptr<ogg_page> ) ) : itype(_Ptr<refbuf_t> ) ;
+refbuf_t* process_vorbis(ogg_state_t *ogg_info : itype(_Ptr<ogg_state_t> ) , ogg_codec_t *codec : itype(_Ptr<ogg_codec_t> ) );
+void vorbis_set_tag(format_plugin_t *plugin : itype(_Ptr<format_plugin_t> ) , const char *tag : itype(_Ptr<const char> ) , const char *in_value : itype(_Ptr<const char> ) , const char *charset : itype(_Ptr<const char> ) );
 
 
-static void free_ogg_packet (ogg_packet *packet)
+void free_ogg_packet(ogg_packet *packet)
 {
     if (packet)
     {
@@ -80,7 +79,7 @@ static void free_ogg_packet (ogg_packet *packet)
 }
 
 
-static void vorbis_codec_free (ogg_state_t *ogg_info, ogg_codec_t *codec)
+void vorbis_codec_free(ogg_state_t *ogg_info, ogg_codec_t *codec)
 {
     vorbis_codec_t *vorbis = codec->specific;
 
@@ -102,7 +101,7 @@ static void vorbis_codec_free (ogg_state_t *ogg_info, ogg_codec_t *codec)
 }
 
 
-static ogg_packet *copy_ogg_packet (ogg_packet *packet)
+ogg_packet* copy_ogg_packet(ogg_packet *packet)
 {
     ogg_packet *next;
     do
@@ -124,7 +123,7 @@ static ogg_packet *copy_ogg_packet (ogg_packet *packet)
 }
 
 
-static void add_audio_packet (vorbis_codec_t *source_vorbis, ogg_packet *packet)
+void add_audio_packet(vorbis_codec_t *source_vorbis, ogg_packet *packet)
 {
     if (source_vorbis->initial_audio_packet)
     {
@@ -142,12 +141,12 @@ static void add_audio_packet (vorbis_codec_t *source_vorbis, ogg_packet *packet)
 }
 
 
-static refbuf_t *get_buffer_audio (ogg_state_t *ogg_info, ogg_codec_t *codec)
+refbuf_t* get_buffer_audio(ogg_state_t *ogg_info, ogg_codec_t *codec)
 {
     refbuf_t *refbuf = NULL;
     ogg_page page;
     vorbis_codec_t *source_vorbis = codec->specific;
-    int (*get_ogg_page)(ogg_stream_state*, ogg_page *) = ogg_stream_pageout;
+    _Ptr<int (ogg_stream_state* , ogg_page* )> get_ogg_page =  ogg_stream_pageout;
 
     if (source_vorbis->samples_in_page > source_vorbis->page_samples_trigger)
         get_ogg_page = ogg_stream_flush;
@@ -164,7 +163,7 @@ static refbuf_t *get_buffer_audio (ogg_state_t *ogg_info, ogg_codec_t *codec)
 }
 
 
-static refbuf_t *get_buffer_header (ogg_state_t *ogg_info, ogg_codec_t *codec)
+refbuf_t* get_buffer_header(ogg_state_t *ogg_info, ogg_codec_t *codec)
 {
     int headers_flushed = 0;
     ogg_page page;
@@ -183,7 +182,7 @@ static refbuf_t *get_buffer_header (ogg_state_t *ogg_info, ogg_codec_t *codec)
 }
 
 
-static refbuf_t *get_buffer_finished (ogg_state_t *ogg_info, ogg_codec_t *codec)
+refbuf_t* get_buffer_finished(ogg_state_t *ogg_info, ogg_codec_t *codec)
 {
     vorbis_codec_t *source_vorbis = codec->specific;
     ogg_page page;
@@ -216,7 +215,7 @@ static refbuf_t *get_buffer_finished (ogg_state_t *ogg_info, ogg_codec_t *codec)
 
 
 /* push last packet into stream marked with eos */
-static void initiate_flush (vorbis_codec_t *source_vorbis)
+void initiate_flush(vorbis_codec_t *source_vorbis)
 {
     if (source_vorbis->prev_packet)
     {
@@ -235,7 +234,7 @@ static void initiate_flush (vorbis_codec_t *source_vorbis)
  * and add them into the new stream, flushing after so many samples. We
  * also check if an new headers are requested after each processed page
  */
-static int process_vorbis_audio (ogg_state_t *ogg_info, ogg_codec_t *codec)
+int process_vorbis_audio(ogg_state_t *ogg_info, ogg_codec_t *codec)
 {
     vorbis_codec_t *source_vorbis = codec->specific;
 
@@ -311,7 +310,7 @@ static int process_vorbis_audio (ogg_state_t *ogg_info, ogg_codec_t *codec)
 /* This handles the headers at the backend, here we insert the header packets
  * we want for the queue.
  */
-static int process_vorbis_headers (ogg_state_t *ogg_info, ogg_codec_t *codec)
+int process_vorbis_headers(ogg_state_t *ogg_info, ogg_codec_t *codec)
 {
     vorbis_codec_t *source_vorbis = codec->specific;
 
@@ -358,7 +357,7 @@ static int process_vorbis_headers (ogg_state_t *ogg_info, ogg_codec_t *codec)
 /* check if the provided BOS page is the start of a vorbis stream. If so
  * then setup a structure so it can be used
  */
-ogg_codec_t *initial_vorbis_page (format_plugin_t *plugin, ogg_page *page)
+ogg_codec_t* initial_vorbis_page(_Ptr<format_plugin_t> plugin, ogg_page *page)
 {
     ogg_codec_t *codec = calloc (1, sizeof (ogg_codec_t));
     ogg_packet packet;
@@ -416,7 +415,7 @@ ogg_codec_t *initial_vorbis_page (format_plugin_t *plugin, ogg_page *page)
 /* called from the admin interface, here we update the artist/title info
  * and schedule a new set of header pages
  */
-static void vorbis_set_tag (format_plugin_t *plugin, const char *tag, const char *in_value, const char *charset)
+void vorbis_set_tag(format_plugin_t *plugin : itype(_Ptr<format_plugin_t> ) , const char *tag : itype(_Ptr<const char> ) , const char *in_value : itype(_Ptr<const char> ) , const char *charset : itype(_Ptr<const char> ) )
 {   
     ogg_state_t *ogg_info = plugin->_state;
     ogg_codec_t *codec = ogg_info->codecs;
@@ -463,7 +462,7 @@ static void vorbis_set_tag (format_plugin_t *plugin, const char *tag, const char
 /* main backend routine when rebuilding streams. Here we loop until we either
  * have a refbuf to add onto the queue, or we want more data to process.
  */
-static refbuf_t *process_vorbis (ogg_state_t *ogg_info, ogg_codec_t *codec)
+refbuf_t* process_vorbis(ogg_state_t *ogg_info : itype(_Ptr<ogg_state_t> ) , ogg_codec_t *codec : itype(_Ptr<ogg_codec_t> ) )
 {
     vorbis_codec_t *source_vorbis = codec->specific;
     refbuf_t *refbuf;
@@ -488,8 +487,7 @@ static refbuf_t *process_vorbis (ogg_state_t *ogg_info, ogg_codec_t *codec)
 /* no processing of pages, just wrap them up in a refbuf and pass
  * back for adding to the queue
  */
-static refbuf_t *process_vorbis_passthru_page (ogg_state_t *ogg_info,
-        ogg_codec_t *codec, ogg_page *page)
+refbuf_t* process_vorbis_passthru_page(ogg_state_t *ogg_info, ogg_codec_t *codec, ogg_page *page)
 {
     return make_refbuf_with_page (page);
 }
@@ -498,8 +496,7 @@ static refbuf_t *process_vorbis_passthru_page (ogg_state_t *ogg_info,
 /* handle incoming page. as the stream is being rebuilt, we need to
  * add all pages from the stream before processing packets
  */
-static refbuf_t *process_vorbis_page (ogg_state_t *ogg_info,
-        ogg_codec_t *codec, ogg_page *page)
+refbuf_t process_vorbis_page(ogg_state_t *ogg_info : itype(_Ptr<ogg_state_t> ) , ogg_codec_t *codec : itype(_Ptr<ogg_codec_t> ) , ogg_page *page : itype(_Ptr<ogg_page> ) ) : itype(_Ptr<refbuf_t> ) 
 {
     ogg_packet header;
     vorbis_codec_t *source_vorbis = codec->specific;

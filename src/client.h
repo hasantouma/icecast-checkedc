@@ -58,13 +58,13 @@ typedef struct _client_tag
     void *format_data;
 
     /* function to call to release format specific resources */
-    void (*free_client_data)(struct _client_tag *client);
+    _Ptr<void (struct _client_tag* )> free_client_data;
 
     /* write out data associated with client */
-    int (*write_to_client)(struct _client_tag *client);
+    _Ptr<int (struct _client_tag* )> write_to_client;
 
     /* function to check if refbuf needs updating */
-    int (*check_buffer)(struct source_tag *source, struct _client_tag *client);
+    _Ptr<int (struct source_tag* , struct _client_tag* )> check_buffer;
 
 } client_t;
 

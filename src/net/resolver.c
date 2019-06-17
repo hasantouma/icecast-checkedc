@@ -49,7 +49,7 @@
 
 /* internal function */
 
-static int _isip(const char *what);
+int _isip(const char *what : itype(_Ptr<const char> ) );
 
 /* internal data */
 
@@ -59,7 +59,7 @@ static mutex_t _resolver_mutex;
 static int _initialized = 0;
 
 #ifdef HAVE_INET_PTON
-static int _isip(const char *what)
+int _isip(const char *what : itype(_Ptr<const char> ) )
 {
     union {
         struct in_addr v4addr;
@@ -83,7 +83,7 @@ static int _isip(const char *what)
 
 
 #if defined (HAVE_GETNAMEINFO) && defined (HAVE_GETADDRINFO)
-char *resolver_getname(const char *ip, char *buff, int len)
+char* resolver_getname(const char *ip : itype(_Ptr<const char> ) , char *buff, int len)
 {
     struct addrinfo *head = NULL, hints;
     char *ret = NULL;
@@ -114,7 +114,7 @@ char *resolver_getname(const char *ip, char *buff, int len)
 }
 
 
-char *resolver_getip(const char *name, char *buff, int len)
+char* resolver_getip(const char *name : itype(_Ptr<const char> ) , char *buff, int len)
 {
     struct addrinfo *head, hints;
     char *ret = NULL;

@@ -42,7 +42,7 @@ typedef struct auth_client_tag
 {
     char        *mount;
     client_t    *client;
-    void        (*process)(struct auth_tag *auth, struct auth_client_tag *auth_user);
+    _Ptr<void (struct auth_tag* , struct auth_client_tag* )> process;
     struct auth_client_tag *next;
 } auth_client;
 
@@ -52,24 +52,24 @@ typedef struct auth_tag
     char *mount;
 
     /* Authenticate using the given username and password */
-    auth_result (*authenticate)(auth_client *aclient);
-    auth_result (*release_listener)(auth_client *auth_user);
+    _Ptr<auth_result (auth_client* )> authenticate;
+    _Ptr<auth_result (auth_client* )> release_listener;
 
     /* auth handler for authenicating a connecting source client */
-    void (*stream_auth)(auth_client *auth_user);
+    _Ptr<void (auth_client* )> stream_auth;
 
     /* auth handler for source startup, no client passed as it may disappear */
-    void (*stream_start)(auth_client *auth_user);
+    _Ptr<void (auth_client* )> stream_start;
 
     /* auth handler for source exit, no client passed as it may disappear */
-    void (*stream_end)(auth_client *auth_user);
+    _Ptr<void (auth_client* )> stream_end;
 
     /* auth state-specific free call */
-    void (*free)(struct auth_tag *self);
+    _Ptr<void (struct auth_tag* )> free;
 
-    auth_result (*adduser)(struct auth_tag *auth, const char *username, const char *password);
-    auth_result (*deleteuser)(struct auth_tag *auth, const char *username);
-    auth_result (*listuser)(struct auth_tag *auth, xmlNodePtr srcnode);
+    _Ptr<auth_result (struct auth_tag* , const char* , const char* )> adduser;
+    _Ptr<auth_result (struct auth_tag* , const char* )> deleteuser;
+    _Ptr<auth_result (struct auth_tag* , xmlNode* )> listuser;
 
     mutex_t lock;
     int running;

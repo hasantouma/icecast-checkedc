@@ -93,9 +93,9 @@ typedef struct {
     char *type;
 } mime_type;
 
-static void fserve_client_destroy(fserve_t *fclient);
-static int _delete_mapping(void *mapping);
-static void *fserv_thread_function(void *arg);
+void fserve_client_destroy(fserve_t *fclient : itype(_Ptr<fserve_t> ) );
+int _delete_mapping(void *mapping);
+void* fserv_thread_function(void *arg);
 
 void fserve_initialize(void)
 {
@@ -271,7 +271,7 @@ static int wait_for_fds(void)
     return -1;
 }
 
-static void *fserv_thread_function(void *arg)
+void* fserv_thread_function(void *arg)
 {
     fserve_t *fclient, **trail;
     size_t bytes;
@@ -344,7 +344,7 @@ static void *fserv_thread_function(void *arg)
 }
 
 /* string returned needs to be free'd */
-char *fserve_content_type (const char *path)
+char* fserve_content_type(const char *path : itype(_Ptr<const char> ) )
 {
     char *ext = util_get_extension(path);
     mime_type exttype = {ext, NULL};
@@ -384,7 +384,7 @@ char *fserve_content_type (const char *path)
     return type;
 }
 
-static void fserve_client_destroy(fserve_t *fclient)
+void fserve_client_destroy(fserve_t *fclient : itype(_Ptr<fserve_t> ) )
 {
     if (fclient)
     {
@@ -404,7 +404,7 @@ static void fserve_client_destroy(fserve_t *fclient)
 /* client has requested a file, so check for it and send the file.  Do not
  * refer to the client_t afterwards.  return 0 for success, -1 on error.
  */
-int fserve_client_create (client_t *httpclient, const char *path)
+int fserve_client_create(client_t *httpclient : itype(_Ptr<client_t> ) , const char *path : itype(_Ptr<const char> ) )
 {
     int bytes;
     struct stat file_buf;
@@ -640,7 +640,7 @@ fail:
 /* Routine to actually add pre-configured client structure to pending list and
  * then to start off the file serving thread if it is not already running
  */
-static void fserve_add_pending (fserve_t *fclient)
+void fserve_add_pending(fserve_t *fclient)
 {
     thread_spin_lock (&pending_lock);
     fclient->next = (fserve_t *)pending_list;
@@ -658,7 +658,7 @@ static void fserve_add_pending (fserve_t *fclient)
 /* Add client to fserve thread, client needs to have refbuf set and filled
  * but may provide a NULL file if no data needs to be read
  */
-int fserve_add_client (client_t *client, FILE *file)
+int fserve_add_client(client_t *client : itype(_Ptr<client_t> ) , FILE *file : itype(_Ptr<FILE> ) )
 {
     fserve_t *fclient = calloc (1, sizeof(fserve_t));
 
@@ -680,7 +680,7 @@ int fserve_add_client (client_t *client, FILE *file)
 /* add client to file serving engine, but just write out the buffer contents,
  * then pass the client to the callback with the provided arg
  */
-void fserve_add_client_callback (client_t *client, fserve_callback_t callback, void *arg)
+void fserve_add_client_callback(client_t *client : itype(_Ptr<client_t> ) , _Ptr<void (_Ptr<client_t> , void* )> callback, void *arg : itype(void* ) )
 {
     fserve_t *fclient = calloc (1, sizeof(fserve_t));
 
@@ -700,7 +700,7 @@ void fserve_add_client_callback (client_t *client, fserve_callback_t callback, v
 }
 
 
-static int _delete_mapping(void *mapping) {
+int _delete_mapping(void *mapping) {
     mime_type *map = mapping;
     free(map->ext);
     free(map->type);
@@ -709,14 +709,14 @@ static int _delete_mapping(void *mapping) {
     return 1;
 }
 
-static int _compare_mappings(void *arg, void *a, void *b)
+int _compare_mappings(void* arg, void *a, void *b)
 {
     return strcmp(
             ((mime_type *)a)->ext,
             ((mime_type *)b)->ext);
 }
 
-void fserve_recheck_mime_types (ice_config_t *config)
+void fserve_recheck_mime_types(ice_config_t *config : itype(_Ptr<ice_config_t> ) )
 {
     FILE *mimefile;
     char line[4096];

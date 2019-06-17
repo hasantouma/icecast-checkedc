@@ -50,7 +50,7 @@ typedef struct _kate_codec_tag
 } kate_codec_t;
 
 
-static void kate_codec_free (ogg_state_t *ogg_info, ogg_codec_t *codec)
+void kate_codec_free(ogg_state_t *ogg_info, ogg_codec_t *codec)
 {
     kate_codec_t *kate = codec->specific;
 
@@ -74,7 +74,7 @@ static void kate_codec_free (ogg_state_t *ogg_info, ogg_codec_t *codec)
 /* kate pages are not rebuilt, so here we just for headers and then
  * pass them straight through to the the queue
  */
-static refbuf_t *process_kate_page (ogg_state_t *ogg_info, ogg_codec_t *codec, ogg_page *page)
+refbuf_t* process_kate_page(ogg_state_t *ogg_info, ogg_codec_t *codec, ogg_page *page)
 {
     kate_codec_t *kate = codec->specific;
     ogg_packet packet;
@@ -178,7 +178,7 @@ static refbuf_t *process_kate_page (ogg_state_t *ogg_info, ogg_codec_t *codec, o
 /* Check if specified BOS page is the start of a kate stream and
  * if so, create a codec structure for handling it
  */
-ogg_codec_t *initial_kate_page (format_plugin_t *plugin, ogg_page *page)
+ogg_codec_t* initial_kate_page(format_plugin_t *plugin : itype(_Ptr<format_plugin_t> ) , ogg_page *page : itype(_Ptr<ogg_page> ) )
 {
     ogg_state_t *ogg_info = plugin->_state;
     ogg_codec_t *codec = calloc (1, sizeof (ogg_codec_t));

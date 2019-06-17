@@ -78,12 +78,12 @@ typedef struct log_tag
 static log_t loglist[LOG_MAXLOGS];
 
 static int _get_log_id(void);
-static void _release_log_id(int log_id);
+void _release_log_id(int log_id);
 static void _lock_logger(void);
 static void _unlock_logger(void);
 
 
-static int _log_open (int id)
+int _log_open(int id)
 {
     if (loglist [id] . in_use == 0)
         return 0;
@@ -165,7 +165,7 @@ void log_initialize(void)
     _initialized = 1;
 }
 
-int log_open_file(FILE *file)
+int log_open_file(FILE *file : itype(_Ptr<FILE> ) )
 {
     int log_id;
 
@@ -182,7 +182,7 @@ int log_open_file(FILE *file)
 }
 
 
-int log_open(const char *filename)
+int log_open(const char *filename : itype(_Ptr<const char> ) )
 {
     int id;
     FILE *file;
@@ -212,7 +212,7 @@ int log_open(const char *filename)
 
 
 /* set the trigger level to trigger, represented in kilobytes */
-void log_set_trigger(int id, unsigned trigger)
+void log_set_trigger(int id, unsigned int trigger)
 {
     if (id >= 0 && id < LOG_MAXLOGS && loglist [id] . in_use)
     {
@@ -221,7 +221,7 @@ void log_set_trigger(int id, unsigned trigger)
 }
 
 
-int log_set_filename(int id, const char *filename)
+int log_set_filename(int id, const char *filename : itype(_Ptr<const char> ) )
 {
     if (id < 0 || id >= LOG_MAXLOGS)
         return LOG_EINSANE;
@@ -250,14 +250,14 @@ int log_set_archive_timestamp(int id, int value)
 }
 
 
-int log_open_with_buffer(const char *filename, int size)
+int log_open_with_buffer(_Ptr<const char> filename, int size)
 {
     /* not implemented */
     return LOG_ENOTIMPL;
 }
 
 
-void log_set_lines_kept (int log_id, unsigned int count)
+void log_set_lines_kept(int log_id, unsigned int count)
 {
     if (log_id < 0 || log_id >= LOG_MAXLOGS) return;
     if (loglist[log_id].in_use == 0) return;
@@ -277,7 +277,7 @@ void log_set_lines_kept (int log_id, unsigned int count)
 }
 
 
-void log_set_level(int log_id, unsigned level)
+void log_set_level(int log_id, unsigned int level)
 {
     if (log_id < 0 || log_id >= LOG_MAXLOGS) return;
     if (loglist[log_id].in_use == 0) return;
@@ -358,7 +358,7 @@ void log_shutdown(void)
 }
 
 
-static int create_log_entry (int log_id, const char *pre, const char *line)
+int create_log_entry(int log_id, const char *pre, const char *line)
 {
     log_entry_t *entry;
 
@@ -389,7 +389,7 @@ static int create_log_entry (int log_id, const char *pre, const char *line)
 }
 
 
-void log_contents (int log_id, char **_contents, unsigned int *_len)
+void log_contents(int log_id, _Ptr<_Ptr<char>> _contents, _Ptr<unsigned int> _len)
 {
     int remain;
     log_entry_t *entry;
@@ -419,7 +419,7 @@ void log_contents (int log_id, char **_contents, unsigned int *_len)
     _unlock_logger ();
 }
 
-static void __vsnprintf(char *str, size_t size, const char *format, va_list ap) {
+void __vsnprintf(char *str, size_t size, const char *format, va_list ap) {
     int in_block = 0;
     int block_size = 0;
     int block_len;
@@ -547,8 +547,7 @@ static void __vsnprintf(char *str, size_t size, const char *format, va_list ap) 
     *str = 0;
 }
 
-void log_write(int log_id, unsigned priority, const char *cat, const char *func, 
-        const char *fmt, ...)
+void log_write(int log_id, unsigned int priority, const char *cat : itype(_Ptr<const char> ) , const char *func : itype(_Ptr<const char> ) , const char *fmt : itype(_Ptr<const char> ) )
 {
     static const char *prior[] = { "EROR", "WARN", "INFO", "DBUG" };
     int datelen;
@@ -580,7 +579,7 @@ void log_write(int log_id, unsigned priority, const char *cat, const char *func,
     _unlock_logger();
 }
 
-void log_write_direct(int log_id, const char *fmt, ...)
+void log_write_direct(int log_id, const char *fmt : itype(_Ptr<const char> ) )
 {
     va_list ap;
     time_t now;
@@ -628,7 +627,7 @@ static int _get_log_id(void)
     return id;
 }
 
-static void _release_log_id(int log_id)
+void _release_log_id(int log_id)
 {
     /* lock mutex */
     _lock_logger();

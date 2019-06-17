@@ -93,8 +93,8 @@ typedef struct client_queue_tag {
 } client_queue_t;
 
 typedef struct _thread_queue_tag {
-    thread_type *thread_id;
-    struct _thread_queue_tag *next;
+    _Ptr<thread_type> thread_id;
+    _Ptr<struct _thread_queue_tag> next;
 } thread_queue_t;
 
 typedef struct
@@ -123,7 +123,7 @@ rwlock_t _source_shutdown_rwlock;
 
 static void _handle_connection(void);
 
-static int compare_ip (void *arg, void *a, void *b)
+int compare_ip(void* arg, void *a, void *b)
 {
     const char *ip = (const char *)a;
     const char *pattern = (const char *)b;
@@ -132,7 +132,7 @@ static int compare_ip (void *arg, void *a, void *b)
 }
 
 
-static int free_filtered_ip (void*x)
+int free_filtered_ip(void *x)
 {
     free (x);
     return 1;
@@ -192,7 +192,7 @@ static unsigned long _next_connection_id(void)
 
 
 #ifdef HAVE_OPENSSL
-static void get_ssl_certificate (ice_config_t *config)
+void get_ssl_certificate(ice_config_t *config)
 {
 #if OPENSSL_VERSION_NUMBER < 0x1000114fL
     SSL_METHOD *method;
@@ -249,7 +249,7 @@ static void get_ssl_certificate (ice_config_t *config)
 /* handlers for reading and writing a connection_t when there is ssl
  * configured on the listening port
  */
-static int connection_read_ssl (connection_t *con, void *buf, size_t len)
+int connection_read_ssl(connection_t *con, void *buf, size_t len)
 {
     int bytes = SSL_read (con->ssl, buf, len);
 
@@ -266,7 +266,7 @@ static int connection_read_ssl (connection_t *con, void *buf, size_t len)
     return bytes;
 }
 
-static int connection_send_ssl (connection_t *con, const void *buf, size_t len)
+int connection_send_ssl(connection_t *con, const void *buf, size_t len)
 {
     int bytes = SSL_write (con->ssl, buf, len);
 
@@ -298,7 +298,7 @@ static void get_ssl_certificate (ice_config_t *config)
 /* handlers (default) for reading and writing a connection_t, no encrpytion
  * used just straight access to the socket
  */
-static int connection_read (connection_t *con, void *buf, size_t len)
+int connection_read(connection_t *con, void *buf, size_t len)
 {
     int bytes = sock_read_bytes (con->sock, buf, len);
     if (bytes == 0)
@@ -308,7 +308,7 @@ static int connection_read (connection_t *con, void *buf, size_t len)
     return bytes;
 }
 
-static int connection_send (connection_t *con, const void *buf, size_t len)
+int connection_send(connection_t *con, const void *buf, size_t len)
 {
     int bytes = sock_write_bytes (con->sock, buf, len);
     if (bytes < 0)
@@ -325,7 +325,7 @@ static int connection_send (connection_t *con, const void *buf, size_t len)
 /* function to handle the re-populating of the avl tree containing IP addresses
  * for deciding whether a connection of an incoming request is to be dropped.
  */
-static void recheck_ip_file (cache_file_contents *cache)
+void recheck_ip_file(_Ptr<cache_file_contents> cache)
 {
     time_t now = time(NULL);
     if (now >= cache->file_recheck)
@@ -385,7 +385,7 @@ static void recheck_ip_file (cache_file_contents *cache)
 
 
 /* return 0 if the passed ip address is not to be handled by icecast, non-zero otherwise */
-static int accept_ip_address (char *ip)
+int accept_ip_address(char *ip)
 {
     void *result;
 
@@ -417,7 +417,7 @@ static int accept_ip_address (char *ip)
 }
 
 
-connection_t *connection_create (sock_t sock, sock_t serversock, char *ip)
+connection_t* connection_create(int sock, int serversock, char *ip : itype(_Ptr<char> ) )
 {
     connection_t *con;
     con = (connection_t *)calloc(1, sizeof(connection_t));
@@ -437,7 +437,7 @@ connection_t *connection_create (sock_t sock, sock_t serversock, char *ip)
 
 /* prepare connection for interacting over a SSL connection
  */
-void connection_uses_ssl (connection_t *con)
+void connection_uses_ssl(connection_t *con)
 {
 #ifdef HAVE_OPENSSL
     con->read = connection_read_ssl;
@@ -448,7 +448,7 @@ void connection_uses_ssl (connection_t *con)
 #endif
 }
 
-static sock_t wait_for_serversock(int timeout)
+int wait_for_serversock(int timeout)
 {
 #ifdef HAVE_POLL
     struct pollfd ufds [global.server_sockets];
@@ -531,7 +531,7 @@ static sock_t wait_for_serversock(int timeout)
 #endif
 }
 
-static connection_t *_accept_connection(int duration)
+connection_t* _accept_connection(int duration)
 {
     sock_t sock, serversock;
     char *ip;
@@ -574,7 +574,7 @@ static connection_t *_accept_connection(int duration)
  * has been collected, so we now pass it onto the connection thread for
  * further processing
  */
-static void _add_connection (client_queue_t *node)
+void _add_connection(client_queue_t *node)
 {
     thread_spin_lock (&_connection_lock);
     *_con_queue_tail = node;
@@ -704,7 +704,7 @@ static void process_request_queue (void)
 /* add node to the queue of requests. This is where the clients are when
  * initial http details are read.
  */
-static void _add_request_queue (client_queue_t *node)
+void _add_request_queue(client_queue_t *node)
 {
     *_req_queue_tail = node;
     _req_queue_tail = (volatile client_queue_t **)&node->next;
@@ -801,7 +801,7 @@ void connection_accept_loop (void)
 /* Called when activating a source. Verifies that the source count is not
  * exceeded and applies any initial parameters.
  */
-int connection_complete_source (source_t *source, int response)
+int connection_complete_source(source_t *source : itype(_Ptr<struct source_tag> ) , int response)
 {
     ice_config_t *config;
 
@@ -908,8 +908,7 @@ int connection_complete_source (source_t *source, int response)
 }
 
 
-static int _check_pass_http(http_parser_t *parser, 
-        const char *correctuser, const char *correctpass)
+int _check_pass_http(http_parser_t *parser, const char *correctuser, const char *correctpass)
 {
     /* This will look something like "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" */
     const char *header = httpp_getvar(parser, "authorization");
@@ -947,7 +946,7 @@ static int _check_pass_http(http_parser_t *parser,
     return 1;
 }
 
-static int _check_pass_icy(http_parser_t *parser, const char *correctpass)
+int _check_pass_icy(http_parser_t *parser, const char *correctpass)
 {
     const char *password;
 
@@ -961,7 +960,7 @@ static int _check_pass_icy(http_parser_t *parser, const char *correctpass)
         return 1;
 }
 
-static int _check_pass_ice(http_parser_t *parser, const char *correctpass)
+int _check_pass_ice(http_parser_t *parser, const char *correctpass)
 {
     const char *password;
 
@@ -975,7 +974,7 @@ static int _check_pass_ice(http_parser_t *parser, const char *correctpass)
         return 1;
 }
 
-int connection_check_admin_pass(http_parser_t *parser)
+int connection_check_admin_pass(http_parser_t *parser : itype(_Ptr<http_parser_t> ) )
 {
     int ret;
     ice_config_t *config = config_get_config();
@@ -997,7 +996,7 @@ int connection_check_admin_pass(http_parser_t *parser)
     return ret;
 }
 
-int connection_check_relay_pass(http_parser_t *parser)
+int connection_check_relay_pass(http_parser_t *parser : itype(_Ptr<http_parser_t> ) )
 {
     int ret;
     ice_config_t *config = config_get_config();
@@ -1017,7 +1016,7 @@ int connection_check_relay_pass(http_parser_t *parser)
 
 /* return 0 for failed, 1 for ok
  */
-int connection_check_pass (http_parser_t *parser, const char *user, const char *pass)
+int connection_check_pass(http_parser_t *parser : itype(_Ptr<http_parser_t> ) , const char *user : itype(_Ptr<const char> ) , const char *pass : itype(_Ptr<const char> ) )
 {
     int ret;
     const char *protocol;
@@ -1049,7 +1048,7 @@ int connection_check_pass (http_parser_t *parser, const char *user, const char *
 
 
 /* only called for native icecast source clients */
-static void _handle_source_request (client_t *client, const char *uri)
+void _handle_source_request(client_t *client, const char *uri)
 {
     ICECAST_LOG_INFO("Source logging in at mountpoint \"%s\" from %s",
         uri, client->con->ip);
@@ -1077,7 +1076,7 @@ static void _handle_source_request (client_t *client, const char *uri)
 }
 
 
-void source_startup (client_t *client, const char *uri, int auth_style)
+void source_startup(client_t *client : itype(_Ptr<client_t> ) , const char *uri : itype(_Ptr<const char> ) , int auth_style)
 {
     source_t *source;
     source = source_reserve (uri);
@@ -1120,7 +1119,7 @@ void source_startup (client_t *client, const char *uri, int auth_style)
 }
 
 
-static void _handle_stats_request (client_t *client, char *uri)
+void _handle_stats_request(client_t *client, char *uri)
 {
     stats_event_inc(NULL, "stats_connections");
 
@@ -1138,7 +1137,7 @@ static void _handle_stats_request (client_t *client, char *uri)
     fserve_add_client_callback (client, stats_callback, NULL);
 }
 
-static void _handle_get_request (client_t *client, char *passed_uri)
+void _handle_get_request(client_t *client, char *passed_uri)
 {
     char *serverhost = NULL;
     int serverport = 0;
@@ -1191,7 +1190,7 @@ static void _handle_get_request (client_t *client, char *passed_uri)
     if (uri != passed_uri) free (uri);
 }
 
-static void _handle_shoutcast_compatible (client_queue_t *node)
+void _handle_shoutcast_compatible(client_queue_t *node)
 {
     char *http_compliant;
     int http_compliant_len = 0;
@@ -1404,7 +1403,7 @@ static void _handle_connection(void)
 
 
 /* called when listening thread is not checking for incoming connections */
-int connection_setup_sockets (ice_config_t *config)
+int connection_setup_sockets(ice_config_t *config : itype(_Ptr<struct ice_config_tag> ) )
 {
     int count = 0;
     listener_t *listener, **prev;
@@ -1491,7 +1490,7 @@ int connection_setup_sockets (ice_config_t *config)
 }
 
 
-void connection_close(connection_t *con)
+void connection_close(connection_t *con : itype(_Ptr<connection_t> ) )
 {
     sock_close(con->sock);
     if (con->ip) free(con->ip);

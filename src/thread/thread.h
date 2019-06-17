@@ -95,10 +95,10 @@ typedef struct
     pthread_spinlock_t lock;
 } spin_t;
 
-void thread_spin_create (spin_t *spin);
-void thread_spin_destroy (spin_t *spin);
-void thread_spin_lock (spin_t *spin);
-void thread_spin_unlock (spin_t *spin);
+void thread_spin_create (_Ptr<spin_t> spin);
+void thread_spin_destroy (_Ptr<spin_t> spin);
+void thread_spin_lock (_Ptr<spin_t> spin);
+void thread_spin_unlock (_Ptr<spin_t> spin);
 #else
 typedef mutex_t spin_t;
 #define thread_spin_create(x)  thread_mutex_create(x)
@@ -163,24 +163,24 @@ void thread_initialize_with_log_id(int log_id);
 void thread_shutdown(void);
 
 /* creation, destruction, locking, unlocking, signalling and waiting */
-thread_type *thread_create_c(char *name, void *(*start_routine)(void *), 
+thread_type *thread_create_c(char *name, _Ptr<void* (void* )> start_routine, 
         void *arg, int detached, int line, char *file);
-void thread_mutex_create_c(mutex_t *mutex, int line, char *file);
-void thread_mutex_lock_c(mutex_t *mutex, int line, char *file);
-void thread_mutex_unlock_c(mutex_t *mutex, int line, char *file);
-void thread_mutex_destroy(mutex_t *mutex);
-void thread_cond_create_c(cond_t *cond, int line, char *file);
-void thread_cond_signal_c(cond_t *cond, int line, char *file);
-void thread_cond_broadcast_c(cond_t *cond, int line, char *file);
-void thread_cond_wait_c(cond_t *cond, int line, char *file);
-void thread_cond_timedwait_c(cond_t *cond, int millis, int line, char *file);
-void thread_cond_destroy(cond_t *cond);
-void thread_rwlock_create_c(rwlock_t *rwlock, int line, char *file);
-void thread_rwlock_rlock_c(rwlock_t *rwlock, int line, char *file);
-void thread_rwlock_wlock_c(rwlock_t *rwlock, int line, char *file);
-void thread_rwlock_unlock_c(rwlock_t *rwlock, int line, char *file);
-void thread_rwlock_destroy(rwlock_t *rwlock);
-void thread_exit_c(long val, int line, char *file);
+void thread_mutex_create_c(_Ptr<mutex_t> mutex, int line, _Ptr<char> file);
+void thread_mutex_lock_c(_Ptr<mutex_t> mutex, int line, _Ptr<char> file);
+void thread_mutex_unlock_c(_Ptr<mutex_t> mutex, int line, _Ptr<char> file);
+void thread_mutex_destroy(_Ptr<mutex_t> mutex);
+void thread_cond_create_c(_Ptr<cond_t> cond, int line, _Ptr<char> file);
+void thread_cond_signal_c(_Ptr<cond_t> cond, int line, _Ptr<char> file);
+void thread_cond_broadcast_c(_Ptr<cond_t> cond, int line, _Ptr<char> file);
+void thread_cond_wait_c(_Ptr<cond_t> cond, int line, _Ptr<char> file);
+void thread_cond_timedwait_c(_Ptr<cond_t> cond, int millis, int line, _Ptr<char> file);
+void thread_cond_destroy(_Ptr<cond_t> cond);
+void thread_rwlock_create_c(_Ptr<rwlock_t> rwlock, int line, _Ptr<char> file);
+void thread_rwlock_rlock_c(_Ptr<rwlock_t> rwlock, int line, _Ptr<char> file);
+void thread_rwlock_wlock_c(_Ptr<rwlock_t> rwlock, int line, _Ptr<char> file);
+void thread_rwlock_unlock_c(_Ptr<rwlock_t> rwlock, int line, _Ptr<char> file);
+void thread_rwlock_destroy(_Ptr<rwlock_t> rwlock);
+void thread_exit_c(long val, int line, _Ptr<char> file);
 
 /* sleeping */
 void thread_sleep(unsigned long len);

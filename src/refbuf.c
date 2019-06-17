@@ -38,7 +38,7 @@ void refbuf_shutdown(void)
 {
 }
 
-refbuf_t *refbuf_new (unsigned int size)
+refbuf_t* refbuf_new(unsigned int size)
 {
     refbuf_t *refbuf;
 
@@ -61,12 +61,12 @@ refbuf_t *refbuf_new (unsigned int size)
     return refbuf;
 }
 
-void refbuf_addref(refbuf_t *self)
+void refbuf_addref(refbuf_t *self : itype(_Ptr<refbuf_t> ) )
 {
     self->_count++;
 }
 
-static void refbuf_release_associated (refbuf_t *ref)
+void refbuf_release_associated(refbuf_t *ref)
 {
     if (ref == NULL)
         return;
@@ -80,7 +80,7 @@ static void refbuf_release_associated (refbuf_t *ref)
     }
 }
 
-void refbuf_release(refbuf_t *self)
+void refbuf_release(refbuf_t *self : itype(_Ptr<refbuf_t> ) )
 {
     if (self == NULL)
         return;

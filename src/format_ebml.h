@@ -30,6 +30,6 @@ struct ebml_source_state_st {
 
 };
 
-int format_ebml_get_plugin (source_t *source);
+int format_ebml_get_plugin(source_t *source : itype(_Ptr<source_t> ) );
 
 #endif  /* __FORMAT_EBML_H__ */

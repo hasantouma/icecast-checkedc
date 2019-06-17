@@ -66,22 +66,22 @@ struct ebml_st {
 
 };
 
-static void ebml_free_plugin (format_plugin_t *plugin);
-static refbuf_t *ebml_get_buffer (source_t *source);
-static int  ebml_write_buf_to_client (client_t *client);
-static void  ebml_write_buf_to_file (source_t *source, refbuf_t *refbuf);
-static int  ebml_create_client_data (source_t *source, client_t *client);
-static void ebml_free_client_data (client_t *client);
+void ebml_free_plugin(format_plugin_t *plugin : itype(_Ptr<format_plugin_t> ) );
+refbuf_t* ebml_get_buffer(source_t *source : itype(_Ptr<source_t> ) );
+int ebml_write_buf_to_client(client_t *client : itype(_Ptr<client_t> ) );
+void ebml_write_buf_to_file(source_t *source : itype(_Ptr<source_t> ) , refbuf_t *refbuf : itype(_Ptr<refbuf_t> ) );
+int ebml_create_client_data(source_t *source : itype(_Ptr<source_t> ) , client_t *client : itype(_Ptr<client_t> ) );
+void ebml_free_client_data(client_t *client : itype(_Ptr<client_t> ) );
 
 static ebml_t *ebml_create();
-static void ebml_destroy(ebml_t *ebml);
-static int ebml_read_space(ebml_t *ebml);
-static int ebml_read(ebml_t *ebml, char *buffer, int len);
-static int ebml_last_was_sync(ebml_t *ebml);
-static char *ebml_write_buffer(ebml_t *ebml, int len);
-static int ebml_wrote(ebml_t *ebml, int len);
+void ebml_destroy(ebml_t *ebml : itype(_Ptr<ebml_t> ) );
+int ebml_read_space(ebml_t *ebml : itype(_Ptr<ebml_t> ) );
+int ebml_read(ebml_t *ebml : itype(_Ptr<ebml_t> ) , char *buffer : itype(_Ptr<char> ) , int len);
+int ebml_last_was_sync(ebml_t *ebml : itype(_Ptr<ebml_t> ) );
+char ebml_write_buffer(ebml_t *ebml : itype(_Ptr<ebml_t> ) , int len) : itype(_Ptr<char> ) ;
+int ebml_wrote(ebml_t *ebml : itype(_Ptr<ebml_t> ) , int len);
 
-int format_ebml_get_plugin (source_t *source)
+int format_ebml_get_plugin(source_t *source : itype(_Ptr<source_t> ) )
 {
 
     ebml_source_state_t *ebml_source_state = calloc(1, sizeof(ebml_source_state_t));
@@ -104,7 +104,7 @@ int format_ebml_get_plugin (source_t *source)
     return 0;
 }
 
-static void ebml_free_plugin (format_plugin_t *plugin)
+void ebml_free_plugin(format_plugin_t *plugin : itype(_Ptr<format_plugin_t> ) )
 {
 
     ebml_source_state_t *ebml_source_state = plugin->_state;
@@ -116,7 +116,7 @@ static void ebml_free_plugin (format_plugin_t *plugin)
 
 }
 
-static int send_ebml_header (client_t *client)
+int send_ebml_header(client_t *client)
 {
 
     ebml_client_data_t *ebml_client_data = client->format_data;
@@ -140,7 +140,7 @@ static int send_ebml_header (client_t *client)
 
 }
 
-static int ebml_write_buf_to_client (client_t *client)
+int ebml_write_buf_to_client(client_t *client : itype(_Ptr<client_t> ) )
 {
 
     ebml_client_data_t *ebml_client_data = client->format_data;
@@ -157,7 +157,7 @@ static int ebml_write_buf_to_client (client_t *client)
 
 }
 
-static refbuf_t *ebml_get_buffer (source_t *source)
+refbuf_t* ebml_get_buffer(source_t *source : itype(_Ptr<source_t> ) )
 {
 
     ebml_source_state_t *ebml_source_state = source->format->_state;
@@ -209,7 +209,7 @@ static refbuf_t *ebml_get_buffer (source_t *source)
     }
 }
 
-static int ebml_create_client_data (source_t *source, client_t *client)
+int ebml_create_client_data(source_t *source : itype(_Ptr<source_t> ) , client_t *client : itype(_Ptr<client_t> ) )
 {
 
     ebml_client_data_t *ebml_client_data = calloc(1, sizeof(ebml_client_data_t));
@@ -231,7 +231,7 @@ static int ebml_create_client_data (source_t *source, client_t *client)
 }
 
 
-static void ebml_free_client_data (client_t *client)
+void ebml_free_client_data(client_t *client : itype(_Ptr<client_t> ) )
 {
 
     ebml_client_data_t *ebml_client_data = client->format_data;
@@ -242,7 +242,7 @@ static void ebml_free_client_data (client_t *client)
 }
 
 
-static void ebml_write_buf_to_file_fail (source_t *source)
+void ebml_write_buf_to_file_fail(source_t *source)
 {
     ICECAST_LOG_WARN("Write to dump file failed, disabling");
     fclose (source->dumpfile);
@@ -250,7 +250,7 @@ static void ebml_write_buf_to_file_fail (source_t *source)
 }
 
 
-static void ebml_write_buf_to_file (source_t *source, refbuf_t *refbuf)
+void ebml_write_buf_to_file(source_t *source : itype(_Ptr<source_t> ) , refbuf_t *refbuf : itype(_Ptr<refbuf_t> ) )
 {
 
     ebml_source_state_t *ebml_source_state = source->format->_state;
@@ -275,7 +275,7 @@ static void ebml_write_buf_to_file (source_t *source, refbuf_t *refbuf)
 
 /* internal ebml parsing */
 
-static void ebml_destroy(ebml_t *ebml)
+void ebml_destroy(ebml_t *ebml : itype(_Ptr<ebml_t> ) )
 {
 
     free(ebml->header);
@@ -302,7 +302,7 @@ static ebml_t *ebml_create()
 
 }
 
-static int ebml_read_space(ebml_t *ebml)
+int ebml_read_space(ebml_t *ebml : itype(_Ptr<ebml_t> ) )
 {
 
     int read_space;
@@ -326,7 +326,7 @@ static int ebml_read_space(ebml_t *ebml)
 
 }
 
-static int ebml_read(ebml_t *ebml, char *buffer, int len)
+int ebml_read(ebml_t *ebml : itype(_Ptr<ebml_t> ) , char *buffer : itype(_Ptr<char> ) , int len)
 {
 
     int read_space;
@@ -384,7 +384,7 @@ static int ebml_read(ebml_t *ebml, char *buffer, int len)
 
 }
 
-static int ebml_last_was_sync(ebml_t *ebml)
+int ebml_last_was_sync(ebml_t *ebml : itype(_Ptr<ebml_t> ) )
 {
 
     if (ebml->cluster_start == 0)
@@ -403,7 +403,7 @@ static int ebml_last_was_sync(ebml_t *ebml)
 
 }
 
-static char *ebml_write_buffer(ebml_t *ebml, int len)
+char ebml_write_buffer(ebml_t *ebml : itype(_Ptr<ebml_t> ) , int len) : itype(_Ptr<char> ) 
 {
 
     return (char *)ebml->input_buffer;
@@ -411,7 +411,7 @@ static char *ebml_write_buffer(ebml_t *ebml, int len)
 }
 
 
-static int ebml_wrote(ebml_t *ebml, int len)
+int ebml_wrote(ebml_t *ebml : itype(_Ptr<ebml_t> ) , int len)
 {
 
     int b;

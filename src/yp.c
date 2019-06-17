@@ -77,7 +77,7 @@ typedef struct ypdata_tag
     time_t      next_update;
     unsigned    touch_interval;
     char        *error_msg;
-    int    (*process)(struct ypdata_tag *yp, char *s, unsigned len);
+    _Ptr<int (struct ypdata_tag* , char* , unsigned int )> process;
 
     struct ypdata_tag *next;
 } ypdata_t;
@@ -94,16 +94,16 @@ static thread_type *yp_thread;
 static volatile unsigned client_limit = 0;
 static volatile char *server_version = NULL;
 
-static void *yp_update_thread(void *arg);
-static void add_yp_info (ypdata_t *yp, void *info, int type);
-static int do_yp_remove (ypdata_t *yp, char *s, unsigned len);
-static int do_yp_add (ypdata_t *yp, char *s, unsigned len);
-static int do_yp_touch (ypdata_t *yp, char *s, unsigned len);
-static void yp_destroy_ypdata(ypdata_t *ypdata);
+void* yp_update_thread(void *arg : itype(void* ) );
+void add_yp_info(ypdata_t *yp : itype(_Ptr<ypdata_t> ) , void *info : itype(void* ) , int type);
+int do_yp_remove(ypdata_t *yp, char *s, unsigned int len);
+int do_yp_add(ypdata_t *yp, char *s, unsigned int len);
+int do_yp_touch(ypdata_t *yp : itype(_Ptr<ypdata_t> ) , char *s : itype(_Ptr<char> ) , unsigned int len);
+void yp_destroy_ypdata(ypdata_t *ypdata : itype(_Ptr<ypdata_t> ) );
 
 
 /* curl callback used to parse headers coming back from the YP server */
-static int handle_returned_header (void *ptr, size_t size, size_t nmemb, void *stream)
+int handle_returned_header(void *ptr, size_t size, size_t nmemb, void *stream)
 {
     ypdata_t *yp = stream;
     unsigned bytes = size * nmemb;
@@ -147,14 +147,14 @@ static int handle_returned_header (void *ptr, size_t size, size_t nmemb, void *s
 
 
 /* capture returned data, but don't do anything with it, shouldn't be any */
-static int handle_returned_data (void *ptr, size_t size, size_t nmemb, void *stream)
+int handle_returned_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
     return (int)(size*nmemb);
 }
 
 
 /* search the active and pending YP server lists */
-static struct yp_server *find_yp_server (const char *url)
+struct yp_server* find_yp_server(const char *url)
 {
     struct yp_server *server;
 
@@ -176,7 +176,7 @@ static struct yp_server *find_yp_server (const char *url)
 }
 
 
-static void destroy_yp_server (struct yp_server *server)
+void destroy_yp_server(struct yp_server *server)
 {
     if (server == NULL)
         return;
@@ -193,7 +193,7 @@ static void destroy_yp_server (struct yp_server *server)
 
 
 /* search for a ypdata entry corresponding to a specific mountpoint */
-static ypdata_t *find_yp_mount (ypdata_t *mounts, const char *mount)
+ypdata_t* find_yp_mount(ypdata_t *mounts, const char *mount)
 {
     ypdata_t *yp = mounts;
     while (yp)
@@ -206,7 +206,7 @@ static ypdata_t *find_yp_mount (ypdata_t *mounts, const char *mount)
 }
 
 
-void yp_recheck_config (ice_config_t *config)
+void yp_recheck_config(ice_config_t *config : itype(_Ptr<ice_config_t> ) )
 {
     int i;
     struct yp_server *server;
@@ -293,7 +293,7 @@ void yp_initialize(void)
  * return 0 for ok, -1 for this entry failed, -2 for server fail.
  * On failure case, update and process are modified
  */
-static int send_to_yp (const char *cmd, ypdata_t *yp, char *post)
+int send_to_yp(const char *cmd, ypdata_t *yp, char *post)
 {
     int curlcode;
     struct yp_server *server = yp->server;
@@ -344,7 +344,7 @@ static int send_to_yp (const char *cmd, ypdata_t *yp, char *post)
 
 
 /* routines for building and issues requests to the YP server */
-static int do_yp_remove (ypdata_t *yp, char *s, unsigned len)
+int do_yp_remove(ypdata_t *yp, char *s, unsigned int len)
 {
     int ret = 0;
 
@@ -367,7 +367,7 @@ static int do_yp_remove (ypdata_t *yp, char *s, unsigned len)
 }
 
 
-static int do_yp_add (ypdata_t *yp, char *s, unsigned len)
+int do_yp_add(ypdata_t *yp, char *s, unsigned int len)
 {
     int ret;
     char *value;
@@ -424,7 +424,7 @@ static int do_yp_add (ypdata_t *yp, char *s, unsigned len)
 }
 
 
-static int do_yp_touch (ypdata_t *yp, char *s, unsigned len)
+int do_yp_touch(ypdata_t *yp : itype(_Ptr<ypdata_t> ) , char *s : itype(_Ptr<char> ) , unsigned int len)
 {
     unsigned listeners = 0, max_listeners = 1;
     char *val, *artist, *title;
@@ -491,7 +491,7 @@ static int do_yp_touch (ypdata_t *yp, char *s, unsigned len)
 
 
 
-static int process_ypdata (struct yp_server *server, ypdata_t *yp)
+int process_ypdata(struct yp_server *server, ypdata_t *yp)
 {
     unsigned len = 1024;
     char *s = NULL, *tmp;
@@ -525,7 +525,7 @@ static int process_ypdata (struct yp_server *server, ypdata_t *yp)
 }
 
 
-static void yp_process_server (struct yp_server *server)
+void yp_process_server(struct yp_server *server)
 {
     ypdata_t *yp;
     int state = 0;
@@ -552,7 +552,7 @@ static void yp_process_server (struct yp_server *server)
 
 
 
-static ypdata_t *create_yp_entry (const char *mount)
+ypdata_t* create_yp_entry(const char *mount)
 {
     ypdata_t *yp;
     char *s;
@@ -666,7 +666,7 @@ static void check_servers (void)
 }
 
 
-static void add_pending_yp (struct yp_server *server)
+void add_pending_yp(struct yp_server *server)
 {
     ypdata_t *current, *yp;
     unsigned count = 0;
@@ -689,7 +689,7 @@ static void add_pending_yp (struct yp_server *server)
 }
 
 
-static void delete_marked_yp (struct yp_server *server)
+void delete_marked_yp(struct yp_server *server)
 {
     ypdata_t *yp = server->mounts, **prev = &server->mounts;
 
@@ -710,7 +710,7 @@ static void delete_marked_yp (struct yp_server *server)
 }
 
 
-static void *yp_update_thread(void *arg)
+void* yp_update_thread(void *arg : itype(void* ) )
 {
     ICECAST_LOG_INFO("YP update thread started");
 
@@ -764,7 +764,7 @@ static void *yp_update_thread(void *arg)
 
 
 
-static void yp_destroy_ypdata(ypdata_t *ypdata)
+void yp_destroy_ypdata(ypdata_t *ypdata : itype(_Ptr<ypdata_t> ) )
 {
     if (ypdata) {
         if (ypdata->mount) {
@@ -809,7 +809,7 @@ static void yp_destroy_ypdata(ypdata_t *ypdata)
     }
 }
 
-static void add_yp_info (ypdata_t *yp, void *info, int type)
+void add_yp_info(ypdata_t *yp : itype(_Ptr<ypdata_t> ) , void *info : itype(void* ) , int type)
 {
     char *escaped;
 
@@ -869,7 +869,7 @@ static void add_yp_info (ypdata_t *yp, void *info, int type)
 
 
 /* Add YP entries to active servers */
-void yp_add (const char *mount)
+void yp_add(const char *mount : itype(_Ptr<const char> ) )
 {
     struct yp_server *server;
 
@@ -911,7 +911,7 @@ void yp_add (const char *mount)
 
 
 /* Mark an existing entry in the YP list as to be marked for deletion */
-void yp_remove (const char *mount)
+void yp_remove(const char *mount : itype(_Ptr<const char> ) )
 {
     struct yp_server *server = (struct yp_server *)active_yps;
 
@@ -942,7 +942,7 @@ void yp_remove (const char *mount)
 
 /* This is similar to yp_remove, but we force a touch
  * attempt */
-void yp_touch (const char *mount)
+void yp_touch(const char *mount : itype(_Ptr<const char> ) )
 {
     struct yp_server *server = (struct yp_server *)active_yps;
     ypdata_t *search_list = NULL;

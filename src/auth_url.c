@@ -105,7 +105,7 @@ typedef struct {
 } auth_url;
 
 
-static void auth_url_clear(auth_t *self)
+void auth_url_clear(auth_t *self)
 {
     auth_url *url;
 
@@ -138,7 +138,7 @@ static int my_getpass(void *client, char *prompt, char *buffer, int buflen)
 #endif
 
 
-static size_t handle_returned_header (void *ptr, size_t size, size_t nmemb, void *stream)
+size_t handle_returned_header(void *ptr, size_t size, size_t nmemb, void *stream)
 {
     auth_client *auth_user = stream;
     size_t len = size * nmemb;
@@ -190,13 +190,13 @@ static size_t handle_returned_header (void *ptr, size_t size, size_t nmemb, void
 }
 
 /* capture returned data, but don't do anything with it */
-static size_t handle_returned_data (void *ptr, size_t size, size_t nmemb, void *stream)
+size_t handle_returned_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
     return size * nmemb;
 }
 
 
-static auth_result url_remove_listener (auth_client *auth_user)
+auth_result url_remove_listener(auth_client *auth_user)
 {
     client_t *client = auth_user->client;
     auth_t *auth = client->auth;
@@ -295,7 +295,7 @@ static auth_result url_remove_listener (auth_client *auth_user)
 }
 
 
-static auth_result url_add_listener (auth_client *auth_user)
+auth_result url_add_listener(auth_client *auth_user)
 {
     client_t *client = auth_user->client;
     auth_t *auth = client->auth;
@@ -448,7 +448,7 @@ static auth_result url_add_listener (auth_client *auth_user)
 /* called by auth thread when a source starts, there is no client_t in
  * this case
  */
-static void url_stream_start (auth_client *auth_user)
+void url_stream_start(auth_client *auth_user)
 {
     char *mount, *server;
     ice_config_t *config = config_get_config ();
@@ -507,7 +507,7 @@ static void url_stream_start (auth_client *auth_user)
 }
 
 
-static void url_stream_end (auth_client *auth_user)
+void url_stream_end(auth_client *auth_user)
 {
     char *mount, *server;
     ice_config_t *config = config_get_config ();
@@ -565,7 +565,7 @@ static void url_stream_end (auth_client *auth_user)
     return;
 }
 
-static void url_stream_auth (auth_client *auth_user)
+void url_stream_auth(auth_client *auth_user)
 {
     ice_config_t *config;
     int port;
@@ -629,22 +629,22 @@ static void url_stream_auth (auth_client *auth_user)
 }
 
 
-static auth_result auth_url_adduser(auth_t *auth, const char *username, const char *password)
+auth_result auth_url_adduser(auth_t *auth, const char *username, const char *password)
 {
     return AUTH_FAILED;
 }
 
-static auth_result auth_url_deleteuser (auth_t *auth, const char *username)
+auth_result auth_url_deleteuser(auth_t *auth, const char *username)
 {
     return AUTH_FAILED;
 }
 
-static auth_result auth_url_listuser (auth_t *auth, xmlNodePtr srcnode)
+auth_result auth_url_listuser(auth_t *auth, xmlNodePtr srcnode)
 {
     return AUTH_FAILED;
 }
 
-int auth_get_url_auth (auth_t *authenticator, config_options_t *options)
+int auth_get_url_auth(auth_t *authenticator, config_options_t *options)
 {
     auth_url *url_info;
 

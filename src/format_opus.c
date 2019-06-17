@@ -29,15 +29,14 @@ typedef struct source_tag source_t;
 #define CATMODULE "format-opus"
 #include "logging.h"
 
-static void opus_codec_free (ogg_state_t *ogg_info, ogg_codec_t *codec)
+void opus_codec_free(ogg_state_t *ogg_info, ogg_codec_t *codec)
 {
     ogg_stream_clear (&codec->os);
     free (codec);
 }
 
 
-static refbuf_t *process_opus_page (ogg_state_t *ogg_info,
-        ogg_codec_t *codec, ogg_page *page)
+refbuf_t* process_opus_page(ogg_state_t *ogg_info, ogg_codec_t *codec, ogg_page *page)
 {
     refbuf_t *refbuf;
 
@@ -60,7 +59,7 @@ static refbuf_t *process_opus_page (ogg_state_t *ogg_info,
 }
 
 
-ogg_codec_t *initial_opus_page (format_plugin_t *plugin, ogg_page *page)
+ogg_codec_t* initial_opus_page(format_plugin_t *plugin : itype(_Ptr<format_plugin_t> ) , ogg_page *page : itype(_Ptr<ogg_page> ) )
 {
     ogg_state_t *ogg_info = plugin->_state;
     ogg_codec_t *codec = calloc (1, sizeof (ogg_codec_t));

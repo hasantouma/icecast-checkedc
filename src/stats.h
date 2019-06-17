@@ -75,7 +75,7 @@ void stats_initialize(void);
 void stats_shutdown(void);
 
 void stats_global(ice_config_t *config);
-stats_t *stats_get_stats(void);
+_Ptr<stats_t> stats_get_stats(void);
 refbuf_t *stats_get_streams (void);
 void stats_clear_virtual_mounts (void);
 
@@ -91,7 +91,7 @@ void stats_event_hidden (const char *source, const char *name, int hidden);
 void stats_event_time (const char *mount, const char *name);
 void stats_event_time_iso8601 (const char *mount, const char *name);
 
-void *stats_connection(void *arg);
+void* stats_connection(void *arg);
 void stats_callback (client_t *client, void *notused);
 
 void stats_transform_xslt(client_t *client, const char *uri);

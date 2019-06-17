@@ -43,7 +43,7 @@ typedef struct source_tag
     avl_tree *client_tree;
     avl_tree *pending_tree;
 
-    rwlock_t *shutdown_rwlock;
+    _Ptr<rwlock_t> shutdown_rwlock;
     util_dict *audio_info;
 
     FILE *intro_file;
@@ -81,7 +81,7 @@ typedef struct source_tag
 } source_t;
 
 source_t *source_reserve (const char *mount);
-void *source_client_thread (void *arg);
+void* source_client_thread (void *arg);
 void source_startup (client_t *client, const char *uri, int auth_style);
 void source_client_callback (client_t *client, void *source);
 void source_update_settings (ice_config_t *config, source_t *source, mount_proxy *mountinfo);
@@ -89,7 +89,7 @@ void source_clear_source (source_t *source);
 source_t *source_find_mount(const char *mount);
 source_t *source_find_mount_raw(const char *mount);
 client_t *source_find_client(source_t *source, int id);
-int source_compare_sources(void *arg, void *a, void *b);
+int source_compare_sources(void* arg, void *a, void *b);
 void source_free_source(source_t *source);
 void source_move_clients (source_t *source, source_t *dest);
 int source_remove_client(void *key);

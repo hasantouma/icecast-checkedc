@@ -84,20 +84,20 @@ mutex_t _global_event_mutex;
 static volatile event_listener_t *_event_listeners;
 
 
-static void *_stats_thread(void *arg);
-static int _compare_stats(void *a, void *b, void *arg);
-static int _compare_source_stats(void *a, void *b, void *arg);
-static int _free_stats(void *key);
-static int _free_source_stats(void *key);
-static void _add_event_to_queue(stats_event_t *event, event_queue_t *queue);
-static stats_node_t *_find_node(avl_tree *tree, const char *name);
-static stats_source_t *_find_source(avl_tree *tree, const char *source);
-static void _free_event(stats_event_t *event);
-static stats_event_t *_get_event_from_queue (event_queue_t *queue);
+void* _stats_thread(void *arg : itype(void* ) );
+int _compare_stats(void* arg, void *a : itype(void* ) , void *b : itype(void* ) );
+int _compare_source_stats(void* arg, void *a : itype(void* ) , void *b : itype(void* ) );
+int _free_stats(void *key);
+int _free_source_stats(void *key);
+void _add_event_to_queue(stats_event_t *event : itype(_Ptr<stats_event_t> ) , _Ptr<event_queue_t> queue);
+stats_node_t* _find_node(avl_tree *stats_tree : itype(_Ptr<avl_tree> ) , const char *name : itype(_Ptr<const char> ) );
+stats_source_t* _find_source(avl_tree *source_tree : itype(_Ptr<avl_tree> ) , const char *source : itype(_Ptr<const char> ) );
+void _free_event(stats_event_t *event : itype(_Ptr<stats_event_t> ) );
+stats_event_t* _get_event_from_queue(_Ptr<event_queue_t> queue);
 
 
 /* simple helper function for creating an event */
-static stats_event_t *build_event (const char *source, const char *name, const char *value)
+stats_event_t* build_event(const char *source, const char *name, const char *value)
 {
     stats_event_t *event;
 
@@ -116,7 +116,7 @@ static stats_event_t *build_event (const char *source, const char *name, const c
     return event;
 }
 
-static void queue_global_event (stats_event_t *event)
+void queue_global_event(stats_event_t *event)
 {
     thread_mutex_lock(&_global_event_mutex);
     _add_event_to_queue (event, &_global_event_queue);
@@ -186,7 +186,7 @@ void stats_shutdown(void)
     }
 }
 
-stats_t *stats_get_stats(void)
+_Ptr<stats_t> stats_get_stats(void)
 {
     /* lock global stats
     
@@ -200,7 +200,7 @@ stats_t *stats_get_stats(void)
 }
 
 /* simple name=tag stat create/update */
-void stats_event(const char *source, const char *name, const char *value)
+void stats_event(const char *source : itype(_Ptr<const char> ) , const char *name : itype(_Ptr<const char> ) , const char *value : itype(_Ptr<const char> ) )
 {
     stats_event_t *event;
 
@@ -216,7 +216,7 @@ void stats_event(const char *source, const char *name, const char *value)
 
 
 /* wrapper for stats_event, this takes a charset to convert from */
-void stats_event_conv(const char *mount, const char *name, const char *value, const char *charset)
+void stats_event_conv(const char *mount : itype(_Ptr<const char> ) , const char *name : itype(_Ptr<const char> ) , const char *value : itype(_Ptr<const char> ) , const char *charset : itype(_Ptr<const char> ) )
 {
     const char *metadata = value;
     xmlBufferPtr conv = xmlBufferCreate ();
@@ -244,7 +244,7 @@ void stats_event_conv(const char *mount, const char *name, const char *value, co
 
 /* make stat hidden (non-zero). name can be NULL if it applies to a whole
  * source stats tree. */
-void stats_event_hidden (const char *source, const char *name, int hidden)
+void stats_event_hidden(const char *source : itype(_Ptr<const char> ) , const char *name : itype(_Ptr<const char> ) , int hidden)
 {
     stats_event_t *event;
     const char *str = NULL;
@@ -260,7 +260,7 @@ void stats_event_hidden (const char *source, const char *name, int hidden)
 }
 
 /* printf style formatting for stat create/update */
-void stats_event_args(const char *source, char *name, char *format, ...)
+void stats_event_args(const char *source : itype(_Ptr<const char> ) , char *name : itype(_Ptr<char> ) , char *format : itype(_Ptr<char> ) )
 {
     char buf[1024];
     va_list val;
@@ -281,7 +281,7 @@ void stats_event_args(const char *source, char *name, char *format, ...)
     stats_event(source, name, buf);
 }
 
-static char *_get_stats(const char *source, const char *name)
+char* _get_stats(const char *source, const char *name)
 {
     stats_node_t *stats = NULL;
     stats_source_t *src = NULL;
@@ -305,13 +305,13 @@ static char *_get_stats(const char *source, const char *name)
     return value;
 }
 
-char *stats_get_value(const char *source, const char *name)
+char* stats_get_value(const char *source : itype(_Ptr<const char> ) , const char *name : itype(_Ptr<const char> ) )
 {
     return(_get_stats(source, name));
 }
 
 /* increase the value in the provided stat by 1 */
-void stats_event_inc(const char *source, const char *name)
+void stats_event_inc(const char *source : itype(_Ptr<const char> ) , const char *name : itype(_Ptr<const char> ) )
 {
     stats_event_t *event = build_event (source, name, NULL);
     /* ICECAST_LOG_DEBUG("%s on %s", name, source==NULL?"global":source); */
@@ -322,7 +322,7 @@ void stats_event_inc(const char *source, const char *name)
     }
 }
 
-void stats_event_add(const char *source, const char *name, unsigned long value)
+void stats_event_add(const char *source : itype(_Ptr<const char> ) , const char *name : itype(_Ptr<const char> ) , unsigned long value)
 {
     stats_event_t *event = build_event (source, name, NULL);
     /* ICECAST_LOG_DEBUG("%s on %s", name, source==NULL?"global":source); */
@@ -335,7 +335,7 @@ void stats_event_add(const char *source, const char *name, unsigned long value)
     }
 }
 
-void stats_event_sub(const char *source, const char *name, unsigned long value)
+void stats_event_sub(const char *source : itype(_Ptr<const char> ) , const char *name : itype(_Ptr<const char> ) , unsigned long value)
 {
     stats_event_t *event = build_event (source, name, NULL);
     if (event)
@@ -348,7 +348,7 @@ void stats_event_sub(const char *source, const char *name, unsigned long value)
 }
 
 /* decrease the value in the provided stat by 1 */
-void stats_event_dec(const char *source, const char *name)
+void stats_event_dec(const char *source : itype(_Ptr<const char> ) , const char *name : itype(_Ptr<const char> ) )
 {
     /* ICECAST_LOG_DEBUG("%s on %s", name, source==NULL?"global":source); */
     stats_event_t *event = build_event (source, name, NULL);
@@ -362,7 +362,7 @@ void stats_event_dec(const char *source, const char *name)
 /* note: you must call this function only when you have exclusive access
 ** to the avl_tree
 */
-static stats_node_t *_find_node(avl_tree *stats_tree, const char *name)
+stats_node_t* _find_node(avl_tree *stats_tree : itype(_Ptr<avl_tree> ) , const char *name : itype(_Ptr<const char> ) )
 {
     stats_node_t *stats;
     avl_node *node;
@@ -389,7 +389,7 @@ static stats_node_t *_find_node(avl_tree *stats_tree, const char *name)
 /* note: you must call this function only when you have exclusive access
 ** to the avl_tree
 */
-static stats_source_t *_find_source(avl_tree *source_tree, const char *source)
+stats_source_t* _find_source(avl_tree *source_tree : itype(_Ptr<avl_tree> ) , const char *source : itype(_Ptr<const char> ) )
 {
     stats_source_t *stats;
     avl_node *node;
@@ -412,7 +412,7 @@ static stats_source_t *_find_source(avl_tree *source_tree, const char *source)
     return NULL;
 }
 
-static stats_event_t *_copy_event(stats_event_t *event)
+stats_event_t* _copy_event(stats_event_t *event)
 {
     stats_event_t *copy = (stats_event_t *)calloc(1, sizeof(stats_event_t));
     if (event->source) 
@@ -433,7 +433,7 @@ static stats_event_t *_copy_event(stats_event_t *event)
 
 
 /* helper to apply specialised changes to a stats node */
-static void modify_node_event (stats_node_t *node, stats_event_t *event)
+void modify_node_event(stats_node_t *node, stats_event_t *event)
 {
     char *str;
 
@@ -483,7 +483,7 @@ static void modify_node_event (stats_node_t *node, stats_event_t *event)
 }
 
 
-static void process_global_event (stats_event_t *event)
+void process_global_event(stats_event_t *event)
 {
     stats_node_t *node;
 
@@ -513,7 +513,7 @@ static void process_global_event (stats_event_t *event)
 }
 
 
-static void process_source_event (stats_event_t *event)
+void process_source_event(stats_event_t *event)
 {
     stats_source_t *snode = _find_source(_stats.source_tree, event->source);
     if (snode == NULL)
@@ -586,7 +586,7 @@ static void process_source_event (stats_event_t *event)
 }
 
 /* NOTE: implicit %z is added to format string. */
-static inline void __format_time(char * buffer, size_t len, const char * format) {
+void __format_time(char *buffer, size_t len, const char *format) {
     time_t now = time(NULL);
     struct tm local;
     char tzbuffer[32];
@@ -634,7 +634,7 @@ static inline void __format_time(char * buffer, size_t len, const char * format)
     snprintf(buffer, len, "%s%s", timebuffer, tzbuffer);
 }
 
-void stats_event_time (const char *mount, const char *name)
+void stats_event_time(const char *mount : itype(_Ptr<const char> ) , const char *name : itype(_Ptr<const char> ) )
 {
     char buffer[100];
 
@@ -643,7 +643,7 @@ void stats_event_time (const char *mount, const char *name)
 }
 
 
-void stats_event_time_iso8601 (const char *mount, const char *name)
+void stats_event_time_iso8601(const char *mount : itype(_Ptr<const char> ) , const char *name : itype(_Ptr<const char> ) )
 {
     char buffer[100];
 
@@ -652,7 +652,7 @@ void stats_event_time_iso8601 (const char *mount, const char *name)
 }
 
 
-void stats_global (ice_config_t *config)
+void stats_global(ice_config_t *config : itype(_Ptr<ice_config_t> ) )
 {
     stats_event (NULL, "server_id", config->server_id);
     stats_event (NULL, "host", config->hostname);
@@ -661,7 +661,7 @@ void stats_global (ice_config_t *config)
 }
 
 
-static void *_stats_thread(void *arg)
+void* _stats_thread(void *arg : itype(void* ) )
 {
     stats_event_t *event;
     stats_event_t *copy;
@@ -735,7 +735,7 @@ static void *_stats_thread(void *arg)
 }
 
 /* you must have the _stats_mutex locked here */
-static void _unregister_listener(event_listener_t *listener)
+void _unregister_listener(_Ptr<event_listener_t> listener)
 {
     event_listener_t **prev = (event_listener_t **)&_event_listeners,
                      *current = *prev;
@@ -752,7 +752,7 @@ static void _unregister_listener(event_listener_t *listener)
 }
 
 
-static stats_event_t *_make_event_from_node(stats_node_t *node, char *source)
+stats_event_t* _make_event_from_node(stats_node_t *node, char *source)
 {
     stats_event_t *event = (stats_event_t *)malloc(sizeof(stats_event_t));
     
@@ -770,14 +770,14 @@ static stats_event_t *_make_event_from_node(stats_node_t *node, char *source)
 }
 
 
-static void _add_event_to_queue(stats_event_t *event, event_queue_t *queue)
+void _add_event_to_queue(stats_event_t *event : itype(_Ptr<stats_event_t> ) , _Ptr<event_queue_t> queue)
 {
     *queue->tail = event;
     queue->tail = (volatile stats_event_t **)&event->next;
 }
 
 
-static stats_event_t *_get_event_from_queue (event_queue_t *queue)
+stats_event_t* _get_event_from_queue(_Ptr<event_queue_t> queue)
 {
     stats_event_t *event = NULL;
 
@@ -792,7 +792,7 @@ static stats_event_t *_get_event_from_queue (event_queue_t *queue)
     return event;
 }
 
-static int _send_event_to_client(stats_event_t *event, client_t *client)
+int _send_event_to_client(stats_event_t *event, client_t *client)
 {
     int len;
     char buf [200];
@@ -812,7 +812,7 @@ static int _send_event_to_client(stats_event_t *event, client_t *client)
 }
 
 
-static xmlNodePtr _dump_stats_to_doc (xmlNodePtr root, const char *show_mount, int hidden)
+xmlNode* _dump_stats_to_doc(xmlNodePtr root, const char *show_mount, int hidden)
 {
     avl_node *avlnode;
     xmlNodePtr ret = NULL;
@@ -860,7 +860,7 @@ static xmlNodePtr _dump_stats_to_doc (xmlNodePtr root, const char *show_mount, i
 ** the queue for all new events atomically.
 ** note: mutex must already be created!
 */
-static void _register_listener (event_listener_t *listener)
+void _register_listener(event_listener_t *listener)
 {
     avl_node *node;
     avl_node *node2;
@@ -902,7 +902,7 @@ static void _register_listener (event_listener_t *listener)
     thread_mutex_unlock(&_stats_mutex);
 }
 
-void *stats_connection(void *arg)
+void* stats_connection(void *arg)
 {
     client_t *client = (client_t *)arg;
     stats_event_t *event;
@@ -950,7 +950,7 @@ void *stats_connection(void *arg)
 }
 
 
-void stats_callback (client_t *client, void *notused)
+void stats_callback(client_t *client : itype(_Ptr<client_t> ) , void *notused : itype(void* ) )
 {
     if (client->con->error)
     {
@@ -963,14 +963,14 @@ void stats_callback (client_t *client, void *notused)
 
 
 typedef struct _source_xml_tag {
-    char *mount;
-    xmlNodePtr node;
+    _Ptr<char> mount;
+    _Ptr<xmlNode> node;
 
-    struct _source_xml_tag *next;
+    _Ptr<struct _source_xml_tag> next;
 } source_xml_t;
 
 
-void stats_transform_xslt(client_t *client, const char *uri)
+void stats_transform_xslt(client_t *client : itype(_Ptr<client_t> ) , const char *uri : itype(_Ptr<const char> ) )
 {
     xmlDocPtr doc;
     char *xslpath = util_get_path_from_normalised_uri (uri);
@@ -984,7 +984,7 @@ void stats_transform_xslt(client_t *client, const char *uri)
     free (xslpath);
 }
 
-xmlDocPtr stats_get_xml(int show_hidden, const char *show_mount)
+xmlDoc* stats_get_xml(int show_hidden, const char *show_mount : itype(_Ptr<const char> ) )
 {
     xmlDocPtr doc;
     xmlNodePtr node;
@@ -999,7 +999,7 @@ xmlDocPtr stats_get_xml(int show_hidden, const char *show_mount)
 }
 
 
-static int _compare_stats(void *arg, void *a, void *b)
+int _compare_stats(void* arg, void *a : itype(void* ) , void *b : itype(void* ) )
 {
     stats_node_t *nodea = (stats_node_t *)a;
     stats_node_t *nodeb = (stats_node_t *)b;
@@ -1007,7 +1007,7 @@ static int _compare_stats(void *arg, void *a, void *b)
     return strcmp(nodea->name, nodeb->name);
 }
 
-static int _compare_source_stats(void *arg, void *a, void *b)
+int _compare_source_stats(void* arg, void *a : itype(void* ) , void *b : itype(void* ) )
 {
     stats_source_t *nodea = (stats_source_t *)a;
     stats_source_t *nodeb = (stats_source_t *)b;
@@ -1015,7 +1015,7 @@ static int _compare_source_stats(void *arg, void *a, void *b)
     return strcmp(nodea->source, nodeb->source);
 }
 
-static int _free_stats(void *key)
+int _free_stats(void *key)
 {
     stats_node_t *node = (stats_node_t *)key;
     free(node->value);
@@ -1025,7 +1025,7 @@ static int _free_stats(void *key)
     return 1;
 }
 
-static int _free_source_stats(void *key)
+int _free_source_stats(void *key)
 {
     stats_source_t *node = (stats_source_t *)key;
     avl_tree_free(node->stats_tree, _free_stats);
@@ -1035,7 +1035,7 @@ static int _free_source_stats(void *key)
     return 1;
 }
 
-static void _free_event(stats_event_t *event)
+void _free_event(stats_event_t *event : itype(_Ptr<stats_event_t> ) )
 {
     if (event->source) free(event->source);
     if (event->name) free(event->name);

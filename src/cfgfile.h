@@ -233,7 +233,7 @@ listener_t *config_get_listen_sock (ice_config_t *config, connection_t *con);
 
 int config_rehash(void);
 
-ice_config_locks *config_locks(void);
+_Ptr<ice_config_locks> config_locks(void);
 
 ice_config_t *config_get_config(void);
 ice_config_t *config_grab_config(void);

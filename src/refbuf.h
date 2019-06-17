@@ -32,9 +32,9 @@ typedef struct _refbuf_tag
 void refbuf_initialize(void);
 void refbuf_shutdown(void);
 
-refbuf_t *refbuf_new(unsigned int size);
-void refbuf_addref(refbuf_t *self);
-void refbuf_release(refbuf_t *self);
+refbuf_t* refbuf_new(unsigned int size);
+void refbuf_addref(refbuf_t *self : itype(_Ptr<refbuf_t> ) );
+void refbuf_release(refbuf_t *self : itype(_Ptr<refbuf_t> ) );
 
 #define PER_CLIENT_REFBUF_SIZE  4096
 

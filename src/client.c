@@ -52,7 +52,7 @@
  * client_t is returned just in case a message needs to be returned. Should
  * be called with global lock held.
  */
-int client_create (client_t **c_ptr, connection_t *con, http_parser_t *parser)
+int client_create(client_t **c_ptr : itype(_Ptr<_Ptr<client_t>> ) , connection_t *con : itype(_Ptr<connection_t> ) , http_parser_t *parser : itype(_Ptr<http_parser_t> ) )
 {
     ice_config_t *config;
     client_t *client = (client_t *)calloc(1, sizeof(client_t));
@@ -83,7 +83,7 @@ int client_create (client_t **c_ptr, connection_t *con, http_parser_t *parser)
     return ret;
 }
 
-void client_destroy(client_t *client)
+void client_destroy(client_t *client : itype(_Ptr<client_t> ) )
 {
     if (client == NULL)
         return;
@@ -127,7 +127,7 @@ void client_destroy(client_t *client)
 
 /* return -1 for failed, 0 for authenticated, 1 for pending
  */
-int client_check_source_auth (client_t *client, const char *mount)
+int client_check_source_auth(client_t *client : itype(_Ptr<client_t> ) , const char *mount : itype(_Ptr<const char> ) )
 {
     ice_config_t *config = config_get_config();
     char *pass = config->source_password;
@@ -157,7 +157,7 @@ int client_check_source_auth (client_t *client, const char *mount)
 
 
 /* helper function for reading data from a client */
-int client_read_bytes (client_t *client, void *buf, unsigned len)
+int client_read_bytes(client_t *client : itype(_Ptr<client_t> ) , void *buf : itype(void* ) , unsigned int len)
 {
     int bytes;
 
@@ -183,7 +183,7 @@ int client_read_bytes (client_t *client, void *buf, unsigned len)
     return bytes;
 }
 
-void client_send_error(client_t *client, int status, int plain, const char *message)
+void client_send_error(client_t *client : itype(_Ptr<client_t> ) , int status, int plain, const char *message : itype(_Ptr<const char> ) )
 {
     ssize_t ret;
 
@@ -208,7 +208,7 @@ void client_send_error(client_t *client, int status, int plain, const char *mess
     fserve_add_client (client, NULL);
 }
 
-void client_send_100(client_t *client)
+void client_send_100(client_t *client : itype(_Ptr<client_t> ) )
 {
     /* On demand inject a HTTP/1.1 100 Continue to make sure clients are happy */
     static const char str[] = "HTTP/1.1 100 Continue\r\nContent-Length: 0\r\n\r\n";
@@ -216,28 +216,28 @@ void client_send_100(client_t *client)
     client_send_bytes(client, str, len);
 }
 
-void client_send_400(client_t *client, const char *message)
+void client_send_400(client_t *client : itype(_Ptr<client_t> ) , const char *message : itype(_Ptr<const char> ) )
 {
     client_send_error(client, 400, 0, message);
 }
 
-void client_send_404(client_t *client, const char *message)
+void client_send_404(client_t *client : itype(_Ptr<client_t> ) , const char *message : itype(_Ptr<const char> ) )
 {
     client_send_error(client, 404, 0, message);
 }
 
-void client_send_401(client_t *client)
+void client_send_401(client_t *client : itype(_Ptr<client_t> ) )
 {
     client_send_error(client, 401, 1, "You need to authenticate\r\n");
 }
 
-void client_send_403(client_t *client, const char *message)
+void client_send_403(client_t *client : itype(_Ptr<client_t> ) , const char *message : itype(_Ptr<const char> ) )
 {
     client_send_error(client, 403, 1, message);
 }
 
 /* this function is designed to work even if client is in bad state */
-void client_send_500(client_t *client, const char *message) {
+void client_send_500(client_t *client : itype(_Ptr<client_t> ) , const char *message : itype(_Ptr<const char> ) ) {
     const char header[] = "HTTP/1.0 500 Internal Server Error\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n"
                           "500 - Internal Server Error\n---------------------------\n";
     const size_t header_len = sizeof(header) - 1;
@@ -253,7 +253,7 @@ void client_send_500(client_t *client, const char *message) {
 }
 
 /* helper function for sending the data to a client */
-int client_send_bytes (client_t *client, const void *buf, unsigned len)
+int client_send_bytes(client_t *client : itype(_Ptr<client_t> ) , const void *buf : itype(_Ptr<const void> ) , unsigned int len)
 {
     int ret = client->con->send (client->con, buf, len);
 
@@ -263,7 +263,7 @@ int client_send_bytes (client_t *client, const void *buf, unsigned len)
     return ret;
 }
 
-void client_set_queue (client_t *client, refbuf_t *refbuf)
+void client_set_queue(client_t *client : itype(_Ptr<client_t> ) , refbuf_t *refbuf : itype(_Ptr<refbuf_t> ) )
 {
     refbuf_t *to_release = client->refbuf;
 

@@ -22,19 +22,19 @@
 
 #define MAX_LINE_LEN 512
 
-int util_timed_wait_for_fd(sock_t fd, int timeout);
-int util_read_header(sock_t sock, char *buff, unsigned long len, int entire);
-int util_check_valid_extension(const char *uri);
-char *util_get_extension(const char *path);
-char *util_get_path_from_uri(char *uri);
-char *util_get_path_from_normalised_uri(const char *uri);
-char *util_normalise_uri(const char *uri);
-char *util_base64_encode(const char *data);
-char *util_base64_decode(const char *input);
-char *util_bin_to_hex(unsigned char *data, int len);
+int util_timed_wait_for_fd(int fd, int timeout);
+int util_read_header(int sock, char *buff, unsigned long len, int entire);
+int util_check_valid_extension(const char *uri : itype(_Ptr<const char> ) );
+char* util_get_extension(const char *path : itype(_Ptr<const char> ) );
+char* util_get_path_from_uri(char *uri : itype(_Ptr<char> ) );
+char* util_get_path_from_normalised_uri(const char *uri : itype(_Ptr<const char> ) );
+char* util_normalise_uri(const char *uri);
+char* util_base64_encode(const char *data : itype(_Ptr<const char> ) );
+char* util_base64_decode(const char *data : itype(_Ptr<const char> ) );
+char* util_bin_to_hex(unsigned char *data, int len);
 
-char *util_url_unescape(const char *src);
-char *util_url_escape(const char *src);
+char* util_url_unescape(const char *src);
+char* util_url_escape(const char *src : itype(_Ptr<const char> ) );
 
 /* Function to build up a HTTP header.
  * out is the pointer to storage.
@@ -59,12 +59,7 @@ char *util_url_escape(const char *src);
  */
 struct source_tag; /* use forward decleration so we do not need to
                     * include <source.h> that would cause other conflicts. */
-ssize_t util_http_build_header(char * out, size_t len, ssize_t offset,
-        int cache,
-        int status, const char * statusmsg,
-        const char * contenttype, const char * charset,
-        const char * datablock,
-        struct source_tag * source);
+ssize_t util_http_build_header(char *out : itype(_Ptr<char> ) , size_t len, ssize_t offset, int cache, int status, const char *statusmsg : itype(_Ptr<const char> ) , const char *contenttype : itype(_Ptr<const char> ) , const char *charset : itype(_Ptr<const char> ) , const char *datablock : itype(_Ptr<const char> ) , struct source_tag *source : itype(_Ptr<struct source_tag> ) );
 
 /* String dictionary type, without support for NULL keys, or multiple
  * instances of the same key */
@@ -75,16 +70,16 @@ typedef struct _util_dict {
 } util_dict;
 
 util_dict *util_dict_new(void);
-void util_dict_free(util_dict *dict);
+void util_dict_free(util_dict *dict : itype(_Ptr<util_dict> ) );
 /* dict, key must not be NULL. */
-int util_dict_set(util_dict *dict, const char *key, const char *val);
-const char *util_dict_get(util_dict *dict, const char *key);
-char *util_dict_urlencode(util_dict *dict, char delim);
+int util_dict_set(util_dict *dict : itype(_Ptr<util_dict> ) , const char *key : itype(_Ptr<const char> ) , const char *val : itype(_Ptr<const char> ) );
+const char* util_dict_get(util_dict *dict : itype(_Ptr<util_dict> ) , const char *key : itype(_Ptr<const char> ) );
+char* util_dict_urlencode(util_dict *dict : itype(_Ptr<util_dict> ) , char delim);
 
 #ifndef HAVE_LOCALTIME_R
 struct tm *localtime_r (const time_t *timep, struct tm *result);
 #endif
-char *util_conv_string (const char *string, const char *in_charset, const char *out_charset);
+char* util_conv_string(const char *string : itype(_Ptr<const char> ) , const char *in_charset : itype(_Ptr<const char> ) , const char *out_charset : itype(_Ptr<const char> ) );
 
-int get_line(FILE *file, char *buf, size_t siz);
+int get_line(FILE *file : itype(_Ptr<FILE> ) , char *buf, size_t siz);
 #endif  /* __UTIL_H__ */

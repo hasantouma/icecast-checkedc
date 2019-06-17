@@ -55,13 +55,13 @@
 
 struct _ogg_state_tag;
 
-static void format_ogg_free_plugin (format_plugin_t *plugin);
-static int  create_ogg_client_data(source_t *source, client_t *client);
-static void free_ogg_client_data (client_t *client);
+void format_ogg_free_plugin(format_plugin_t *plugin : itype(_Ptr<format_plugin_t> ) );
+int create_ogg_client_data(source_t *source : itype(_Ptr<source_t> ) , client_t *client : itype(_Ptr<client_t> ) );
+void free_ogg_client_data(client_t *client : itype(_Ptr<client_t> ) );
 
-static void write_ogg_to_file (struct source_tag *source, refbuf_t *refbuf);
-static refbuf_t *ogg_get_buffer (source_t *source);
-static int write_buf_to_client (client_t *client);
+void write_ogg_to_file(struct source_tag *source : itype(_Ptr<struct source_tag> ) , refbuf_t *refbuf : itype(_Ptr<refbuf_t> ) );
+refbuf_t* ogg_get_buffer(source_t *source : itype(_Ptr<source_t> ) );
+int write_buf_to_client(client_t *client : itype(_Ptr<client_t> ) );
 
 
 struct ogg_client
@@ -73,7 +73,7 @@ struct ogg_client
 };
 
 
-refbuf_t *make_refbuf_with_page (ogg_page *page)
+refbuf_t* make_refbuf_with_page(ogg_page *page : itype(_Ptr<ogg_page> ) )
 {
     refbuf_t *refbuf = refbuf_new (page->header_len + page->body_len);
 
@@ -86,7 +86,7 @@ refbuf_t *make_refbuf_with_page (ogg_page *page)
 /* routine for taking the provided page (should be a header page) and
  * placing it on the collection of header pages
  */
-void format_ogg_attach_header (ogg_state_t *ogg_info, ogg_page *page)
+void format_ogg_attach_header(ogg_state_t *ogg_info : itype(_Ptr<ogg_state_t> ) , ogg_page *page : itype(_Ptr<ogg_page> ) )
 {
     refbuf_t *refbuf = make_refbuf_with_page (page);
 
@@ -110,7 +110,7 @@ void format_ogg_attach_header (ogg_state_t *ogg_info, ogg_page *page)
 }
 
 
-void format_ogg_free_headers (ogg_state_t *ogg_info)
+void format_ogg_free_headers(ogg_state_t *ogg_info : itype(_Ptr<ogg_state_t> ) )
 {
     refbuf_t *header;
 
@@ -130,7 +130,7 @@ void format_ogg_free_headers (ogg_state_t *ogg_info)
 
 
 /* release the memory used for the codec and header pages from the module */
-static void free_ogg_codecs (ogg_state_t *ogg_info)
+void free_ogg_codecs(ogg_state_t *ogg_info)
 {
     ogg_codec_t *codec;
 
@@ -157,7 +157,7 @@ static void free_ogg_codecs (ogg_state_t *ogg_info)
 }
 
 
-int format_ogg_get_plugin (source_t *source)
+int format_ogg_get_plugin(source_t *source : itype(_Ptr<source_t> ) )
 {
     format_plugin_t *plugin;
     ogg_state_t *state = calloc (1, sizeof (ogg_state_t));
@@ -186,7 +186,7 @@ int format_ogg_get_plugin (source_t *source)
 }
 
 
-static void format_ogg_free_plugin (format_plugin_t *plugin)
+void format_ogg_free_plugin(format_plugin_t *plugin : itype(_Ptr<format_plugin_t> ) )
 {
     ogg_state_t *state = plugin->_state;
 
@@ -203,7 +203,7 @@ static void format_ogg_free_plugin (format_plugin_t *plugin)
 
 
 /* a new BOS page has been seen so check which codec it is */
-static int process_initial_page (format_plugin_t *plugin, ogg_page *page)
+int process_initial_page(format_plugin_t *plugin, ogg_page *page)
 {
     ogg_state_t *ogg_info = plugin->_state;
     ogg_codec_t *codec;
@@ -274,7 +274,7 @@ static int process_initial_page (format_plugin_t *plugin, ogg_page *page)
  * artist and title are provided separately so here we update the stats
  * and write log entry if required.
  */
-static void update_comments (source_t *source)
+void update_comments(source_t *source)
 {
     ogg_state_t *ogg_info = source->format->_state;
     char *title = ogg_info->title;
@@ -339,7 +339,7 @@ static void update_comments (source_t *source)
 /* called when preparing a refbuf with audio data to be passed
  * back for queueing
  */
-static refbuf_t *complete_buffer (source_t *source, refbuf_t *refbuf)
+refbuf_t* complete_buffer(source_t *source, refbuf_t *refbuf)
 {
     ogg_state_t *ogg_info = source->format->_state;
     refbuf_t *header = ogg_info->header_pages;
@@ -367,7 +367,7 @@ static refbuf_t *complete_buffer (source_t *source, refbuf_t *refbuf)
 /* process the incoming page. this requires searching through the
  * currently known codecs that have been seen in the stream
  */
-static refbuf_t *process_ogg_page (ogg_state_t *ogg_info, ogg_page *page)
+refbuf_t* process_ogg_page(ogg_state_t *ogg_info, ogg_page *page)
 {
     ogg_codec_t *codec = ogg_info->codecs;
     refbuf_t *refbuf = NULL;
@@ -392,7 +392,7 @@ static refbuf_t *process_ogg_page (ogg_state_t *ogg_info, ogg_page *page)
  * just add an incoming page to the codecs and process it until either
  * more data is needed or we prodice a buffer for the queue.
  */
-static refbuf_t *ogg_get_buffer (source_t *source)
+refbuf_t* ogg_get_buffer(source_t *source : itype(_Ptr<source_t> ) )
 {
     ogg_state_t *ogg_info = source->format->_state;
     format_plugin_t *format = source->format;
@@ -456,7 +456,7 @@ static refbuf_t *ogg_get_buffer (source_t *source)
 }
 
 
-static int create_ogg_client_data (source_t *source, client_t *client) 
+int create_ogg_client_data(source_t *source : itype(_Ptr<source_t> ) , client_t *client : itype(_Ptr<client_t> ) ) 
 {
     struct ogg_client *client_data = calloc (1, sizeof (struct ogg_client));
     int ret = -1;
@@ -472,7 +472,7 @@ static int create_ogg_client_data (source_t *source, client_t *client)
 }
 
 
-static void free_ogg_client_data (client_t *client)
+void free_ogg_client_data(client_t *client : itype(_Ptr<client_t> ) )
 {
     free (client->format_data);
     client->format_data = NULL;
@@ -482,7 +482,7 @@ static void free_ogg_client_data (client_t *client)
 /* send out the header pages. These are for all codecs but are
  * in the order for the stream, ie BOS pages first
  */
-static int send_ogg_headers (client_t *client, refbuf_t *headers)
+int send_ogg_headers(client_t *client, refbuf_t *headers)
 {
     struct ogg_client *client_data = client->format_data;
     refbuf_t *refbuf;
@@ -523,7 +523,7 @@ static int send_ogg_headers (client_t *client, refbuf_t *headers)
 /* main client write routine for sending ogg data. Each refbuf has a
  * single page so we only need to determine if there are new headers
  */
-static int write_buf_to_client (client_t *client)
+int write_buf_to_client(client_t *client : itype(_Ptr<client_t> ) )
 {
     refbuf_t *refbuf = client->refbuf;
     char *buf = refbuf->data + client->pos;
@@ -558,7 +558,7 @@ static int write_buf_to_client (client_t *client)
 }
 
 
-static int write_ogg_data (struct source_tag *source, refbuf_t *refbuf)
+int write_ogg_data(struct source_tag *source, refbuf_t *refbuf)
 {
     int ret = 1;
 
@@ -573,7 +573,7 @@ static int write_ogg_data (struct source_tag *source, refbuf_t *refbuf)
 }
 
 
-static void write_ogg_to_file (struct source_tag *source, refbuf_t *refbuf)
+void write_ogg_to_file(struct source_tag *source : itype(_Ptr<struct source_tag> ) , refbuf_t *refbuf : itype(_Ptr<refbuf_t> ) )
 {
     ogg_state_t *ogg_info = source->format->_state;
 

@@ -136,7 +136,7 @@ static int evict_cache_entry(void) {
     return oldest;
 }
 
-static xsltStylesheetPtr xslt_get_stylesheet(const char *fn) {
+xsltStylesheet* xslt_get_stylesheet(const char *fn) {
     int i;
     int empty = -1;
     struct stat file;

@@ -59,7 +59,7 @@
 
 #define CATMODULE "slave"
 
-static void *_slave_thread(void *arg);
+void* _slave_thread(void *arg : itype(void* ) );
 static thread_type *_slave_thread_id;
 static int slave_running = 0;
 static volatile int update_settings = 0;
@@ -67,7 +67,7 @@ static volatile int update_all_mounts = 0;
 static volatile unsigned int max_interval = 0;
 static mutex_t _slave_mutex; // protects update_settings, update_all_mounts, max_interval
 
-relay_server *relay_free (relay_server *relay)
+relay_server* relay_free(relay_server *relay : itype(_Ptr<relay_server> ) )
 {
     relay_server *next = relay->next;
     ICECAST_LOG_DEBUG("freeing relay %s", relay->localmount);
@@ -85,7 +85,7 @@ relay_server *relay_free (relay_server *relay)
 }
 
 
-relay_server *relay_copy (relay_server *r)
+relay_server* relay_copy(relay_server *r)
 {
     relay_server *copy = calloc (1, sizeof (relay_server));
 
@@ -155,7 +155,7 @@ void slave_shutdown(void)
 /* Actually open the connection and do some http parsing, handle any 302
  * responses within here.
  */
-static client_t *open_relay_connection (relay_server *relay)
+client_t* open_relay_connection(relay_server *relay)
 {
     int redirects = 0;
     char *server_id = NULL;
@@ -313,7 +313,7 @@ static client_t *open_relay_connection (relay_server *relay)
 /* This does the actual connection for a relay. A thread is
  * started off if a connection can be acquired
  */
-static void *start_relay_stream (void *arg)
+void* start_relay_stream(void *arg)
 {
     relay_server *relay = arg;
     source_t *src = relay->source;
@@ -389,7 +389,7 @@ static void *start_relay_stream (void *arg)
 
 
 /* wrapper for starting the provided relay stream */
-static void check_relay_stream (relay_server *relay)
+void check_relay_stream(relay_server *relay)
 {
     if (relay->source == NULL)
     {
@@ -486,7 +486,7 @@ static void check_relay_stream (relay_server *relay)
 /* compare the 2 relays to see if there are any changes, return 1 if
  * the relay needs to be restarted, 0 otherwise
  */
-static int relay_has_changed (relay_server *new, relay_server *old)
+int relay_has_changed(relay_server *new, relay_server *old)
 {
     do
     {
@@ -510,8 +510,7 @@ static int relay_has_changed (relay_server *new, relay_server *old)
  * returned list contains relays that should be kept running, current contains
  * the list of relays to shutdown
  */
-static relay_server *
-update_relay_set (relay_server **current, relay_server *updated)
+relay_server* update_relay_set(relay_server **current, relay_server *updated)
 {
     relay_server *relay = updated;
     relay_server *existing_relay, **existing_p;
@@ -552,8 +551,7 @@ update_relay_set (relay_server **current, relay_server *updated)
  * are added to the list, and any not listed in the provided new_relay_list
  * are separated and returned in a separate list
  */
-static relay_server *
-update_relays (relay_server **relay_list, relay_server *new_relay_list)
+relay_server* update_relays(relay_server **relay_list, relay_server *new_relay_list)
 {
     relay_server *active_relays, *cleanup_relays;
 
@@ -567,8 +565,7 @@ update_relays (relay_server **relay_list, relay_server *new_relay_list)
 }
 
 
-static void relay_check_streams (relay_server *to_start,
-        relay_server *to_free, int skip_timer)
+void relay_check_streams(relay_server *to_start, relay_server *to_free, int skip_timer)
 {
     relay_server *relay;
 
@@ -601,7 +598,7 @@ static void relay_check_streams (relay_server *to_start,
 }
 
 
-static int update_from_master(ice_config_t *config)
+int update_from_master(ice_config_t *config)
 {
     char *master = NULL, *password = NULL, *username= NULL;
     int port;
@@ -724,7 +721,7 @@ static int update_from_master(ice_config_t *config)
 }
 
 
-static void *_slave_thread(void *arg)
+void* _slave_thread(void *arg : itype(void* ) )
 {
     ice_config_t *config;
     unsigned int interval = 0;

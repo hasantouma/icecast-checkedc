@@ -53,12 +53,11 @@ typedef struct ogg_codec_tag
     const char *name;
     void *specific;
     refbuf_t        *possible_start;
-    refbuf_t        *page;
+    _Ptr<refbuf_t> page;
 
-    refbuf_t *(*process)(ogg_state_t *ogg_info, struct ogg_codec_tag *codec);
-    refbuf_t *(*process_page)(ogg_state_t *ogg_info,
-            struct ogg_codec_tag *codec, ogg_page *page);
-    void (*codec_free)(ogg_state_t *ogg_info, struct ogg_codec_tag *codec);
+    _Ptr<refbuf_t* (ogg_state_t* , struct ogg_codec_tag* )> process;
+    _Ptr<refbuf_t* (ogg_state_t* , struct ogg_codec_tag* , ogg_page* )> process_page;
+    _Ptr<void (ogg_state_t* , struct ogg_codec_tag* )> codec_free;
 } ogg_codec_t;
 
 

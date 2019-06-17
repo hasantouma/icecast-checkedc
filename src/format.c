@@ -52,10 +52,10 @@
 #define snprintf _snprintf
 #endif
 
-static int format_prepare_headers (source_t *source, client_t *client);
+int format_prepare_headers(source_t *source : itype(_Ptr<source_t> ) , client_t *client : itype(_Ptr<client_t> ) );
 
 
-format_type_t format_get_type (const char *contenttype)
+format_type_t format_get_type(const char *contenttype : itype(_Ptr<const char> ) )
 {
     if(strcmp(contenttype, "application/x-ogg") == 0)
         return FORMAT_TYPE_OGG; /* Backwards compatibility */
@@ -83,7 +83,7 @@ format_type_t format_get_type (const char *contenttype)
         return FORMAT_TYPE_GENERIC;
 }
 
-int format_get_plugin(format_type_t type, source_t *source)
+int format_get_plugin(format_type_t type, source_t *source : itype(_Ptr<struct source_tag> ) )
 {
     int ret = -1;
 
@@ -111,7 +111,7 @@ int format_get_plugin(format_type_t type, source_t *source)
 /* clients need to be start from somewhere in the queue so we will look for
  * a refbuf which has been previously marked as a sync point. 
  */
-static void find_client_start (source_t *source, client_t *client)
+void find_client_start(source_t *source, client_t *client)
 {
     refbuf_t *refbuf = source->burst_point;
 
@@ -147,7 +147,7 @@ static void find_client_start (source_t *source, client_t *client)
 }
 
 
-static int get_file_data (FILE *intro, client_t *client)
+int get_file_data(FILE *intro, client_t *client)
 {
     refbuf_t *refbuf = client->refbuf;
     size_t bytes;
@@ -167,7 +167,7 @@ static int get_file_data (FILE *intro, client_t *client)
  * to right place in the queue at end of file else repeat file if queue
  * is not ready yet.
  */
-int format_check_file_buffer (source_t *source, client_t *client)
+int format_check_file_buffer(source_t *source, client_t *client)
 {
     refbuf_t *refbuf = client->refbuf;
 
@@ -212,7 +212,7 @@ int format_check_file_buffer (source_t *source, client_t *client)
 /* call this to verify that the HTTP data has been sent and if so setup
  * callbacks to the appropriate format functions
  */
-int format_check_http_buffer (source_t *source, client_t *client)
+int format_check_http_buffer(source_t *source : itype(_Ptr<struct source_tag> ) , client_t *client : itype(_Ptr<client_t> ) )
 {
     refbuf_t *refbuf = client->refbuf;
 
@@ -247,7 +247,7 @@ int format_check_http_buffer (source_t *source, client_t *client)
 }
 
 
-int format_generic_write_to_client (client_t *client)
+int format_generic_write_to_client(client_t *client : itype(_Ptr<client_t> ) )
 {
     refbuf_t *refbuf = client->refbuf;
     int ret;
@@ -267,7 +267,7 @@ int format_generic_write_to_client (client_t *client)
  * the next buffer in the queue if there is no more left to be written from 
  * the existing buffer.
  */
-int format_advance_queue (source_t *source, client_t *client)
+int format_advance_queue(source_t *source : itype(_Ptr<struct source_tag> ) , client_t *client : itype(_Ptr<client_t> ) )
 {
     refbuf_t *refbuf = client->refbuf;
 
@@ -287,7 +287,7 @@ int format_advance_queue (source_t *source, client_t *client)
 }
 
 
-static int format_prepare_headers (source_t *source, client_t *client)
+int format_prepare_headers(source_t *source : itype(_Ptr<source_t> ) , client_t *client : itype(_Ptr<client_t> ) )
 {
     unsigned remaining;
     char *ptr;

@@ -33,7 +33,7 @@ typedef struct http_var_tag {
 
 typedef struct http_varlist_tag {
     http_var_t var;
-    struct http_varlist_tag *next;
+    _Ptr<struct http_varlist_tag> next;
 } http_varlist_t;
 
 typedef struct http_parser_tag {
@@ -58,12 +58,12 @@ typedef struct http_parser_tag {
 #endif
 
 http_parser_t *httpp_create_parser(void);
-void httpp_initialize(http_parser_t *parser, http_varlist_t *defaults);
+void httpp_initialize(http_parser_t *parser, _Ptr<http_varlist_t> defaults);
 int httpp_parse(http_parser_t *parser, const char *http_data, unsigned long len);
 int httpp_parse_icy(http_parser_t *parser, const char *http_data, unsigned long len);
 int httpp_parse_response(http_parser_t *parser, const char *http_data, unsigned long len, const char *uri);
 void httpp_setvar(http_parser_t *parser, const char *name, const char *value);
-void httpp_deletevar(http_parser_t *parser, const char *name);
+void httpp_deletevar(_Ptr<http_parser_t> parser, const char *name);
 const char *httpp_getvar(http_parser_t *parser, const char *name);
 void httpp_set_query_param(http_parser_t *parser, const char *name, const char *value);
 const char *httpp_get_query_param(http_parser_t *parser, const char *name);

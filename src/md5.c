@@ -43,12 +43,12 @@
 #include <string_checked.h>
 #include <ctype.h>
 
-static void MD5Transform(uint32_t buf[4], uint32_t const in[HASH_LEN]);
+void MD5Transform(uint32_t buf[4], const uint32_t in[16]);
 
 /*
  * Note: this code is harmless on little-endian machines.
  */
-static void byteReverse(unsigned char *buf, unsigned longs)
+void byteReverse(unsigned char *buf, unsigned int longs)
 {
     uint32_t t;
     do
@@ -65,7 +65,7 @@ static void byteReverse(unsigned char *buf, unsigned longs)
  * Start MD5 accumulation.  Set bit count to 0 and buffer to mysterious
  * initialization constants.
  */
-void MD5Init(struct MD5Context *ctx)
+void MD5Init(_Ptr<struct MD5Context> ctx)
 {
     ctx->buf[0] = 0x67452301;
     ctx->buf[1] = 0xefcdab89;
@@ -80,8 +80,7 @@ void MD5Init(struct MD5Context *ctx)
  * Update context to reflect the concatenation of another buffer full
  * of bytes.
  */
-void MD5Update(struct MD5Context *ctx, unsigned char const *buf, 
-        unsigned len)
+void MD5Update(_Ptr<struct MD5Context> ctx, const unsigned char *buf : itype(_Ptr<const unsigned char> ) , unsigned int len)
 {
     uint32_t t;
 
@@ -133,7 +132,7 @@ void MD5Update(struct MD5Context *ctx, unsigned char const *buf,
  * Final wrapup - pad to 64-byte boundary with the bit pattern
  * 1 0* (64-bit count of bits processed, MSB-first)
  */
-void MD5Final(unsigned char digest[HASH_LEN], struct MD5Context *ctx)
+void MD5Final(unsigned char digest[16] : itype(_Ptr<unsigned char> ) , struct MD5Context *ctx : itype(_Ptr<struct MD5Context> ) )
 {
     unsigned count;
     unsigned char *p;
@@ -194,7 +193,7 @@ void MD5Final(unsigned char digest[HASH_LEN], struct MD5Context *ctx)
  * reflect the addition of 16 longwords of new data.  MD5Update blocks
  * the data and converts bytes into longwords for this routine.
  */
-static void MD5Transform(uint32_t buf[4], uint32_t const in[HASH_LEN])
+void MD5Transform(uint32_t buf[4], const uint32_t in[16])
 {
     register uint32_t a, b, c, d;
 

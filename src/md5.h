@@ -24,10 +24,9 @@ struct MD5Context
     unsigned char in[64];
 };
 
-void MD5Init(struct MD5Context *context);
-void MD5Update(struct MD5Context *context, unsigned char const *buf, 
-        unsigned len);
-void MD5Final(unsigned char digest[HASH_LEN], struct MD5Context *context);
+void MD5Init(_Ptr<struct MD5Context> ctx);
+void MD5Update(_Ptr<struct MD5Context> ctx, const unsigned char *buf : itype(_Ptr<const unsigned char> ) , unsigned int len);
+void MD5Final(unsigned char digest[16] : itype(_Ptr<unsigned char> ) , struct MD5Context *ctx : itype(_Ptr<struct MD5Context> ) );
 
 
 #endif

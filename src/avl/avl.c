@@ -38,9 +38,7 @@
 
 #include "avl.h"
 
-avl_node *
-avl_node_new (void *        key,
-          avl_node *    parent)
+avl_node* avl_node_new(void *key : itype(void* ) , avl_node *parent : itype(_Ptr<avl_node> ) )
 {
   avl_node * node = (avl_node *) malloc (sizeof (avl_node));
 
@@ -61,9 +59,7 @@ avl_node_new (void *        key,
   }
 }         
 
-avl_tree *
-avl_tree_new (avl_key_compare_fun_type compare_fun,
-          void * compare_arg)
+avl_tree* avl_tree_new(_Ptr<int (void* , void* , void* )> compare_fun, void *compare_arg : itype(void* ) )
 {
   avl_tree * t = (avl_tree *) malloc (sizeof (avl_tree));
 
@@ -86,8 +82,7 @@ avl_tree_new (avl_key_compare_fun_type compare_fun,
   }
 }
   
-static void
-avl_tree_free_helper (avl_node * node, avl_free_key_fun_type free_key_fun)
+void avl_tree_free_helper(avl_node *node, _Ptr<int (void* )> free_key_fun)
 {
   if (node->left) {
     avl_tree_free_helper (node->left, free_key_fun);
@@ -103,8 +98,7 @@ avl_tree_free_helper (avl_node * node, avl_free_key_fun_type free_key_fun)
   free (node);
 }
   
-void
-avl_tree_free (avl_tree * tree, avl_free_key_fun_type free_key_fun)
+void avl_tree_free(avl_tree *tree : itype(_Ptr<avl_tree> ) , _Ptr<int (void* )> free_key_fun)
 {
   if (tree->length) {
     avl_tree_free_helper (tree->root->right, free_key_fun);
@@ -119,9 +113,7 @@ avl_tree_free (avl_tree * tree, avl_free_key_fun_type free_key_fun)
   free (tree);
 }
 
-int
-avl_insert (avl_tree * ob,
-           void * key)
+int avl_insert(avl_tree *ob : itype(_Ptr<avl_tree> ) , void *key : itype(void* ) )
 {
   if (!(ob->root->right)) {
     avl_node * node = avl_node_new (key, ob->root);
@@ -295,10 +287,7 @@ avl_insert (avl_tree * ob,
   return 0;
 }
 
-int
-avl_get_by_index (avl_tree * tree,
-           unsigned long index,
-           void ** value_address)
+int avl_get_by_index(_Ptr<avl_tree> tree, unsigned long index, void** value_address)
 {
   avl_node * p = tree->root->right;
   unsigned long m = index + 1;
@@ -318,10 +307,7 @@ avl_get_by_index (avl_tree * tree,
   }
 }
            
-int
-avl_get_by_key (avl_tree * tree,
-         void * key,
-         void **value_address)
+int avl_get_by_key(avl_tree *tree : itype(_Ptr<avl_tree> ) , void *key : itype(void* ) , void **value_address : itype(void** ) )
 {
   avl_node * x = tree->root->right;
   if (!x) {
@@ -348,7 +334,7 @@ avl_get_by_key (avl_tree * tree,
   }
 }
 
-int avl_delete(avl_tree *tree, void *key, avl_free_key_fun_type free_key_fun)
+int avl_delete(avl_tree *tree : itype(_Ptr<avl_tree> ) , void *key : itype(void* ) , _Ptr<int (void* )> free_key_fun)
 {
   avl_node *x, *y, *p, *q, *r, *top, *x_child;
   int shortened_side, shorter;
@@ -623,10 +609,7 @@ int avl_delete(avl_tree *tree, void *key, avl_free_key_fun_type free_key_fun)
   return (0);
 }
 
-static int
-avl_iterate_inorder_helper (avl_node * node,
-            avl_iter_fun_type iter_fun,
-            void * iter_arg)
+int avl_iterate_inorder_helper(avl_node *node, _Ptr<int (void* , void* )> iter_fun, void* iter_arg)
 {
   int result;
   if (node->left) {
@@ -648,10 +631,7 @@ avl_iterate_inorder_helper (avl_node * node,
   return 0;
 }
 
-int
-avl_iterate_inorder (avl_tree * tree,
-         avl_iter_fun_type iter_fun,
-         void * iter_arg)
+int avl_iterate_inorder(_Ptr<avl_tree> tree, _Ptr<int (void* , void* )> iter_fun, void* iter_arg)
 {
   int result;
 
@@ -663,7 +643,7 @@ avl_iterate_inorder (avl_tree * tree,
   }
 }
 
-avl_node *avl_get_first(avl_tree *tree)
+avl_node* avl_get_first(avl_tree *tree : itype(_Ptr<avl_tree> ) )
 {
     avl_node *node;
     
@@ -676,7 +656,7 @@ avl_node *avl_get_first(avl_tree *tree)
     return node;
 }
 
-avl_node *avl_get_prev(avl_node *node)
+avl_node* avl_get_prev(avl_node *node : itype(_Ptr<avl_node> ) )
 {
     if (node->left) {
         node = node->left;
@@ -699,7 +679,7 @@ avl_node *avl_get_prev(avl_node *node)
     }
 }
 
-avl_node *avl_get_next(avl_node *node)
+avl_node* avl_get_next(avl_node *node : itype(_Ptr<avl_node> ) )
 {
     if (node->right) {
         node = node->right;
@@ -724,12 +704,7 @@ avl_node *avl_get_next(avl_node *node)
 
 /* iterate a function over a range of indices, using get_predecessor */
 
-int
-avl_iterate_index_range (avl_tree * tree,
-             avl_iter_index_fun_type iter_fun,
-             unsigned long low,
-             unsigned long high,
-             void * iter_arg)
+int avl_iterate_index_range(_Ptr<avl_tree> tree, _Ptr<int (unsigned long , void* , void* )> iter_fun, unsigned long low, unsigned long high, void* iter_arg)
 {
   unsigned long m;
   unsigned long num_left;
@@ -768,10 +743,7 @@ avl_iterate_index_range (avl_tree * tree,
  * representing the closest preceding value.
  */
 
-static avl_node *
-avl_get_index_by_key (avl_tree * tree,
-          void * key,
-          unsigned long * index)
+avl_node* avl_get_index_by_key(_Ptr<avl_tree> tree, void *key, _Ptr<unsigned long> index)
 {
   avl_node * x = tree->root->right;
   unsigned long m;
@@ -809,11 +781,7 @@ avl_get_index_by_key (avl_tree * tree,
 
 /* return the (low index, high index) pair that spans the given key */
 
-int
-avl_get_span_by_key (avl_tree * tree,
-         void * key,
-         unsigned long * low,
-         unsigned long * high)
+int avl_get_span_by_key(_Ptr<avl_tree> tree, void *key : itype(void* ) , _Ptr<unsigned long> low, _Ptr<unsigned long> high)
 {
   unsigned long m, i, j;
   avl_node * node;
@@ -852,12 +820,7 @@ avl_get_span_by_key (avl_tree * tree,
 
 /* return the (low index, high index) pair that spans the given key */
 
-int
-avl_get_span_by_two_keys (avl_tree * tree,
-              void * low_key,
-              void * high_key,
-              unsigned long * low,
-              unsigned long * high)
+int avl_get_span_by_two_keys(_Ptr<avl_tree> tree, void *low_key : itype(void* ) , void *high_key : itype(void* ) , _Ptr<unsigned long> low, _Ptr<unsigned long> high)
 {
   unsigned long i, j;
   avl_node * low_node, * high_node;
@@ -903,10 +866,7 @@ avl_get_span_by_two_keys (avl_tree * tree,
 }
 
            
-int
-avl_get_item_by_key_most (avl_tree * tree,
-              void * key,
-              void **value_address)
+int avl_get_item_by_key_most(_Ptr<avl_tree> tree, void *key : itype(void* ) , void** value_address)
 {
   avl_node * x = tree->root->right;
   *value_address = NULL;
@@ -947,10 +907,7 @@ avl_get_item_by_key_most (avl_tree * tree,
   }
 }
 
-int
-avl_get_item_by_key_least (avl_tree * tree,
-               void * key,
-               void **value_address)
+int avl_get_item_by_key_least(_Ptr<avl_tree> tree, void *key : itype(void* ) , void** value_address)
 {
   avl_node * x = tree->root->right;
   *value_address = NULL;
@@ -991,8 +948,7 @@ avl_get_item_by_key_least (avl_tree * tree,
 
 #define AVL_MAX(X, Y)  ((X) > (Y) ? (X) : (Y))
 
-static long
-avl_verify_balance (avl_node * node)
+long avl_verify_balance(avl_node *node)
 {
   if (!node) {
     return 0;
@@ -1009,8 +965,7 @@ avl_verify_balance (avl_node * node)
   }
 }
     
-static void
-avl_verify_parent (avl_node * node, avl_node * parent)
+void avl_verify_parent(avl_node *node, avl_node *parent)
 {
   if (node->parent != parent) {
     return;
@@ -1023,8 +978,7 @@ avl_verify_parent (avl_node * node, avl_node * parent)
   }
 }
 
-static long
-avl_verify_rank (avl_node * node)
+long avl_verify_rank(avl_node *node)
 {
   if (!node) {
     return 0;
@@ -1046,8 +1000,7 @@ avl_verify_rank (avl_node * node)
 
 /* sanity-check the tree */
 
-int
-avl_verify (avl_tree * tree)
+int avl_verify(_Ptr<avl_tree> tree)
 {
   if (tree->length) {
     avl_verify_balance (tree->root->right);
@@ -1064,15 +1017,14 @@ avl_verify (avl_tree * tree)
  */ 
 
 typedef struct _link_node {
-  struct _link_node    * parent;
+  _Ptr<struct _link_node> parent;
   char            direction;
   int            width;
 } link_node;  
 
 static char balance_chars[3] = {'\\', '-', '/'};
 
-static int
-default_key_printer (char * buffer, void * key)
+int default_key_printer(char *buffer, void *key)
 {
   return snprintf (buffer, AVL_KEY_PRINTER_BUFLEN, "%p", key);
 }  
@@ -1084,8 +1036,7 @@ default_key_printer (char * buffer, void * key)
  * it backwards using recursion.
  */
 
-static void
-print_connectors (link_node * link)
+void print_connectors(_Ptr<link_node> link)
 {
   if (link->parent) {
     print_connectors (link->parent);
@@ -1111,10 +1062,7 @@ print_connectors (link_node * link)
  * representation.
  */
 
-static void
-print_node (avl_key_printer_fun_type key_printer,
-        avl_node * node,
-        link_node * link)
+void print_node(_Ptr<int (char* , void* )> key_printer, avl_node *node, _Ptr<link_node> link)
 {
   char buffer[AVL_KEY_PRINTER_BUFLEN];
   unsigned int width;
@@ -1146,8 +1094,7 @@ print_node (avl_key_printer_fun_type key_printer,
   } 
 }  
 
-void
-avl_print_tree (avl_tree * tree, avl_key_printer_fun_type key_printer)
+void avl_print_tree(_Ptr<avl_tree> tree, _Ptr<int (_Ptr<char> , void* )> key_printer)
 {
   link_node top = {NULL, 0, 0};
   if (!key_printer) {
@@ -1161,17 +1108,17 @@ avl_print_tree (avl_tree * tree, avl_key_printer_fun_type key_printer)
 }
 
 
-void avl_tree_rlock(avl_tree *tree)
+void avl_tree_rlock(avl_tree *tree : itype(_Ptr<avl_tree> ) )
 {
     thread_rwlock_rlock(&tree->rwlock);
 }
 
-void avl_tree_wlock(avl_tree *tree)
+void avl_tree_wlock(avl_tree *tree : itype(_Ptr<avl_tree> ) )
 {
     thread_rwlock_wlock(&tree->rwlock);
 }
 
-void avl_tree_unlock(avl_tree *tree)
+void avl_tree_unlock(avl_tree *tree : itype(_Ptr<avl_tree> ) )
 {
     thread_rwlock_unlock(&tree->rwlock);
 }

@@ -70,10 +70,10 @@ extern int playlistlog;
 
 #define LOGGING_FORMAT_CLF "%d/%b/%Y:%H:%M:%S %z"
 
-void logging_access(client_t *client);
-void logging_playlist(const char *mount, const char *metadata, long listeners);
-void restart_logging (ice_config_t *config);
-void log_parse_failure (void *ctx, const char *fmt, ...);
+void logging_access(client_t *client : itype(_Ptr<client_t> ) );
+void logging_playlist(const char *mount : itype(_Ptr<const char> ) , const char *metadata : itype(_Ptr<const char> ) , long listeners);
+void restart_logging(ice_config_t *config : itype(_Ptr<ice_config_t> ) );
+void log_parse_failure(void *ctx : itype(void* ) , const char *fmt : itype(_Ptr<const char> ) );
 
 #endif  /* __LOGGING_H__ */
 
