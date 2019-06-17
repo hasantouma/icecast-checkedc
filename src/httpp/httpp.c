@@ -44,7 +44,7 @@ http_parser_t httpp_create_parser(void) : itype(_Ptr<http_parser_t> )
 
 void httpp_initialize(http_parser_t *parser : itype(_Ptr<http_parser_t> ) , _Ptr<http_varlist_t> defaults)
 {
-    _Ptr<http_varlist_t> list;
+    _Ptr<http_varlist_t> list = defaults;
 
     parser->req_type = httpp_req_none;
     parser->uri = NULL;
@@ -52,7 +52,7 @@ void httpp_initialize(http_parser_t *parser : itype(_Ptr<http_parser_t> ) , _Ptr
     parser->queryvars = avl_tree_new(_compare_vars, NULL);
 
     /* now insert the default variables */
-    list = defaults;
+    // list = defaults; --> Hasan: Done on line 47 to fix error by clang
     while (list != NULL) {
         httpp_setvar(parser, list->var.name, list->var.value);
         list = list->next;
