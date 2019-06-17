@@ -38,7 +38,7 @@
 
 #include "avl.h"
 
-avl_node* avl_node_new(void *key : itype(void* ) , avl_node *parent : itype(_Ptr<avl_node> ) )
+avl_node* avl_node_new(void *key : itype(_Ptr<void> ) , avl_node *parent : itype(_Ptr<avl_node> ) )
 {
   avl_node * node = (avl_node *) malloc (sizeof (avl_node));
 
@@ -59,7 +59,7 @@ avl_node* avl_node_new(void *key : itype(void* ) , avl_node *parent : itype(_Ptr
   }
 }         
 
-avl_tree* avl_tree_new(_Ptr<int (void* , void* , void* )> compare_fun, void *compare_arg : itype(void* ) )
+avl_tree* avl_tree_new(_Ptr<int (void* , void* , void* )> compare_fun, void *compare_arg : itype(_Ptr<void> ) )
 {
   avl_tree * t = (avl_tree *) malloc (sizeof (avl_tree));
 
@@ -113,7 +113,7 @@ void avl_tree_free(avl_tree *tree : itype(_Ptr<avl_tree> ) , _Ptr<int (void* )> 
   free (tree);
 }
 
-int avl_insert(avl_tree *ob : itype(_Ptr<avl_tree> ) , void *key : itype(void* ) )
+int avl_insert(avl_tree *ob : itype(_Ptr<avl_tree> ) , void *key : itype(_Ptr<void> ) )
 {
   if (!(ob->root->right)) {
     avl_node * node = avl_node_new (key, ob->root);
@@ -307,7 +307,7 @@ int avl_get_by_index(_Ptr<avl_tree> tree, unsigned long index, void** value_addr
   }
 }
            
-int avl_get_by_key(avl_tree *tree : itype(_Ptr<avl_tree> ) , void *key : itype(void* ) , void **value_address : itype(void** ) )
+int avl_get_by_key(avl_tree *tree : itype(_Ptr<avl_tree> ) , void *key : itype(_Ptr<void> ) , void **value_address : itype(_Ptr<_Ptr<void>> ) )
 {
   avl_node * x = tree->root->right;
   if (!x) {
@@ -334,7 +334,7 @@ int avl_get_by_key(avl_tree *tree : itype(_Ptr<avl_tree> ) , void *key : itype(v
   }
 }
 
-int avl_delete(avl_tree *tree : itype(_Ptr<avl_tree> ) , void *key : itype(void* ) , _Ptr<int (void* )> free_key_fun)
+int avl_delete(avl_tree *tree : itype(_Ptr<avl_tree> ) , void *key : itype(_Ptr<void> ) , _Ptr<int (void* )> free_key_fun)
 {
   avl_node *x, *y, *p, *q, *r, *top, *x_child;
   int shortened_side, shorter;
@@ -781,7 +781,7 @@ avl_node* avl_get_index_by_key(_Ptr<avl_tree> tree, void *key, _Ptr<unsigned lon
 
 /* return the (low index, high index) pair that spans the given key */
 
-int avl_get_span_by_key(_Ptr<avl_tree> tree, void *key : itype(void* ) , _Ptr<unsigned long> low, _Ptr<unsigned long> high)
+int avl_get_span_by_key(_Ptr<avl_tree> tree, void *key : itype(_Ptr<void> ) , _Ptr<unsigned long> low, _Ptr<unsigned long> high)
 {
   unsigned long m, i, j;
   avl_node * node;
@@ -820,7 +820,7 @@ int avl_get_span_by_key(_Ptr<avl_tree> tree, void *key : itype(void* ) , _Ptr<un
 
 /* return the (low index, high index) pair that spans the given key */
 
-int avl_get_span_by_two_keys(_Ptr<avl_tree> tree, void *low_key : itype(void* ) , void *high_key : itype(void* ) , _Ptr<unsigned long> low, _Ptr<unsigned long> high)
+int avl_get_span_by_two_keys(_Ptr<avl_tree> tree, void *low_key : itype(_Ptr<void> ) , void *high_key : itype(_Ptr<void> ) , _Ptr<unsigned long> low, _Ptr<unsigned long> high)
 {
   unsigned long i, j;
   avl_node * low_node, * high_node;
@@ -866,7 +866,7 @@ int avl_get_span_by_two_keys(_Ptr<avl_tree> tree, void *low_key : itype(void* ) 
 }
 
            
-int avl_get_item_by_key_most(_Ptr<avl_tree> tree, void *key : itype(void* ) , void** value_address)
+int avl_get_item_by_key_most(_Ptr<avl_tree> tree, void *key : itype(_Ptr<void> ) , void** value_address)
 {
   avl_node * x = tree->root->right;
   *value_address = NULL;
@@ -907,7 +907,7 @@ int avl_get_item_by_key_most(_Ptr<avl_tree> tree, void *key : itype(void* ) , vo
   }
 }
 
-int avl_get_item_by_key_least(_Ptr<avl_tree> tree, void *key : itype(void* ) , void** value_address)
+int avl_get_item_by_key_least(_Ptr<avl_tree> tree, void *key : itype(_Ptr<void> ) , void** value_address)
 {
   avl_node * x = tree->root->right;
   *value_address = NULL;
