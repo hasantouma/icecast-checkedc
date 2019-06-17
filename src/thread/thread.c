@@ -129,7 +129,7 @@ void _mutex_lock(_Ptr<mutex_t> mutex);
 void _mutex_unlock(_Ptr<mutex_t> mutex);
 
 /* misc thread stuff */
-void _start_routine(void *arg : itype(_Ptr<void> ) ) : itype(void* ) ;
+static void* _start_routine(void *arg : itype(_Ptr<void> ) ) : itype(_Ptr<void> ) ;
 static void _catch_signals(void);
 static void _block_signals(void);
 
@@ -631,7 +631,7 @@ void thread_sleep(unsigned long len)
 #endif
 }
 
-void _start_routine(void *arg : itype(_Ptr<void> ) ) : itype(void* ) 
+static void* _start_routine(void *arg : itype(_Ptr<void> ) ) : itype(_Ptr<void> ) 
 {
     thread_start_t *start = (thread_start_t *)arg;
     _Ptr<void* (void* )> start_routine =  start->start_routine;
