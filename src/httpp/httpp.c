@@ -34,8 +34,8 @@
 char* _lowercase(char *str : itype(_Ptr<char> ) );
 
 /* for avl trees */
-int _compare_vars(void* compare_arg, void *a : itype(void* ) , void *b : itype(void* ) );
-int _free_vars(void *key : itype(void* ) );
+int _compare_vars(void* compare_arg, void *a : itype(_Ptr<void> ) , void *b : itype(_Ptr<void> ) );
+int _free_vars(void *key : itype(_Ptr<void> ) );
 
 http_parser_t httpp_create_parser(void) : itype(_Ptr<http_parser_t> ) 
 {
@@ -544,7 +544,7 @@ char* _lowercase(char *str : itype(_Ptr<char> ) )
     return str;
 }
 
-int _compare_vars(void* compare_arg, void *a : itype(void* ) , void *b : itype(void* ) )
+int _compare_vars(void* compare_arg, void *a : itype(_Ptr<void>) , void *b : itype(_Ptr<void> ) )
 {
     http_var_t *vara, *varb;
 
@@ -554,7 +554,7 @@ int _compare_vars(void* compare_arg, void *a : itype(void* ) , void *b : itype(v
     return strcmp(vara->name, varb->name);
 }
 
-int _free_vars(void *key : itype(void* ) )
+int _free_vars(void *key : itype(_Ptr<void> ) )
 {
     http_var_t *var;
 
