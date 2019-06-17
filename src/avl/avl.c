@@ -1024,7 +1024,7 @@ typedef struct _link_node {
 
 static char balance_chars[3] = {'\\', '-', '/'};
 
-int default_key_printer(char *buffer, void *key)
+int default_key_printer(char *buffer : itype(_Ptr<char>), void *key)
 {
   return snprintf (buffer, AVL_KEY_PRINTER_BUFLEN, "%p", key);
 }  
@@ -1094,7 +1094,7 @@ void print_node(_Ptr<int (char* , void* )> key_printer, avl_node *node, _Ptr<lin
   } 
 }  
 
-void avl_print_tree(_Ptr<avl_tree> tree, _Ptr<int (_Ptr<char> , void* )> key_printer)
+void avl_print_tree(_Ptr<avl_tree> tree, _Ptr<int (char* , void* )> key_printer)
 {
   link_node top = {NULL, 0, 0};
   if (!key_printer) {
