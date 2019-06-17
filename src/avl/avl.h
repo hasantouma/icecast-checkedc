@@ -167,7 +167,7 @@ int avl_verify (_Ptr<avl_tree> tree);
 
 void avl_print_tree (
   _Ptr<avl_tree> tree,
-  _Ptr<int (_Ptr<char> , void* )> key_printer
+  _Ptr<int (char* , void* )> key_printer
   );
 
 avl_node *avl_get_first(avl_tree *tree);
