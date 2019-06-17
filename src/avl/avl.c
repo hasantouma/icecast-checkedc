@@ -1069,7 +1069,7 @@ void print_node(_Ptr<int (char* , void* )> key_printer, avl_node *node, _Ptr<lin
   width = key_printer (buffer, node->key);
 
   if (node->right) {
-      link_node here;
+      link_node here = {};
       here.parent = link;
       here.direction = 1;
       here.width = width + 11;
@@ -1086,7 +1086,7 @@ void print_node(_Ptr<int (char* , void* )> key_printer, avl_node *node, _Ptr<lin
     fprintf (stdout, "\n");
   }
   if (node->left) {
-      link_node here;
+      link_node here = {};
       here.parent = link;
       here.direction = -1;
       here.width = width + 11;
