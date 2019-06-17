@@ -37,7 +37,7 @@ char* _lowercase(char *str : itype(_Ptr<char> ) );
 int _compare_vars(void* compare_arg, void *a : itype(_Ptr<void> ) , void *b : itype(_Ptr<void> ) );
 int _free_vars(void *key : itype(_Ptr<void> ) );
 
-http_parser_t httpp_create_parser(void) : itype(_Ptr<http_parser_t> ) 
+http_parser_t *httpp_create_parser(void) : itype(_Ptr<http_parser_t> ) 
 {
     return (http_parser_t *)malloc(sizeof(http_parser_t));
 }
