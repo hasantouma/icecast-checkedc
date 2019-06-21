@@ -59,7 +59,7 @@
 
 #define CATMODULE "slave"
 
-void* _slave_thread(void *arg : itype(void* ) );
+void* _slave_thread(void *arg);
 static thread_type *_slave_thread_id;
 static int slave_running = 0;
 static volatile int update_settings = 0;
@@ -721,7 +721,7 @@ int update_from_master(ice_config_t *config)
 }
 
 
-void* _slave_thread(void *arg : itype(void* ) )
+void* _slave_thread(void *arg)
 {
     ice_config_t *config;
     unsigned int interval = 0;
