@@ -33,7 +33,7 @@ void fserve_initialize(void);
 void fserve_shutdown(void);
 int fserve_client_create(client_t *httpclient, const char *path);
 int fserve_add_client (client_t *client, FILE *file);
-void fserve_add_client_callback (client_t *client, _Ptr<void (_Ptr<client_t> , void* )> callback, void *arg);
+void fserve_add_client_callback (client_t *client, _Ptr<void (client_t* : itype(_Ptr<client_t>) , void* )> callback, void *arg);
 char *fserve_content_type (const char *path);
 void fserve_recheck_mime_types (ice_config_t *config);
 

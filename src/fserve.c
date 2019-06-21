@@ -680,7 +680,7 @@ int fserve_add_client(client_t *client : itype(_Ptr<client_t> ) , FILE *file : i
 /* add client to file serving engine, but just write out the buffer contents,
  * then pass the client to the callback with the provided arg
  */
-void fserve_add_client_callback(client_t *client : itype(_Ptr<client_t> ) , _Ptr<void (_Ptr<client_t> , void* )> callback, void *arg : itype(void* ) )
+void fserve_add_client_callback(client_t *client : itype(_Ptr<client_t> ) , _Ptr<void (client_t* : itype(_Ptr<client_t) , void* )> callback, void *arg : itype(void* ) )
 {
     fserve_t *fclient = calloc (1, sizeof(fserve_t));
 
