@@ -64,7 +64,7 @@ typedef struct vorbis_codec_tag
 } vorbis_codec_t;
 
 int process_vorbis_headers(ogg_state_t *ogg_info, ogg_codec_t *codec);
-refbuf_t process_vorbis_page(ogg_state_t *ogg_info : itype(_Ptr<ogg_state_t> ) , ogg_codec_t *codec : itype(_Ptr<ogg_codec_t> ) , ogg_page *page : itype(_Ptr<ogg_page> ) ) : itype(_Ptr<refbuf_t> ) ;
+refbuf_t *process_vorbis_page(ogg_state_t *ogg_info : itype(_Ptr<ogg_state_t> ) , ogg_codec_t *codec : itype(_Ptr<ogg_codec_t> ) , ogg_page *page : itype(_Ptr<ogg_page> ) ) : itype(_Ptr<refbuf_t> ) ;
 refbuf_t* process_vorbis(ogg_state_t *ogg_info : itype(_Ptr<ogg_state_t> ) , ogg_codec_t *codec : itype(_Ptr<ogg_codec_t> ) );
 void vorbis_set_tag(format_plugin_t *plugin : itype(_Ptr<format_plugin_t> ) , const char *tag : itype(_Ptr<const char> ) , const char *in_value : itype(_Ptr<const char> ) , const char *charset : itype(_Ptr<const char> ) );
 
@@ -496,7 +496,7 @@ refbuf_t* process_vorbis_passthru_page(ogg_state_t *ogg_info, ogg_codec_t *codec
 /* handle incoming page. as the stream is being rebuilt, we need to
  * add all pages from the stream before processing packets
  */
-refbuf_t process_vorbis_page(ogg_state_t *ogg_info : itype(_Ptr<ogg_state_t> ) , ogg_codec_t *codec : itype(_Ptr<ogg_codec_t> ) , ogg_page *page : itype(_Ptr<ogg_page> ) ) : itype(_Ptr<refbuf_t> ) 
+refbuf_t *process_vorbis_page(ogg_state_t *ogg_info : itype(_Ptr<ogg_state_t> ) , ogg_codec_t *codec : itype(_Ptr<ogg_codec_t> ) , ogg_page *page : itype(_Ptr<ogg_page> ) ) : itype(_Ptr<refbuf_t> ) 
 {
     ogg_packet header;
     vorbis_codec_t *source_vorbis = codec->specific;
