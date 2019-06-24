@@ -157,7 +157,7 @@ int client_check_source_auth(client_t *client : itype(_Ptr<client_t> ) , const c
 
 
 /* helper function for reading data from a client */
-int client_read_bytes(client_t *client : itype(_Ptr<client_t> ) , void *buf : itype(void* ) , unsigned int len)
+int client_read_bytes(client_t *client : itype(_Ptr<client_t> ) , void *buf, unsigned int len)
 {
     int bytes;
 
