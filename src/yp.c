@@ -94,8 +94,8 @@ static thread_type *yp_thread;
 static volatile unsigned client_limit = 0;
 static volatile char *server_version = NULL;
 
-void* yp_update_thread(void *arg : itype(void* ) );
-void add_yp_info(ypdata_t *yp : itype(_Ptr<ypdata_t> ) , void *info : itype(void* ) , int type);
+void* yp_update_thread(void *arg);
+void add_yp_info(ypdata_t *yp : itype(_Ptr<ypdata_t> ) , void *info, int type);
 int do_yp_remove(ypdata_t *yp, char *s, unsigned int len);
 int do_yp_add(ypdata_t *yp, char *s, unsigned int len);
 int do_yp_touch(ypdata_t *yp : itype(_Ptr<ypdata_t> ) , char *s : itype(_Ptr<char> ) , unsigned int len);
@@ -710,7 +710,7 @@ void delete_marked_yp(struct yp_server *server)
 }
 
 
-void* yp_update_thread(void *arg : itype(void* ) )
+void* yp_update_thread(void *arg)
 {
     ICECAST_LOG_INFO("YP update thread started");
 
@@ -809,7 +809,7 @@ void yp_destroy_ypdata(ypdata_t *ypdata : itype(_Ptr<ypdata_t> ) )
     }
 }
 
-void add_yp_info(ypdata_t *yp : itype(_Ptr<ypdata_t> ) , void *info : itype(void* ) , int type)
+void add_yp_info(ypdata_t *yp : itype(_Ptr<ypdata_t> ) , void *info, int type)
 {
     char *escaped;
 
