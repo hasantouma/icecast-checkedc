@@ -84,9 +84,9 @@ mutex_t _global_event_mutex;
 static volatile event_listener_t *_event_listeners;
 
 
-void* _stats_thread(void *arg : itype(void* ) );
-int _compare_stats(void* arg, void *a : itype(void* ) , void *b : itype(void* ) );
-int _compare_source_stats(void* arg, void *a : itype(void* ) , void *b : itype(void* ) );
+void* _stats_thread(void *arg);
+int _compare_stats(void* arg, void *a, void *b);
+int _compare_source_stats(void* arg, void *a, void *b);
 int _free_stats(void *key);
 int _free_source_stats(void *key);
 void _add_event_to_queue(stats_event_t *event : itype(_Ptr<stats_event_t> ) , _Ptr<event_queue_t> queue);
@@ -661,7 +661,7 @@ void stats_global(ice_config_t *config : itype(_Ptr<ice_config_t> ) )
 }
 
 
-void* _stats_thread(void *arg : itype(void* ) )
+void* _stats_thread(void *arg)
 {
     stats_event_t *event;
     stats_event_t *copy;
@@ -950,7 +950,7 @@ void* stats_connection(void *arg)
 }
 
 
-void stats_callback(client_t *client : itype(_Ptr<client_t> ) , void *notused : itype(void* ) )
+void stats_callback(client_t *client : itype(_Ptr<client_t> ) , void *notused)
 {
     if (client->con->error)
     {
@@ -999,7 +999,7 @@ xmlDoc* stats_get_xml(int show_hidden, const char *show_mount : itype(_Ptr<const
 }
 
 
-int _compare_stats(void* arg, void *a : itype(void* ) , void *b : itype(void* ) )
+int _compare_stats(void* arg, void *a, void *b)
 {
     stats_node_t *nodea = (stats_node_t *)a;
     stats_node_t *nodeb = (stats_node_t *)b;
@@ -1007,7 +1007,7 @@ int _compare_stats(void* arg, void *a : itype(void* ) , void *b : itype(void* ) 
     return strcmp(nodea->name, nodeb->name);
 }
 
-int _compare_source_stats(void* arg, void *a : itype(void* ) , void *b : itype(void* ) )
+int _compare_source_stats(void* arg, void *a, void *b)
 {
     stats_source_t *nodea = (stats_source_t *)a;
     stats_source_t *nodeb = (stats_source_t *)b;
