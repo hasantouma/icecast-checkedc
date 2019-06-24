@@ -78,7 +78,7 @@ void ebml_destroy(ebml_t *ebml : itype(_Ptr<ebml_t> ) );
 int ebml_read_space(ebml_t *ebml : itype(_Ptr<ebml_t> ) );
 int ebml_read(ebml_t *ebml : itype(_Ptr<ebml_t> ) , char *buffer : itype(_Ptr<char> ) , int len);
 int ebml_last_was_sync(ebml_t *ebml : itype(_Ptr<ebml_t> ) );
-char ebml_write_buffer(ebml_t *ebml : itype(_Ptr<ebml_t> ) , int len) : itype(_Ptr<char> ) ;
+char *ebml_write_buffer(ebml_t *ebml : itype(_Ptr<ebml_t> ) , int len) : itype(_Ptr<char> ) ;
 int ebml_wrote(ebml_t *ebml : itype(_Ptr<ebml_t> ) , int len);
 
 int format_ebml_get_plugin(source_t *source : itype(_Ptr<source_t> ) )
@@ -403,7 +403,7 @@ int ebml_last_was_sync(ebml_t *ebml : itype(_Ptr<ebml_t> ) )
 
 }
 
-char ebml_write_buffer(ebml_t *ebml : itype(_Ptr<ebml_t> ) , int len) : itype(_Ptr<char> ) 
+char *ebml_write_buffer(ebml_t *ebml : itype(_Ptr<ebml_t> ) , int len) : itype(_Ptr<char> ) 
 {
 
     return (char *)ebml->input_buffer;
