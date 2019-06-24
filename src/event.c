@@ -28,7 +28,7 @@
 
 #define CATMODULE "event"
 
-void event_config_read(void *arg : itype(void* ) )
+void event_config_read(void *arg)
 {
     int ret;
     ice_config_t *config;
