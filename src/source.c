@@ -325,9 +325,9 @@ void source_free_source(source_t *source : itype(_Ptr<source_t> ) )
 
 client_t* source_find_client(source_t *source : itype(_Ptr<source_t> ) , int id)
 {
-    client_t fakeclient;
+    client_t fakeclient = {};
     void *result;
-    connection_t fakecon;
+    connection_t fakecon = {};
 
     fakeclient.con = &fakecon;
     fakeclient.con->id = id;
