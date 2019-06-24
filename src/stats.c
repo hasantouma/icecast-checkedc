@@ -260,7 +260,7 @@ void stats_event_hidden(const char *source : itype(_Ptr<const char> ) , const ch
 }
 
 /* printf style formatting for stat create/update */
-void stats_event_args(const char *source : itype(_Ptr<const char> ) , char *name : itype(_Ptr<char> ) , char *format : itype(_Ptr<char> ) )
+void stats_event_args(const char *source : itype(_Ptr<const char> ) , char *name : itype(_Ptr<char> ) , char *format : itype(_Ptr<char> ), ... )
 {
     char buf[1024];
     va_list val;
