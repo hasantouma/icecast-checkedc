@@ -59,6 +59,8 @@
 
 #define CATMODULE "slave"
 
+// Hasan: Adding a temporary variable in place of `config_locks()->relay_lock` to resolve errors for bounds inference
+mutex_t temp;
 void* _slave_thread(void *arg);
 static thread_type *_slave_thread_id;
 static int slave_running = 0;
@@ -377,11 +379,17 @@ void* start_relay_stream(void *arg)
 
     /* cleanup relay, but prevent this relay from starting up again too soon */
     thread_mutex_lock(&_slave_mutex);
-    thread_mutex_lock(&(config_locks()->relay_lock));
+    // Added by Hasan
+    temp = config_locks()->relay_lock;
+    thread_mutex_lock(&temp);
+    // End of modification
     relay->source->on_demand = 0;
     relay->start = time(NULL) + max_interval;
     relay->cleanup = 1;
-    thread_mutex_unlock(&(config_locks()->relay_lock));
+    // Added by Hasan
+    temp = config_locks()->relay_lock;
+    thread_mutex_unlock(&temp);
+    // End of modification
     thread_mutex_unlock(&_slave_mutex);
 
     return NULL;
@@ -700,13 +708,19 @@ int update_from_master(ice_config_t *config)
         }
         sock_close (mastersock);
 
-        thread_mutex_lock (&(config_locks()->relay_lock));
+        // Added by Hasan
+        temp = config_locks()->relay_lock;
+        thread_mutex_lock (&temp);
+        // End of modification
         cleanup_relays = update_relays (&global.master_relays, new_relays);
         
         relay_check_streams (global.master_relays, cleanup_relays, 0);
         relay_check_streams (NULL, new_relays, 0);
 
-        thread_mutex_unlock (&(config_locks()->relay_lock));
+        // Added by Hasan
+        temp = config_locks()->relay_lock;
+        thread_mutex_unlock (&temp);
+        // End of modification
 
     } while(0);
 
@@ -774,7 +788,10 @@ void* _slave_thread(void *arg)
             if (update_from_master (config))
                 config = config_get_config();
 
-            thread_mutex_lock (&(config_locks()->relay_lock));
+            // Added by Hasan
+            temp = config_locks()->relay_lock;
+            thread_mutex_lock (&temp);
+            // End of modification
 
             cleanup_relays = update_relays (&global.relays, config->relay);
 
@@ -783,12 +800,18 @@ void* _slave_thread(void *arg)
         else
         {
             thread_mutex_unlock(&_slave_mutex);
-            thread_mutex_lock (&(config_locks()->relay_lock));
+            // Added by Hasan
+            temp = config_locks()->relay_lock;
+            thread_mutex_lock (&temp);
+            // End of modification
         }
 
         relay_check_streams (global.relays, cleanup_relays, skip_timer);
         relay_check_streams (global.master_relays, NULL, skip_timer);
-        thread_mutex_unlock (&(config_locks()->relay_lock));
+        // Added by Hasan
+        temp = config_locks()->relay_lock;
+        thread_mutex_unlock (&temp);
+        // End of modification
 
         thread_mutex_lock(&_slave_mutex);
         if (update_settings)
