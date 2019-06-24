@@ -103,7 +103,7 @@ void yp_destroy_ypdata(ypdata_t *ypdata : itype(_Ptr<ypdata_t> ) );
 
 
 /* curl callback used to parse headers coming back from the YP server */
-int handle_returned_header(void *ptr, size_t size, size_t nmemb, void *stream)
+static int handle_returned_header(void *ptr, size_t size, size_t nmemb, void *stream)
 {
     ypdata_t *yp = stream;
     unsigned bytes = size * nmemb;
@@ -147,7 +147,7 @@ int handle_returned_header(void *ptr, size_t size, size_t nmemb, void *stream)
 
 
 /* capture returned data, but don't do anything with it, shouldn't be any */
-int handle_returned_data(void *ptr, size_t size, size_t nmemb, void *stream)
+static int handle_returned_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
     return (int)(size*nmemb);
 }

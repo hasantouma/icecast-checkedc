@@ -188,7 +188,7 @@ int httpp_parse_response(http_parser_t *parser : itype(_Ptr<http_parser_t> ) , c
     return 1;
 }
 
-int hex(char c)
+static int hex(char c)
 {
     if(c >= '0' && c <= '9')
         return c - '0';

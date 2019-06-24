@@ -174,7 +174,7 @@ int util_check_valid_extension(const char *uri : itype(_Ptr<const char> ) ) {
     return ret;
 }
 
-int hex(char c)
+static int hex(char c)
 {
     if(c >= '0' && c <= '9')
         return c - '0';
