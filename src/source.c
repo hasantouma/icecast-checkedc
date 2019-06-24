@@ -70,8 +70,8 @@
 mutex_t move_clients_mutex;
 
 /* avl tree helper */
-int _compare_clients(void* compare_arg, void *a : itype(void* ) , void *b : itype(void* ) );
-int _free_client(void *key : itype(void* ) );
+int _compare_clients(void* compare_arg, void *a, void *b);
+int _free_client(void *key);
 void _parse_audio_info(source_t *source : itype(_Ptr<source_t> ) , const char *s : itype(_Ptr<const char> ) );
 void source_shutdown(source_t *source : itype(_Ptr<source_t> ) );
 #ifdef _WIN32
@@ -193,7 +193,7 @@ source_t* source_find_mount(const char *mount : itype(_Ptr<const char> ) )
 }
 
 
-int source_compare_sources(void* arg, void *a : itype(void* ) , void *b : itype(void* ) )
+int source_compare_sources(void* arg, void *a, void *b)
 {
     source_t *srca = (source_t *)a;
     source_t *srcb = (source_t *)b;
@@ -926,7 +926,7 @@ void source_shutdown(source_t *source : itype(_Ptr<source_t> ) )
 }
 
 
-int _compare_clients(void* compare_arg, void *a : itype(void* ) , void *b : itype(void* ) )
+int _compare_clients(void* compare_arg, void *a, void *b)
 {
     client_t *clienta = (client_t *)a;
     client_t *clientb = (client_t *)b;
@@ -940,12 +940,12 @@ int _compare_clients(void* compare_arg, void *a : itype(void* ) , void *b : ityp
     return 0;
 }
 
-int source_remove_client(void *key : itype(void* ) )
+int source_remove_client(void *key)
 {
     return 1;
 }
 
-int _free_client(void *key : itype(void* ) )
+int _free_client(void *key)
 {
     client_t *client = (client_t *)key;
 
@@ -1295,7 +1295,7 @@ void* source_client_thread(void *arg)
 }
 
 
-void source_client_callback(client_t *client : itype(_Ptr<client_t> ) , void *arg : itype(void* ) )
+void source_client_callback(client_t *client : itype(_Ptr<client_t> ) , void *arg)
 {
     const char *agent;
     source_t *source = arg;
