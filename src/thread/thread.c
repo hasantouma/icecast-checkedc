@@ -120,8 +120,8 @@ static int _compare_mutexes(void *compare_arg, void *a, void *b);
 static int _free_mutex(void *key);
 #endif
 
-int _compare_threads(void* compare_arg, void *a : itype(_Ptr<void> ) , void *b : itype(_Ptr<void> ) );
-int _free_thread(void *key : itype(_Ptr<void> ) );
+int _compare_threads(void* compare_arg, void *a, void *b);
+int _free_thread(void *key);
 
 /* mutex fuctions */
 void _mutex_create(_Ptr<mutex_t> mutex);
@@ -129,7 +129,7 @@ void _mutex_lock(_Ptr<mutex_t> mutex);
 void _mutex_unlock(_Ptr<mutex_t> mutex);
 
 /* misc thread stuff */
-static void* _start_routine(void *arg : itype(_Ptr<void> ) ) : itype(_Ptr<void> ) ;
+static void* _start_routine(void *arg);
 static void _catch_signals(void);
 static void _block_signals(void);
 
@@ -261,7 +261,7 @@ static void _catch_signals(void)
 }
 
 
-thread_type* thread_create_c(char *name : itype(_Ptr<char> ) , _Ptr<void* (void* )> start_routine, void *arg : itype(_Ptr<void> ) , int detached, int line, char *file : itype(_Ptr<char> ) )
+thread_type* thread_create_c(char *name : itype(_Ptr<char> ) , _Ptr<void* (void* )> start_routine, void *arg, int detached, int line, char *file : itype(_Ptr<char> ) )
 {
     int ok = 1;
     thread_type *thread = NULL;
@@ -631,7 +631,7 @@ void thread_sleep(unsigned long len)
 #endif
 }
 
-static void* _start_routine(void *arg : itype(_Ptr<void> ) ) : itype(_Ptr<void> ) 
+static void* _start_routine(void *arg) 
 {
     thread_start_t *start = (thread_start_t *)arg;
     _Ptr<void* (void* )> start_routine =  start->start_routine;
@@ -763,7 +763,7 @@ static int _compare_mutexes(void *compare_arg, void *a, void *b)
 }
 #endif
 
-int _compare_threads(void* compare_arg, void *a : itype(_Ptr<void> ) , void *b : itype(_Ptr<void> ) )
+int _compare_threads(void* compare_arg, void *a, void *b)
 {
     thread_type *t1, *t2;
 
@@ -795,7 +795,7 @@ static int _free_mutex(void *key)
 }
 #endif
 
-int _free_thread(void *key : itype(_Ptr<void> ) )
+int _free_thread(void *key)
 {
     thread_type *t;
 
