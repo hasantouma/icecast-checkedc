@@ -1,0 +1,68 @@
+[2019-07-01  16:11:37] INFO main/main Icecast 2.4.4 server started
+[2019-07-01  16:11:37] INFO yp/yp_update_thread YP update thread started
+[2019-07-01  16:11:37] INFO connection/get_ssl_certificate No SSL capability on any configured ports
+[2019-07-01  16:11:40] INFO fserve/fserve_client_create checking for file /style.css (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/style.css)
+[2019-07-01  16:11:40] INFO fserve/fserve_client_create checking for file /icecast.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/icecast.png)
+[2019-07-01  16:11:56] INFO connection/_handle_source_request Source logging in at mountpoint "/example1.ogg" from 128.8.130.18
+[2019-07-01  16:11:56] INFO format-vorbis/initial_vorbis_page seen initial vorbis header
+[2019-07-01  16:11:56] INFO source/source_main listener count on /example1.ogg now 0
+[2019-07-01  16:12:07] INFO fserve/fserve_client_create checking for file /style.css (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/style.css)
+[2019-07-01  16:12:07] INFO fserve/fserve_client_create checking for file /icecast.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/icecast.png)
+[2019-07-01  16:12:07] INFO fserve/fserve_client_create checking for file /tunein.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/tunein.png)
+[2019-07-01  16:12:14] INFO source/source_main listener count on /example1.ogg now 1
+[2019-07-01  16:12:32] INFO fserve/fserve_client_create checking for file /style.css (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/style.css)
+[2019-07-01  16:12:32] INFO fserve/fserve_client_create checking for file /tunein.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/tunein.png)
+[2019-07-01  16:12:32] INFO fserve/fserve_client_create checking for file /icecast.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/icecast.png)
+[2019-07-01  16:12:34] INFO fserve/fserve_client_create checking for file /style.css (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/style.css)
+[2019-07-01  16:12:35] INFO fserve/fserve_client_create checking for file /tunein.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/tunein.png)
+[2019-07-01  16:12:35] INFO fserve/fserve_client_create checking for file /icecast.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/icecast.png)
+[2019-07-01  16:12:36] INFO source/source_main listener count on /example1.ogg now 2
+[2019-07-01  16:13:52] INFO source/source_main listener count on /example1.ogg now 1
+[2019-07-01  16:15:42] INFO fserve/fserve_client_create checking for file /style.css (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/style.css)
+[2019-07-01  16:15:42] INFO fserve/fserve_client_create checking for file /icecast.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/icecast.png)
+[2019-07-01  16:15:42] INFO fserve/fserve_client_create checking for file /tunein.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/tunein.png)
+[2019-07-01  16:15:45] INFO fserve/fserve_client_create checking for file /style.css (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/style.css)
+[2019-07-01  16:15:45] INFO fserve/fserve_client_create checking for file /icecast.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/icecast.png)
+[2019-07-01  16:15:45] INFO fserve/fserve_client_create checking for file /tunein.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/tunein.png)
+[2019-07-01  16:15:47] INFO source/source_main listener count on /example1.ogg now 2
+[2019-07-01  16:15:59] INFO source/source_main listener count on /example1.ogg now 1
+[2019-07-01  16:17:18] INFO source/source_shutdown Source from 128.8.130.18 at "/example1.ogg" exiting
+[2019-07-01  16:17:18] INFO source/source_clear_source 1 active listeners on /example1.ogg released
+[2019-07-01  16:17:18] INFO main/_server_proc Caught halt request, shutting down...
+[2019-07-01  16:17:18] INFO main/main Shutting down
+[2019-07-01  16:17:18] INFO fserve/fserve_shutdown file serving stopped
+[2019-07-01  16:17:19] INFO slave/_slave_thread shutting down current relays
+[2019-07-01  16:17:19] INFO slave/_slave_thread Slave thread shutdown complete
+[2019-07-01  16:17:19] INFO auth/auth_shutdown Auth shutdown
+[2019-07-01  16:17:19] INFO yp/yp_shutdown YP thread down
+[2019-07-01  16:17:19] INFO stats/stats_shutdown stats thread finished
+[2019-07-02  10:34:46] INFO main/main Icecast 2.4.4 server started
+[2019-07-02  10:34:46] INFO connection/get_ssl_certificate No SSL capability on any configured ports
+[2019-07-02  10:34:46] INFO stats/_stats_thread stats thread started
+[2019-07-02  10:34:46] INFO yp/yp_update_thread YP update thread started
+[2019-07-02  10:34:49] INFO fserve/fserve_client_create checking for file /style.css (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/style.css)
+[2019-07-02  10:34:50] INFO fserve/fserve_client_create checking for file /icecast.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/icecast.png)
+[2019-07-02  10:34:50] INFO fserve/fserve_client_create checking for file /favicon.ico (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/favicon.ico)
+[2019-07-02  10:34:50] WARN fserve/fserve_client_create req for file "/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/favicon.ico" No such file or directory
+[2019-07-02  10:35:19] INFO connection/_handle_source_request Source logging in at mountpoint "/example1.ogg" from 128.8.130.18
+[2019-07-02  10:35:19] INFO format-vorbis/initial_vorbis_page seen initial vorbis header
+[2019-07-02  10:35:19] INFO source/source_main listener count on /example1.ogg now 0
+[2019-07-02  10:35:22] INFO fserve/fserve_client_create checking for file /style.css (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/style.css)
+[2019-07-02  10:35:22] INFO fserve/fserve_client_create checking for file /icecast.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/icecast.png)
+[2019-07-02  10:35:22] INFO fserve/fserve_client_create checking for file /tunein.png (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/tunein.png)
+[2019-07-02  10:35:29] INFO source/source_main listener count on /example1.ogg now 1
+[2019-07-02  10:48:45] INFO source/get_next_buffer End of Stream /example1.ogg
+[2019-07-02  10:48:45] INFO source/source_shutdown Source from 128.8.130.18 at "/example1.ogg" exiting
+[2019-07-02  10:48:45] INFO source/source_clear_source 1 active listeners on /example1.ogg released
+[2019-07-02  10:48:59] INFO fserve/fserve_client_create checking for file /example1.ogg (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/example1.ogg)
+[2019-07-02  10:48:59] WARN fserve/fserve_client_create req for file "/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/example1.ogg" No such file or directory
+[2019-07-02  10:49:04] INFO fserve/fserve_client_create checking for file /example1.ogg (/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/example1.ogg)
+[2019-07-02  10:49:04] WARN fserve/fserve_client_create req for file "/home/hasantouma/converted-examples/run_icecast/convert_icecast/web/example1.ogg" No such file or directory
+[2019-07-02  10:49:13] INFO main/_server_proc Caught halt request, shutting down...
+[2019-07-02  10:49:13] INFO main/main Shutting down
+[2019-07-02  10:49:13] INFO fserve/fserve_shutdown file serving stopped
+[2019-07-02  10:49:13] INFO slave/_slave_thread shutting down current relays
+[2019-07-02  10:49:13] INFO slave/_slave_thread Slave thread shutdown complete
+[2019-07-02  10:49:13] INFO auth/auth_shutdown Auth shutdown
+[2019-07-02  10:49:13] INFO yp/yp_shutdown YP thread down
+[2019-07-02  10:49:14] INFO stats/stats_shutdown stats thread finished
