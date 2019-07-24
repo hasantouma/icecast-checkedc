@@ -1,20 +1,20 @@
 libicenet_la-sock.lo: sock.c ../../config.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdio_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdio_checked.h \
   /usr/include/stdio.h /usr/include/features.h \
   /usr/include/stdc-predef.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stddef.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stddef.h \
   /usr/include/x86_64-linux-gnu/bits/types.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h /usr/include/libio.h \
   /usr/include/_G_config.h /usr/include/wchar.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdarg.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdarg.h \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/_builtin_stdio_checked.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/_builtin_common.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdlib_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/_builtin_stdio_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/_builtin_common.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdlib_checked.h \
   /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h /usr/include/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
@@ -29,20 +29,20 @@ libicenet_la-sock.lo: sock.c ../../config.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/alloca.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h /usr/include/ctype.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/string_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/string_checked.h \
   /usr/include/string.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/_builtin_string_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/_builtin_string_checked.h \
   /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
   /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
   /usr/include/x86_64-linux-gnu/bits/uio.h \
   /usr/include/x86_64-linux-gnu/bits/stat.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/errno_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/errno_checked.h \
   /usr/include/errno.h /usr/include/x86_64-linux-gnu/bits/errno.h \
   /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
   /usr/include/poll.h /usr/include/x86_64-linux-gnu/sys/poll.h \
   /usr/include/x86_64-linux-gnu/bits/poll.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/unistd_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/unistd_checked.h \
   /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h /usr/include/getopt.h \
@@ -55,7 +55,7 @@ libicenet_la-sock.lo: sock.c ../../config.h \
   /usr/include/asm-generic/socket.h \
   /usr/include/x86_64-linux-gnu/asm/sockios.h \
   /usr/include/asm-generic/sockios.h /usr/include/netinet/in.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdint.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdint.h \
   /usr/include/stdint.h /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/in.h /usr/include/netinet/tcp.h \
   /usr/include/arpa/inet.h /usr/include/x86_64-linux-gnu/sys/time.h \
@@ -65,7 +65,7 @@ libicenet_la-sock.lo: sock.c ../../config.h \
 
 ../../config.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdio_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdio_checked.h:
 
 /usr/include/stdio.h:
 
@@ -81,7 +81,7 @@ libicenet_la-sock.lo: sock.c ../../config.h \
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stddef.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stddef.h:
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
@@ -93,17 +93,17 @@ libicenet_la-sock.lo: sock.c ../../config.h \
 
 /usr/include/wchar.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdarg.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdarg.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/sys_errlist.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/_builtin_stdio_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/_builtin_stdio_checked.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/_builtin_common.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/_builtin_common.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdlib_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdlib_checked.h:
 
 /usr/include/stdlib.h:
 
@@ -143,11 +143,11 @@ libicenet_la-sock.lo: sock.c ../../config.h \
 
 /usr/include/ctype.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/string_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/string_checked.h:
 
 /usr/include/string.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/_builtin_string_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/_builtin_string_checked.h:
 
 /usr/include/fcntl.h:
 
@@ -159,7 +159,7 @@ libicenet_la-sock.lo: sock.c ../../config.h \
 
 /usr/include/x86_64-linux-gnu/bits/stat.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/errno_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/errno_checked.h:
 
 /usr/include/errno.h:
 
@@ -179,7 +179,7 @@ libicenet_la-sock.lo: sock.c ../../config.h \
 
 /usr/include/x86_64-linux-gnu/bits/poll.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/unistd_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/unistd_checked.h:
 
 /usr/include/unistd.h:
 
@@ -211,7 +211,7 @@ libicenet_la-sock.lo: sock.c ../../config.h \
 
 /usr/include/netinet/in.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdint.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdint.h:
 
 /usr/include/stdint.h:
 

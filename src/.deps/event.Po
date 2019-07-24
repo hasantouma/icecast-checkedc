@@ -9,7 +9,7 @@ event.o: event.c ../config.h event.h cfgfile.h thread/thread.h \
   /usr/include/x86_64-linux-gnu/bits/types.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap-16.h /usr/include/sched.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stddef.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stddef.h \
   /usr/include/time.h /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/time.h \
   /usr/include/x86_64-linux-gnu/bits/timex.h /usr/include/xlocale.h \
@@ -17,7 +17,7 @@ event.o: event.c ../config.h event.h cfgfile.h thread/thread.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h avl/avl.h auth.h \
   /usr/include/libxml2/libxml/xmlmemory.h /usr/include/stdio.h \
   /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdarg.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdarg.h \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
   /usr/include/libxml2/libxml/xmlversion.h \
@@ -26,7 +26,7 @@ event.o: event.c ../config.h event.h cfgfile.h thread/thread.h \
   /usr/include/libxml2/libxml/globals.h \
   /usr/include/libxml2/libxml/parser.h \
   /usr/include/libxml2/libxml/tree.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/limits.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/limits.h \
   /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
   /usr/include/x86_64-linux-gnu/bits/local_lim.h \
   /usr/include/linux/limits.h \
@@ -46,15 +46,15 @@ event.o: event.c ../config.h event.h cfgfile.h thread/thread.h \
   /usr/include/x86_64-linux-gnu/unicode/utypes.h \
   /usr/include/x86_64-linux-gnu/unicode/umachine.h \
   /usr/include/x86_64-linux-gnu/unicode/ptypes.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/__stddef_max_align_t.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/__stddef_max_align_t.h \
   /usr/include/x86_64-linux-gnu/unicode/platform.h \
   /usr/include/x86_64-linux-gnu/unicode/uconfig.h \
   /usr/include/x86_64-linux-gnu/unicode/uvernum.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdint.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdint.h \
   /usr/include/stdint.h /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/unicode/urename.h \
   /usr/include/x86_64-linux-gnu/unicode/uversion.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/float.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/float.h \
   /usr/include/x86_64-linux-gnu/unicode/utf.h \
   /usr/include/x86_64-linux-gnu/unicode/utf8.h \
   /usr/include/x86_64-linux-gnu/unicode/utf16.h \
@@ -72,7 +72,7 @@ event.o: event.c ../config.h event.h cfgfile.h thread/thread.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/libxml2/libxml/xlink.h /usr/include/libxml2/libxml/SAX2.h \
   client.h connection.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/time_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/time_checked.h \
   /usr/include/openssl/ssl.h /usr/include/openssl/e_os2.h \
   /usr/include/x86_64-linux-gnu/openssl/opensslconf.h \
   /usr/include/openssl/comp.h /usr/include/openssl/crypto.h \
@@ -99,19 +99,19 @@ event.o: event.c ../config.h event.h cfgfile.h thread/thread.h \
   /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
   compat.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/unistd_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/unistd_checked.h \
   /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h /usr/include/getopt.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/inttypes_checked.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/inttypes.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/inttypes_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/inttypes.h \
   /usr/include/inttypes.h httpp/httpp.h net/sock.h \
   /usr/include/x86_64-linux-gnu/sys/uio.h \
   /usr/include/x86_64-linux-gnu/bits/uio.h refbuf.h global.h slave.h \
   yp.h source.h util.h format.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdio_checked.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/_builtin_stdio_checked.h \
-  /home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/_builtin_common.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdio_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/_builtin_stdio_checked.h \
+  /home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/_builtin_common.h \
   logging.h log/log.h fserve.h stats.h
 
 ../config.h:
@@ -150,7 +150,7 @@ thread/thread.h:
 
 /usr/include/sched.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stddef.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stddef.h:
 
 /usr/include/time.h:
 
@@ -180,7 +180,7 @@ auth.h:
 
 /usr/include/wchar.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdarg.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdarg.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
@@ -198,7 +198,7 @@ auth.h:
 
 /usr/include/libxml2/libxml/tree.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/limits.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/limits.h:
 
 /usr/include/limits.h:
 
@@ -244,7 +244,7 @@ auth.h:
 
 /usr/include/x86_64-linux-gnu/unicode/ptypes.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/__stddef_max_align_t.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/__stddef_max_align_t.h:
 
 /usr/include/x86_64-linux-gnu/unicode/platform.h:
 
@@ -252,7 +252,7 @@ auth.h:
 
 /usr/include/x86_64-linux-gnu/unicode/uvernum.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdint.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -262,7 +262,7 @@ auth.h:
 
 /usr/include/x86_64-linux-gnu/unicode/uversion.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/float.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/float.h:
 
 /usr/include/x86_64-linux-gnu/unicode/utf.h:
 
@@ -308,7 +308,7 @@ client.h:
 
 connection.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/time_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/time_checked.h:
 
 /usr/include/openssl/ssl.h:
 
@@ -408,7 +408,7 @@ connection.h:
 
 compat.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/unistd_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/unistd_checked.h:
 
 /usr/include/unistd.h:
 
@@ -420,9 +420,9 @@ compat.h:
 
 /usr/include/getopt.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/inttypes_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/inttypes_checked.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/inttypes.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/inttypes.h:
 
 /usr/include/inttypes.h:
 
@@ -448,11 +448,11 @@ util.h:
 
 format.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/stdio_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/stdio_checked.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/_builtin_stdio_checked.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/_builtin_stdio_checked.h:
 
-/home/hasantouma/building-checkedc-clang/llvm.obj/lib/clang/8.0.0/include/_builtin_common.h:
+/home/hasantouma/building-checkedc-clang-plum/llvm.obj/lib/clang/8.0.0/include/_builtin_common.h:
 
 logging.h:
 
